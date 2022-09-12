@@ -1,6 +1,8 @@
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: white;
   background-color: #628571;
+  --bs-nav-link-hover-color: rgb(211, 61, 61);
+  --bs-nav-link-hover-bg: #76ac8d5b;
 }
 
 .nav-link {
@@ -20,6 +22,22 @@
   padding: auto 0;
   font-weight: 500;
   height: 100%;
+}
+
+.pictureBadge {
+  height: 50px;
+  width: 50px;
+  background-color: #0C4223;
+  background-image: url("../samplePictures/5R (3).JPG");
+  background-size: cover;
+  border-radius: 50%;
+  margin-right: 20px;
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+  font-size: 33px;
+  padding: auto 0;
+  font-weight: 500;
 }
 
 .containerName {
@@ -49,4 +67,10 @@
 
 .downlineLabel {
   padding-left: 3px;
+}
+
+.btn-success {
+  background-color: #0C4223;
+  --bs-btn-hover-color: rgb(5, 63, 17);
+  --bs-btn-hover-bg: #ffffff;
 }/*# sourceMappingURL=style.css.map */
