@@ -13,7 +13,12 @@ function slideMainContent(){
 if(a==0){
 document.getElementById("mainContent").style.width="100%";  
 document.getElementById("mainContent").style.marginLeft= "0px"; 
-document.getElementById("mainContent").style.transition = "all .3s";; 
+// document.getElementById("sidebar").style.opacity= ""; 
+// document.getElementById("sidebar").style.transition = "all .1s";
+
+document.getElementById("mainContent").style.transition = "all .3s";
+
+
 
 
 

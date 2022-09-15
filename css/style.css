@@ -115,7 +115,6 @@
 .main-content {
   height: 100vh;
   width: calc(100% - 280px);
-  background-color: #0C4223;
   color: white;
   margin-left: 280px;
 }
@@ -213,4 +212,28 @@
 
 .navbar-brand:hover {
   color: #7867f8;
+}
+
+#v-pills-tabContent {
+  height: 100%;
+}
+
+#v-pills-home {
+  background-color: #f867c0;
+  height: 100%;
+}
+
+#v-pills-profile {
+  background-color: #ca67f8;
+  height: 100%;
+}
+
+#v-pills-disabled {
+  background-color: #67a6f8;
+  height: 100%;
+}
+
+#v-pills-messages {
+  background-color: #f89567;
+  height: 100%;
 }/*# sourceMappingURL=style.css.map */
