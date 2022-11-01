@@ -35,6 +35,8 @@ $resultPresentBalance = mysqli_query($conn, $SelectPresentBalance);
 while($userRow = mysqli_fetch_assoc($resultPresentBalance)){
     $totalBalance = $userRow['totalBalance'];
     $unclaimableBalance = $userRow['unclaimable'];
+    $totalIncome = $userRow['totalIncome'];
+
 
 }
 
@@ -390,7 +392,10 @@ return $msg;
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
     <script src="../node_modules/tw-elements/dist/js/index.min.js"></script>
     <script src="../js/jquery-3.6.1.min.js"></script>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
     <title>Arvie Cosmetic & Skincare  ProductsTrading</title>
 
     <style>
@@ -468,10 +473,13 @@ return $msg;
 </head>
 <body>
     <?php include_once "./user-header.php"; ?>
+    <?php include_once "./user-footer.php"; ?>
+
     <div class="flex flex-row">
         <div class="basis-0 lg:basis-64 xl:basis-72 hidden md:flex h-screen">
             <?php include_once "./user-nav.php"; ?>
         </div>
+        <?php include_once "./offcanvas.php"; ?>
 
         <!-- Modal -->
         <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
@@ -569,7 +577,7 @@ return $msg;
             </div>
         </div>
 
-        <div class=" user-dashboard-content-container pt-24 px-6 pb-6 bg-emerald-100 h-screen">
+        <div class=" user-dashboard-content-container pt-20 px-6 pb-6 bg-emerald-100 h-screen">
         <!-- <div class="grid grid-rows-2 md:grid-cols-2 gap-4 bg-gradient">
   <div class="...">01</div>
   <div class="...">02</div>
@@ -600,12 +608,12 @@ return $msg;
                 </button>
             </div>
             <!-- Top Content -->
-            <div class="flex flex-col lg:flex-row h-56 lg:h-40 xl:h-48 bg-gradient rounded-2xl">
+            <!-- <div class="hidden flex flex-col lg:flex-row h-80 sm:72 md:h-60 lg:h-52 xl:h-48 bg-gradient rounded-2xl">
                 <div class="lg:w-1/2">
                     <div class="h-36 xl:h-48 rounded-2xl">
                         <div class="h-full pl-3 py-2 text-white items-center">
                             <div class="font-medium text-lg sm:text-lg lg:text-xl xl:text-2xl">Unclaimable Balance</div>
-                            <div class="row-span-2 text-xl sm:text-2xl xl:text-3xl font-black">₱ <?php $totalincome = number_format($unclaimableBalance, 2);echo $totalincome; //cedrick code?></div>
+                            <div class="row-span-2 text-xl sm:text-2xl xl:text-3xl font-black">₱ <?php $unclaimableB = number_format($unclaimableBalance, 2);echo $unclaimableB; //cedrick code?></div>
                             <div class="row-span-2 text-lg sm:text-xl lg:text-xl xl:text-2xl font-medium">Available Balance as of <?php echo $dateNow; ?></div>
                             <div class="row-span-4 text-3xl sm:text-4xl xl:text-5xl font-black glow-font">₱ <?php $totalBalance2 = number_format($totalBalance, 2);echo $totalBalance2; //cedrick code?></div>
                         </div>
@@ -615,8 +623,8 @@ return $msg;
                     <div class="h-16">
                         <div class="font-medium text-md sm:text-lg xl:text-xl">Points Earned</div>
                         <div class="row-span-2 text-2xl xl:text-3xl font-black <?php if($totalPoints<=0){echo "text-red-600";} ?>"><?php echo $totalPoints;?></div>
-                        <div class="row-span-2 text-lg sm:text-xl lg:text-xl xl:text-2xl font-medium">Referral Link</div>
-                        <div class="row-span-2 text-lg sm:text-xl lg:text-xl xl:text-sm font-medium">http://localhost/ArvieCSP/signup.php?arviecsp=<?php echo $member_id; ?></div>
+                        <div class="row-span-2 text-lg sm:text-xl lg:text-xl xl:text-2xl font-medium">Total Income</div>
+                        <div class="row-span-2 text-xl sm:text-2xl xl:text-3xl font-black">₱ <?php $totalIncomeA = number_format($totalIncome, 2);echo $totalIncomeA; //cedrick code?></div>
 
 
                     </div>
@@ -627,10 +635,49 @@ return $msg;
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> -->
+<!-- Top content testing -->
 
+            <div class="grid grid-cols-2 gap-2 flex-col lg:flex-row h-96 sm:72 md:h-60 lg:h-52 xl:h-48 bg-gradient rounded-2xl">
+                <div class="col-span-2 sm:col-span-1">
+                    <div class="grid grid-col-2 gap-2 flex-col w-full h-full pl-3 py-2 text-white">
+                        <div class="grid grid-cols-2 gap w-full h-full">
+                            <div class="col-span-1 sm:col-span-2 w-full h-full">
+                                <div class="col-span-2 font-medium text-lg sm:text-lg lg:text-xl xl:text-2xl">Unclaimable Balance</div>
+                                <div class="col-span-2 row-span-2 text-xl sm:text-2xl xl:text-3xl font-black">₱ <?php $unclaimableB = number_format($unclaimableBalance, 2);echo $unclaimableB; //cedrick code?></div>
+                            </div>
+                            <div class="flex sm:hidden col-span-1 w-full h-full">
+                            <div class="h-16">
+                                <button onclick="setClipboard('<?php echo $member_id; ?>')"type="button" class="px-6 py-2.5 bg-blue-600 text-white font-medium text-xs lg:text-sm uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" >
+                               Copy referral Link
+                                </button>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-span-2 row-span-2 text-lg sm:text-xl lg:text-xl xl:text-2xl font-medium">Available Balance as of <?php echo $dateNow; ?></div>
+                        <div class="col-span-2 row-span-4 text-3xl sm:text-4xl xl:text-5xl font-black glow-font">₱ <?php $totalBalance2 = number_format($totalBalance, 2);echo $totalBalance2; //cedrick code?></div>
+                        
+                    </div>   
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                     <div class="grid grid-col-2 gab-2 w-full h-full pl-3 py-2 text-white">
+                     <div class="col-span-2 font-medium text-md sm:text-lg xl:text-xl">Points Earned</div>
+                        <div class="col-span-1 row-span-2 text-2xl xl:text-3xl font-black <?php if($totalPoints<=0){echo "text-red-600";} ?>"><?php echo $totalPoints;?></div>
+                        <div class="col-span-1 row-span-2 text-2xl xl:text-3xl font-black">
+                             <div class="h-16 pt-2 ml-6">
+                                <button type="button" class="px-6 py-2.5 bg-blue-600 text-white font-medium text-sm lg:text-sm uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                                    Redeem Code
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-span-2 row-span-2 text-lg sm:text-xl lg:text-xl xl:text-2xl font-medium">Total Income</div>
+                        <div class="col-span-2 row-span-2 text-xl sm:text-2xl xl:text-3xl font-black">₱ <?php $totalIncomeA = number_format($totalIncome, 2);echo $totalIncomeA; //cedrick code?></div>
+
+                    </div>
+                </div>
+            </div>
             <!-- Bottom Content -->
-            <div class="bottom-content mt-6  bg-gradient-transaction rounded-2xl">
+            <div class="bottom-content mt-6 mb-28 bg-gradient-transaction rounded-2xl">
             <!-- <div class="absolute  z-10 h-full w-full coffee-pattern bottom-content rounded-2xl"> </div> -->
             <div class="w-full h-full bottom-content px-3 py-3 rounded-2xl">
                 <h1 class="text-xl xl:text-2xl font-black text-white">Income Details</h1>
@@ -747,13 +794,13 @@ return $msg;
                         ?>
                         <!-- Pag out or withdraw -->
                         <div class="w-full h-28 lg:h-20 bg-white mt-3 rounded-xl grid grid-cols-5 grid-rows-2">
-                            <div class="self-end text-center text-xl md:text-sm font-medium">Category</div>
-                            <div class="self-end text-center text-xl font-medium">Data </div>
-                            <div class="self-end text-center text-xl font-medium">Time</div>
-                            <div class="row-span-2 col-span-2 self-center text-end mr-5 text-xl md:text-2xl font-black">- ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;?></div>
-                            <div class="self-start text-center text-2xl md:text-lg font-bold text-red-600">Withdrawal</div>
-                            <div class="self-start text-center text-2xl font-bold"><?php echo $date;?> </div>
-                            <div class="self-start text-center text-2xl font-bold"><?php echo $time;?> </div>
+                            <div class="row-span-2 sm:row-span-1 self-center sm:self-end text-center pl-2 text-xs sm:text-sm md:text-sm xl:text-base font-medium">Category</div>
+                            <div class="row-span-2 sm:row-span-1 self-center sm:self-end text-center text-xs sm:text-sm md:text-sm xl:text-base font-medium">Date </div>
+                            <div class="row-span-2 sm:row-span-1 self-center sm:self-end text-center text-xs sm:text-sm md:text-sm xl:text-base font-medium">Time</div>
+                            <div class="row-span-3 col-span-2 self-center text-end mr-5 text-sm sm:text-xl md:text-2xl xl:text-3xl font-black">- ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;?></div>
+                            <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base xl:text-xl font-bold text-red-600">Withdrawal</div>
+                            <div class="row-span-2 pl-1 mr-1 self-center text-center whitespace-normal overflow-hidden lg:whitespace-nowrap text-xs sm:text-base xl:text-xl font-bold"><?php echo $date;?> </div>
+                            <div class="row-span-2 pl-1 mr-1 self-center text-center whitespace-normal overflow-hidden lg:whitespace-nowrap text-xs sm:text-base xl:text-xl font-bold"><?php echo $time;?> </div>
 
                         </div>
 
@@ -767,8 +814,13 @@ return $msg;
                 </div>
             </div>
           </div>   
+          <br>
+          <br>
+   
+
         </div>
     </div>
+
 
     <script>
         $(document).ready(function(){
@@ -776,6 +828,21 @@ return $msg;
             $("#nav_dashboard").addClass("bg-emerald-700");
             $("#nav_dashboard").addClass("text-white");
             $("#nav_dashboard").removeClass("text-gray-600");
+            $("#header_dashboard1").addClass("bg-gray-300");
+            $("#nav_dashboard1").addClass("bg-emerald-700");
+            $("#nav_dashboard1").addClass("text-white");
+            $("#nav_dashboard1").removeClass("text-gray-600");
+
+            $("#payoutFooter").addClass("hidden");
+            $("#memberFooter").addClass("hidden");
+            $("#profileFooter").addClass("hidden");
+            $("#dashboardFooter").removeClass("hidden");
+
+            $("#dashboardFooterA").removeClass("focus:text-orange-500");
+            $("#dashboardFooterA").addClass("text-orange-500");
+
+
+            focus:text-orange-500
         });
     </script>
 

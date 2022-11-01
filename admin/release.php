@@ -66,11 +66,15 @@ if (isset($_POST['Release']) && $_POST['Release'] == 'Upload')
       $resultTotalBalance = mysqli_query($conn, $sqlGetTotalBalance);
       
       $totalBalance = 0;
+      $totalIncome = 0;
       while($userRow = mysqli_fetch_assoc($resultTotalBalance)){
           $totalBalance = $userRow['totalBalance'];
+          $totalIncome = $userRow['totalIncome'];
+
       }
       $updatedBalance = $totalBalance - $amount;
-      $sqlAddBalance= "UPDATE `totalbalance` SET `totalBalance`='$updatedBalance' WHERE `userID` = '$member_id'";
+      $updatedTotalIncome = $totalIncome + $amount;
+      $sqlAddBalance= "UPDATE `totalbalance` SET `totalBalance`='$updatedBalance', `totalIncome` = '$updatedTotalIncome' WHERE `userID` = '$member_id'";
       mysqli_query($conn, $sqlAddBalance);
   
       $sqlinsertTransact= "INSERT INTO `transaction`(`Date`,`time`,`type`,`userId`, `addedAmount`, `TotalBalance`) VALUES ('$DateToday','$timenow','Withdrawal','$member_id','$amount','$updatedBalance')";

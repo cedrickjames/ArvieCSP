@@ -266,10 +266,13 @@ return $msg;
 </head>
 <body>
     <?php include_once "./user-header.php"; ?>
+    <?php include_once "./user-footer.php"; ?>
+
     <div class="flex flex-row">
         <div class="basis-0 lg:basis-64 xl:basis-72 hidden md:flex h-screen">
             <?php include_once "./user-nav.php"; ?>
         </div>
+        <?php include_once "./offcanvas.php"; ?>
 
         <div class=" user-members-content-container pt-24 px-6 pb-6 bg-emerald-100 w-screen">
             <h2 class="text-center font-black text-4xl mb-10">Members</h2>
@@ -477,6 +480,18 @@ return $msg;
             $("#nav_members").addClass("bg-emerald-700");
             $("#nav_members").addClass("text-white");
             $("#nav_members").removeClass("text-gray-600");
+            
+            $("#nav_members1").addClass("bg-emerald-700");
+            $("#nav_members1").addClass("text-white");
+            $("#nav_members1").removeClass("text-gray-600");
+
+            $("#payoutFooter").addClass("hidden");
+            $("#memberFooter").removeClass("hidden");
+            $("#profileFooter").addClass("hidden");
+            $("#dashboardFooter").addClass("hidden");
+
+            $("#membersFooterA").removeClass("focus:text-orange-500");
+            $("#membersFooterA").addClass("text-orange-500");
         });
     </script>
 </body>

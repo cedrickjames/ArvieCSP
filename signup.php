@@ -1,5 +1,6 @@
-<?php $loginPage = false; ?>
-<?php include "./includes/auth/signup.php"; ?>
+<?php $loginPage = false;
+ ?>
+<?php //include "./includes/auth/signup.php"; ?>
 
 <!doctype html>
 <html lang="en">
@@ -14,10 +15,16 @@
     <script src="./js/tailwind-3.1.8.js"></script>
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
     <script src="./js/jquery-3.6.1.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
 </head>
 <body class="h-screen w-screen">
-
-    <?php include_once "./header.php"; ?>
+<?php include "./includes/auth/signup.php"; ?>
+    <?php include_once "./header.php"; 
+    
+ ?>
 
     
     <div class="container bg-white relative top-20 mx-auto w-11/12 max-w-sm md:max-w-xl">

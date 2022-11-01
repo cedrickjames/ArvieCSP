@@ -157,35 +157,87 @@ date_default_timezone_set("Asia/Singapore");
                         }
                            
                         }
-                        echo "<script> alert('You are now registered!')</script>";
-                        header("location: ./login.php");
+                        // echo "<script> alert('You are now registered!')</script>";
+                        ?><script>
+                        Swal.fire({
+                      icon: 'success',
+                      title: 'Successfull',
+                      text: 'You are now registered!',
+                    //   footer: '<a href="">Why do I have this issue?</a>'
+                    }).then(function() {
+              window.location = "./login.php";
+          });
+                     </script><?php 
+                        // header("location: ./login.php");
                     }
                     else{
-                        echo "<script> alert('There is an error with adding account')</script>";
-                header("location: signup.php?arviecsp=$referrer");
+                        ?><script>
+                        Swal.fire({
+                      icon: 'error',
+                      title: 'Unsuccessfull',
+                      text: 'There is an error in adding the account.',
+                    //   footer: '<a href="">Why do I have this issue?</a>'
+                    }).then(function() {
+              window.location = "signup.php?arviecsp=<?php echo $referrer;?>";
+          });
+                     </script><?php 
+
+                //         echo "<script> alert('There is an error with adding account')</script>";
+                // header("location: signup.php?arviecsp=$referrer");
 
                     }
                    
                 }
                 else{
 
-                    echo "<script> alert('Password not match')</script>";
-                header("location: signup.php?arviecsp=$referrer");
+                //     echo "<script> alert('Password not match')</script>";
+                // header("location: signup.php?arviecsp=$referrer");
+
+                ?><script>
+                Swal.fire({
+              icon: 'error',
+              title: 'Unsuccessfull',
+              text: 'Password not match.',
+            //   footer: '<a href="">Why do I have this issue?</a>'
+            }).then(function() {
+      window.location = "signup.php?arviecsp=<?php echo $referrer;?>";
+  });
+             </script><?php 
 
                 } 
             }
             else if ($create_user_count>0) 
             {
-                echo "<script> alert('Email address is already taken.')</script>";
-                header("location: signup.php?arviecsp=$referrer");
+                // echo "<script> alert('Email address is already taken.')</script>";
+                // header("location: signup.php?arviecsp=$referrer");
+                ?><script>
+                Swal.fire({
+              icon: 'error',
+              title: 'Unsuccessfull',
+              text: 'Email address is already taken.',
+            //   footer: '<a href="">Why do I have this issue?</a>'
+            }).then(function() {
+      window.location = "signup.php?arviecsp=<?php echo $referrer;?>";
+  });
+             </script><?php 
             } 
         }
     }
     else{
         // echo "<script> alert('Email address is already taken.')</script>";
 
-        echo "<script> alert('This code does not exist or already been used.')</script>";
-        header("location: signup.php?arviecsp=$referrer");
+        // echo "<script> alert('This code does not exist or already been used.')</script>";
+        // header("location: signup.php?arviecsp=$referrer");
+        ?><script>
+        Swal.fire({
+      icon: 'error',
+      title: 'Unsuccessfull',
+      text: 'This code does not exist or already been used.',
+    //   footer: '<a href="">Why do I have this issue?</a>'
+    }).then(function() {
+window.location = "signup.php?arviecsp=<?php echo $referrer;?>";
+});
+     </script><?php 
 
     }
 }

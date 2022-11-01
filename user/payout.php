@@ -38,6 +38,12 @@ while($userRow = mysqli_fetch_assoc($resultPresentBalance)){
 
 }
 
+$havependingrequest ="SELECT * FROM `payout_request` WHERE `member_id` = '$member_id' AND `status` != 'released';";
+$resultPending = mysqli_query($conn, $havependingrequest);
+$numOfPending = mysqli_num_rows($resultPending);
+
+
+
 $email = $_SESSION["email_address"];
 
 
@@ -74,21 +80,58 @@ if(isset($_POST['requestPO'])){
                             echo "<script>alert('You don't have enough balance to request a payout. ₱ 1000.00 is the minimum amount.') </script>";
 
                         }
+                        else if($numOfPending>=1){
+                            echo "<script>alert('You still have unfinish request. Please wait until it is released.') </script>";
+
+                        }
                         else {
 
                             $amount = $_POST['POAmount'];
                             $modeOfPayment = $_POST['modeOfPO'];
-                        
-                            $sqlInsertRequest= "INSERT INTO `payout_request`(`date`,`transaction_id`, `member_id`, `member_name`, `amount`, `mode_of_payment`, `status`, `transactionIdBasis`) VALUES ('$FullDateOfthisDay','$transactionId','$member_id','$fname $lname','$amount','$modeOfPayment','pending','$lastId')";
-                          $insertRequest =   mysqli_query($conn, $sqlInsertRequest);
-                                if($insertRequest){
-                                    echo "<script>alert('You have successfully requested a payout!') </script>";
-                                }
-                                else{
-                                    echo "<script>alert('Please try again!') </script>";
-                        
-                                }
+                            $gcashNo = $_POST['gcashNo'];
+                            $gcashName = $_POST['gcashName'];
+                            $bankNo = $_POST['bankNo'];
+                            $accountName = $_POST['accountName'];
+                            $bankBranch = $_POST['bankBranch'];
 
+                            if($modeOfPayment=="Gcash"){
+                                $sqlInsertRequest= "INSERT INTO `payout_request`(`date`,`transaction_id`, `member_id`, `member_name`, `amount`, `mode_of_payment`, `account_number`, `account_name`, `bank_branch`, `status`, `transactionIdBasis`) VALUES ('$FullDateOfthisDay','$transactionId','$member_id','$fname $lname','$amount','$modeOfPayment','$gcashNo','$gcashName','','pending','$lastId')";
+                                $insertRequest =   mysqli_query($conn, $sqlInsertRequest);
+      
+                                      if($insertRequest){
+                                          echo "<script>alert('You have successfully requested a payout!') </script>";
+                                      }
+                                      else{
+                                          echo "<script>alert('Please try again!') </script>";
+                              
+                                      }
+      
+                            }
+                            else if($modeOfPayment=="BPI"){
+                                $sqlInsertRequest= "INSERT INTO `payout_request`(`date`,`transaction_id`, `member_id`, `member_name`, `amount`, `mode_of_payment`, `account_number`, `account_name`, `bank_branch`, `status`, `transactionIdBasis`) VALUES ('$FullDateOfthisDay','$transactionId','$member_id','$fname $lname','$amount','$modeOfPayment','$bankNo','$accountName','$bankBranch','pending','$lastId')";
+                                $insertRequest =   mysqli_query($conn, $sqlInsertRequest);
+      
+                                      if($insertRequest){
+                                          echo "<script>alert('You have successfully requested a payout!') </script>";
+                                      }
+                                      else{
+                                          echo "<script>alert('Please try again!') </script>";
+                              
+                                      }
+                            }
+                            else{
+                                $sqlInsertRequest= "INSERT INTO `payout_request`(`date`,`transaction_id`, `member_id`, `member_name`, `amount`, `mode_of_payment`, `account_number`, `account_name`, `bank_branch`, `status`, `transactionIdBasis`) VALUES ('$FullDateOfthisDay','$transactionId','$member_id','$fname $lname','$amount','$modeOfPayment','','','','pending','$lastId')";
+                                $insertRequest =   mysqli_query($conn, $sqlInsertRequest);
+      
+                                      if($insertRequest){
+                                          echo "<script>alert('You have successfully requested a payout!') </script>";
+                                      }
+                                      else{
+                                          echo "<script>alert('Please try again!') </script>";
+                              
+                                      }
+                            }
+                           
                         }
  
 }
@@ -282,10 +325,14 @@ return $msg;
 </head>
 <body>
   <?php include_once "./user-header.php"; ?>
+  <?php include_once "./user-footer.php"; ?>
+
   <div class="content-container lg:flex lg:flex-row w-full">
     <div class="display-none lg:display-block lg:w-1/4 xl:w-1/5 2xl:w-1/5">
       <?php include_once "./user-nav.php"; ?>
     </div>
+    <?php include_once "./offcanvas.php"; ?>
+
 <!-- modal -->
 <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="payoutModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
             <div class="modal-dialog modal-xl relative w-auto pointer-events-none">
@@ -310,6 +357,10 @@ return $msg;
                         if($totalBalance<1000){
                             echo "<h5 class='text-xl font-medium leading-normal text-gray-800'> Note: You don't have enough balance to request a payout. ₱ 1000.00 is the minimum amount.</h5>";
                         }
+                        if($numOfPending>=1){
+                            echo "<h5 class='text-xl font-medium leading-normal text-gray-800'> Note: You still have unfinish request. Please wait until it is released.</h5>";
+
+                        }
                         ?>
                     <h5 class="text-xl font-medium leading-normal text-gray-800" id="">
                         Your Total Balance is : <span> ₱ <?php $totalBalance2 = number_format($totalBalance, 2);echo $totalBalance2; //cedrick code?></span>
@@ -321,14 +372,38 @@ return $msg;
         <label for="exampleFormControlInput2" class="form-label inline-block mb-2 text-gray-700 text-xl">Enter amount</label>
         <input type="number" name="POAmount" class=" form-control block w-full px-4 py-2  text-xl  font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="POAmount" placeholder="Please enter a valid amount">
       </div>
-      <div class="mb-3 xl:w-96">
+      <div class="grid grid-cols-4 gap-4">
+      <div class="form-group mb-3 ">
         <label for="exampleFormControlInput2" class="form-label inline-block mb-2 text-gray-700 text-xl">Mode of Payment</label>
-        <select name="modeOfPO" class="form-select form-select-lg mb-3 appearance-none block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition  ease-in-out  m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label=".form-select-lg example">
+        <select onchange="showDetails()" id="modeOfPayment" name="modeOfPO" class="form-select form-select-lg mb-3 appearance-none block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition  ease-in-out  m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label=".form-select-lg example">
           <option disabled selected="">Choose mode of payment</option>
           <option value="Cash">Cash</option>
           <option value="Gcash">Gcash</option>
           <option value="BPI">BPI</option>
       </select></div>
+      <div class=" form-group mb-3 " id="gcashno">
+        <label for="exampleFormControlInput2" class="hiddenform-label inline-block mb-2 text-gray-700 text-xl">Gcash No.</label>
+        <input type="text" name="gcashNo" class=" form-control block w-full px-4 py-2  text-xl  font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="gcashNo" placeholder="">
+    </div>
+      <div class=" form-group mb-3 " id="gcashname">
+        <label for="exampleFormControlInput2" class="form-label inline-block mb-2 text-gray-700 text-xl">Gcash Name</label>
+        <input type="text" name="gcashName" class=" form-control block w-full px-4 py-2  text-xl  font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="gcashName" placeholder="">
+    </div>
+      <div class=" form-group mb-3 " id="bankno">
+        <label for="exampleFormControlInput2" class="form-label inline-block mb-2 text-gray-700 text-xl">Account Number</label>
+        <input type="text" name="bankNo" class=" form-control block w-full px-4 py-2  text-xl  font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="bankNo" placeholder="">
+    </div>
+  
+      <div class=" form-group mb-3 "id="bankname">
+        <label for="exampleFormControlInput2" class="form-label inline-block mb-2 text-gray-700 text-xl">Account Name</label>
+        <input type="text" name="accountName" class=" form-control block w-full px-4 py-2  text-xl  font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="bankName" placeholder="">
+    </div>
+    <div class=" form-group mb-3 "id="bankBranch">
+        <label for="exampleFormControlInput2" class="form-label inline-block mb-2 text-gray-700 text-xl">Branch Name</label>
+        <input type="text" name="bankBranch" class=" form-control block w-full px-4 py-2  text-xl  font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="bankName" placeholder="">
+    </div>
+      </div>
+        
                     
                     </div>
                     <div
@@ -425,20 +500,79 @@ return $msg;
         <!--/container-->
 
     </div>
-    </>
+                                    </div>
 
     <script>
         $(document).ready(function(){
-            $("#payout").addClass("bg-emerald-700");
-            $("#payout").addClass("text-white");
-            $("#payout").removeClass("text-gray-600");
+            $("#header_request").addClass("bg-gray-300");
+            $("#nav_request").addClass("bg-emerald-700");
+            $("#nav_request").addClass("text-white");
+            $("#nav_request").removeClass("text-gray-600");
 
+            $("#nav_request1").addClass("bg-emerald-700");
+            $("#nav_request1").addClass("text-white");
+            $("#nav_request1").removeClass("text-gray-600");
+
+            $("#payoutFooter").removeClass("hidden");
+            $("#memberFooter").addClass("hidden");
+            $("#profileFooter").addClass("hidden");
+            $("#dashboardFooter").addClass("hidden");
+
+            $("#payoutFooterA").removeClass("focus:text-orange-500");
+            $("#payoutFooterA").addClass("text-orange-500");
+            
             var table = $('#payoutTable').DataTable({
                 responsive: true
             })
             .columns.adjust()
             .responsive.recalc();
         });
+
+
+        function showDetails(){
+            var chosen = document.getElementById("modeOfPayment").value;
+
+            if(chosen=="Gcash"){
+                var element = document.getElementById("gcashno");
+                element.classList.remove("hidden");
+                var element2 = document.getElementById("gcashname");
+                element2.classList.remove("hidden");
+                var element3 = document.getElementById("bankno");
+                element3.classList.add("hidden");
+                var element4 = document.getElementById("bankname");
+                element4.classList.add("hidden");
+                var element5 = document.getElementById("bankBranch");
+                element5.classList.add("hidden");
+                
+
+            }
+            else if(chosen=="BPI"){
+                var element = document.getElementById("bankno");
+                element.classList.remove("hidden");
+                var element2 = document.getElementById("bankname");
+                element2.classList.remove("hidden");
+                var element5 = document.getElementById("bankBranch");
+                element5.classList.remove("hidden");
+
+                var element4 = document.getElementById("gcashno");
+                element4.classList.add("hidden");
+                var element4 = document.getElementById("gcashname");
+                element4.classList.add("hidden");
+            }
+            else{
+                var element = document.getElementById("gcashno");
+                element.classList.add("hidden");
+                var element2 = document.getElementById("gcashname");
+                element2.classList.add("hidden");
+                var element3 = document.getElementById("bankno");
+                element3.classList.add("hidden");
+                var element4 = document.getElementById("bankname");
+                element4.classList.add("hidden");
+                var element5 = document.getElementById("bankBranch");
+                element5.classList.add("hidden");
+            }
+        }
+        showDetails();
     </script>
 
 </body>

@@ -6,7 +6,7 @@ $db= $conn;
 
 // code for getting the payout transaction//
 $tablePayout="payout_request";
-$columnsTransaction= ['transaction_id','date','date_released','time_released','member_id','member_name','amount','mode_of_payment' ,'status','receipt'];
+$columnsTransaction= ['transaction_id','date','date_released','time_released','member_id','member_name','amount','mode_of_payment' ,'status','receipt','account_number','account_name','bank_branch'];
 $fetchDataPayout= fetch_transaction($db, $tablePayout, $columnsTransaction);
 
 
@@ -349,6 +349,10 @@ $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Oroz
                             <th data-priority="6">Status</th>
                             <th data-priority="8">Time Released</th>
                             <th data-priority="7">Action</th>
+                            <th data-priority="9">Account No</th>
+                            <th data-priority="10">Account Name</th>
+                            <th data-priority="11">Bank Branch</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -367,6 +371,10 @@ $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Oroz
                                     $Date = $data['date_released'];
                                     $time = $data['time_released'];
                                     $receipt=$data['receipt'];
+                                    $account_no=$data['account_number'];
+                                    $account_name=$data['account_name'];
+                                    $bank_branch=$data['bank_branch'];
+
 
                         ?>
                                                 <tr>
@@ -403,6 +411,9 @@ $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Oroz
                                 <?php 
                             }
                                 ?>
+                            <td class="text-center"><?php echo $account_no?></td>
+                            <td class="text-center"><?php echo $account_name?></td>
+                            <td class="text-center"><?php echo $bank_branch?></td>
                            
                         </tr>
                              <?php
