@@ -638,30 +638,41 @@ return $msg;
                 </div>
             </div> -->
 <!-- Top content testing -->
-
+<button type="button" onclick="setClipboard('<?php echo $member_id; ?>')" class="w-full inline-block mb-3 px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-normal uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
+Copy Referral Link
+</button>
             <div class="grid grid-cols-2 gap-2 flex-col lg:flex-row h-96 sm:72 md:h-60 lg:h-52 xl:h-48 bg-gradient rounded-2xl">
+
                 <div class="col-span-2 sm:col-span-1">
-                    <div class="grid grid-col-2 gap-2 flex-col w-full h-full pl-3 py-2 text-white">
+                    <div class="grid grid-cols-1 gap-2 flex-col w-full h-full pl-3 py-2 text-white">
                         <div class="grid grid-cols-2 gap w-full h-full">
                             <div class="col-span-1 sm:col-span-2 w-full h-full">
                                 <div class="col-span-2 font-medium text-lg sm:text-lg lg:text-xl xl:text-2xl">Unclaimable Balance</div>
                                 <div class="col-span-2 row-span-2 text-xl sm:text-2xl xl:text-3xl font-black">₱ <?php $unclaimableB = number_format($unclaimableBalance, 2);echo $unclaimableB; //cedrick code?></div>
                             </div>
-                            <div class="flex sm:hidden col-span-1 w-full h-full">
-                            <div class="h-16">
-                                <button onclick="setClipboard('<?php echo $member_id; ?>')"type="button" class="px-6 py-2.5 bg-blue-600 text-white font-medium text-xs lg:text-sm uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" >
-                               Copy referral Link
-                                </button>
-                            </div>
+                            <div class=" block sm:hidden col-span-1 sm:col-span-2 w-full h-full">
+                                <div class="col-span-2 font-medium text-lg sm:text-lg lg:text-xl xl:text-2xl">Total Income</div>
+                                <div class="col-span-2 row-span-2 text-xl sm:text-2xl xl:text-3xl font-black">₱ <?php $totalIncomeA = number_format($totalIncome, 2);echo $totalIncomeA; //cedrick code?></div>
                             </div>
                         </div>
-                        <div class="col-span-2 row-span-2 text-lg sm:text-xl lg:text-xl xl:text-2xl font-medium">Available Balance as of <?php echo $dateNow; ?></div>
-                        <div class="col-span-2 row-span-4 text-3xl sm:text-4xl xl:text-5xl font-black glow-font">₱ <?php $totalBalance2 = number_format($totalBalance, 2);echo $totalBalance2; //cedrick code?></div>
+                        <div class="block sm:hidden grid grid-cols-2 gap w-full h-full">
+                            <div class="col-span-1 sm:col-span-2 w-full h-full">
+                                <div class="col-span-2 row-span-2 text-lg sm:text-xl lg:text-xl xl:text-2xl font-medium">Available Balance as of <?php echo $dateNow; ?></div>
+                                <div class="col-span-2 row-span-4 text-3xl sm:text-4xl xl:text-5xl font-black glow-font">₱ <?php $totalBalance2 = number_format($totalBalance, 2);echo $totalBalance2; //cedrick code?></div>
+                            </div>
+                            <div class=" block sm:hidden col-span-1 sm:col-span-2 w-full h-full">
+                                <div class="col-span-2 font-medium text-lg sm:text-lg lg:text-xl xl:text-2xl">Points Earned</div>
+                                <div class="col-span-2 row-span-2 text-xl sm:text-2xl xl:text-3xl font-black <?php if($totalPoints<=0){echo "text-red-600";} ?>"><?php echo $totalPoints;?></div>
+                            </div>
+                        </div>
+                        <div class="hidden sm:block col-span-2 row-span-2 text-lg sm:text-xl lg:text-xl xl:text-2xl font-medium">Available Balance as of <?php echo $dateNow; ?></div>
+                        <div class="hidden sm:block col-span-2 row-span-4 text-3xl sm:text-4xl xl:text-5xl font-black glow-font">₱ <?php $totalBalance2 = number_format($totalBalance, 2);echo $totalBalance2; //cedrick code?></div>
                         
                     </div>   
                 </div>
-                <div class="col-span-2 sm:col-span-1">
-                     <div class="grid grid-col-2 gab-2 w-full h-full pl-3 py-2 text-white">
+                <div class="block sm:hidden col-span-2 ">asd</div>
+                <div class="hidden sm:block col-span-2 sm:col-span-1">
+                     <div class="grid grid-cols-2 gab-2 w-full h-full pl-3 py-2 text-white">
                      <div class="col-span-2 font-medium text-md sm:text-lg xl:text-xl">Points Earned</div>
                         <div class="col-span-1 row-span-2 text-2xl xl:text-3xl font-black <?php if($totalPoints<=0){echo "text-red-600";} ?>"><?php echo $totalPoints;?></div>
                         <div class="col-span-1 row-span-2 text-2xl xl:text-3xl font-black">
@@ -671,8 +682,8 @@ return $msg;
                                 </button>
                             </div>
                         </div>
-                        <div class="col-span-2 row-span-2 text-lg sm:text-xl lg:text-xl xl:text-2xl font-medium">Total Income</div>
-                        <div class="col-span-2 row-span-2 text-xl sm:text-2xl xl:text-3xl font-black">₱ <?php $totalIncomeA = number_format($totalIncome, 2);echo $totalIncomeA; //cedrick code?></div>
+                        <div class="hidden sm:block col-span-2 row-span-2 text-lg sm:text-xl lg:text-xl xl:text-2xl font-medium">Total Income</div>
+                        <div class="hidden sm:block col-span-2 row-span-2 text-xl sm:text-2xl xl:text-3xl font-black">₱ <?php $totalIncomeA = number_format($totalIncome, 2);echo $totalIncomeA; //cedrick code?></div>
 
                     </div>
                 </div>
