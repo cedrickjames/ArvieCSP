@@ -1,10 +1,25 @@
 <?php
     // include "./includes/auth/session.php";
     session_start();
-    $loginPage = false;
-    if($_SESSION["access"] == 'admin'){
-        $admin = true;
-    }
+    header("login.php");
+    if(!isset( $_SESSION['loggedin'])){
+        header("location:./login.php");
+      }else{
+        if($_SESSION['permission']=='administ'){
+        header("location:./admin/index.php");
+    
+        }
+      }
+      if(isset( $_SESSION['loggedin'])){
+        if($_SESSION['permission']=='administ'){
+        header("location:./admin/index.php");
+    
+        }else{
+            header("location: ./user/index.php");
+
+        }
+    
+}
 ?>
 
 <!DOCTYPE html>

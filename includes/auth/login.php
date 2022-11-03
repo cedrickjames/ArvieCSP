@@ -1,9 +1,14 @@
 <?php
 session_start();
  
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: ./user/index.php");
-    exit;
+if(isset( $_SESSION['loggedin'])){
+        if($_SESSION['permission']=='administ'){
+        header("location:./admin/index.php");
+    
+        }else{
+            header("location: ./user/index.php");
+
+        }
     
 }
 include_once ("./includes/config/conn.php");

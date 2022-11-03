@@ -5,7 +5,14 @@ include_once ("../includes/config/conn.php");
 
 if(!isset( $_SESSION['loggedin'])){
     header("location:../login.php");
+  }else{
+    if($_SESSION['permission']=='administ'){
+    header("location:../admin/index.php");
+
+    }
   }
+
+
 
 $db= $conn;
 date_default_timezone_set("Asia/Singapore");
