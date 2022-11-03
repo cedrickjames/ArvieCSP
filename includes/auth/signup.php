@@ -161,7 +161,7 @@ date_default_timezone_set("Asia/Singapore");
                         ?><script>
                         Swal.fire({
                       icon: 'success',
-                      title: 'Successfull',
+                      title: 'Successful',
                       text: 'You are now registered!',
                     //   footer: '<a href="">Why do I have this issue?</a>'
                     }).then(function() {
@@ -174,7 +174,7 @@ date_default_timezone_set("Asia/Singapore");
                         ?><script>
                         Swal.fire({
                       icon: 'error',
-                      title: 'Unsuccessfull',
+                      title: 'Unsuccessful',
                       text: 'There is an error in adding the account.',
                     //   footer: '<a href="">Why do I have this issue?</a>'
                     }).then(function() {
@@ -196,7 +196,7 @@ date_default_timezone_set("Asia/Singapore");
                 ?><script>
                 Swal.fire({
               icon: 'error',
-              title: 'Unsuccessfull',
+              title: 'Unsuccessful',
               text: 'Password not match.',
             //   footer: '<a href="">Why do I have this issue?</a>'
             }).then(function() {
@@ -231,7 +231,7 @@ date_default_timezone_set("Asia/Singapore");
         ?><script>
         Swal.fire({
       icon: 'error',
-      title: 'Unsuccessfull',
+      title: 'Unsuccessful',
       text: 'This code does not exist or already been used.',
     //   footer: '<a href="">Why do I have this issue?</a>'
     }).then(function() {

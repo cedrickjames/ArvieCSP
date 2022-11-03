@@ -14,10 +14,11 @@ $SelectInfo ="SELECT * FROM `accounts` WHERE `member_id` = '$member_id';";
 $resultInfo= mysqli_query($conn, $SelectInfo);
 $fname="";
 $lname="";
+$sponsorrr="";
 while($userRow = mysqli_fetch_assoc($resultInfo)){
     $fname = $userRow['first_name'];
     $lname = $userRow['last_name'];
-
+    $sponsorrr = $userRow['sponsorName'];
 
 }
 $SelectPresentBalance ="SELECT * FROM `totalbalance` WHERE `userID` = '$member_id';";
@@ -277,6 +278,8 @@ return $msg;
         <div class=" user-members-content-container pt-24 px-6 pb-6 bg-emerald-100 w-screen">
             <h2 class="text-center font-black text-4xl mb-10">Members</h2>
             <div class="container px-6 mx-auto">
+            <h2 class="bg-white rounded-lg p-3 mb-3 font-bold text-xl shadow-lg">Spnsor: <?php echo $sponsorrr; ?></h2>
+
                 <h2 class="bg-white rounded-lg p-3 mb-3 font-bold text-xl shadow-lg">Total: 9,999</h2>
                 <section class="mb-32 text-gray-800  shadow-lg">
                     <div class="accordion accordion-flush" id="accordionFlushExample">

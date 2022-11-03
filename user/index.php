@@ -2,6 +2,11 @@
 session_start();
 
 include_once ("../includes/config/conn.php");
+
+if(!isset( $_SESSION['loggedin'])){
+    header("location:../login.php");
+  }
+
 $db= $conn;
 date_default_timezone_set("Asia/Singapore");
 $dateNow = new DateTime(); 
@@ -210,7 +215,7 @@ if(isset($_POST['enterCode'])){
 
                        
                         }
-                        echo "<script>alert('You have successfully enter the code!')</script>";
+                        echo "<script>alert('You have successfully entered the code!')</script>";
     
                     }
                     else if($type == "RB"){
@@ -638,31 +643,31 @@ return $msg;
                 </div>
             </div> -->
 <!-- Top content testing -->
-<button type="button" onclick="setClipboard('<?php echo $member_id; ?>')" class="w-full inline-block mb-3 px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-normal uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
+<button type="button" onclick="setClipboard('<?php echo $member_id; ?>')" class="block sm:hidden w-full inline-block mb-3 px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-normal uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
 Copy Referral Link
 </button>
-            <div class="grid grid-cols-2 gap-2 flex-col lg:flex-row h-96 sm:72 md:h-60 lg:h-52 xl:h-48 bg-gradient rounded-2xl">
+            <div class="grid grid-cols-2 gap-2 flex-col lg:flex-row h-96 sm:72 md:h-60 lg:h-52 xl:h-56 bg-gradient rounded-2xl">
 
                 <div class="col-span-2 sm:col-span-1">
                     <div class="grid grid-cols-1 gap-2 flex-col w-full h-full pl-3 py-2 text-white">
                         <div class="grid grid-cols-2 gap w-full h-full">
-                            <div class="col-span-1 sm:col-span-2 w-full h-full">
+                            <div class="col-span-1 sm:col-span-2 w-full h-full p-3">
                                 <div class="col-span-2 font-medium text-lg sm:text-lg lg:text-xl xl:text-2xl">Unclaimable Balance</div>
                                 <div class="col-span-2 row-span-2 text-xl sm:text-2xl xl:text-3xl font-black">₱ <?php $unclaimableB = number_format($unclaimableBalance, 2);echo $unclaimableB; //cedrick code?></div>
                             </div>
-                            <div class=" block sm:hidden col-span-1 sm:col-span-2 w-full h-full">
+                            <div class=" block sm:hidden col-span-1 sm:col-span-2 w-full h-full p-3">
                                 <div class="col-span-2 font-medium text-lg sm:text-lg lg:text-xl xl:text-2xl">Total Income</div>
                                 <div class="col-span-2 row-span-2 text-xl sm:text-2xl xl:text-3xl font-black">₱ <?php $totalIncomeA = number_format($totalIncome, 2);echo $totalIncomeA; //cedrick code?></div>
                             </div>
                         </div>
-                        <div class="block sm:hidden grid grid-cols-2 gap w-full h-full">
-                            <div class="col-span-1 sm:col-span-2 w-full h-full">
-                                <div class="col-span-2 row-span-2 text-lg sm:text-xl lg:text-xl xl:text-2xl font-medium">Available Balance as of <?php echo $dateNow; ?></div>
+                        <div class="block sm:hidden grid grid-cols-2 gap w-full h-full p-3">
+                            <div class="col-span-1 sm:col-span-2 w-full h-full p-3">
+                                <div class="col-span-2 row-span-2 text-lg sm:text-xl lg:text-xl xl:text-2xl font-medium">Total Balance</div>
                                 <div class="col-span-2 row-span-4 text-3xl sm:text-4xl xl:text-5xl font-black glow-font">₱ <?php $totalBalance2 = number_format($totalBalance, 2);echo $totalBalance2; //cedrick code?></div>
                             </div>
-                            <div class=" block sm:hidden col-span-1 sm:col-span-2 w-full h-full">
+                            <div class=" block sm:hidden col-span-1 sm:col-span-2 w-full h-full p-3">
                                 <div class="col-span-2 font-medium text-lg sm:text-lg lg:text-xl xl:text-2xl">Points Earned</div>
-                                <div class="col-span-2 row-span-2 text-xl sm:text-2xl xl:text-3xl font-black <?php if($totalPoints<=0){echo "text-red-600";} ?>"><?php echo $totalPoints;?></div>
+                                <div class="col-span-2 row-span-2 text-3xl sm:text-4xl xl:text-5xl font-black <?php if($totalPoints<=0){echo "text-red-600";} ?>"><?php echo $totalPoints;?></div>
                             </div>
                         </div>
                         <div class="hidden sm:block col-span-2 row-span-2 text-lg sm:text-xl lg:text-xl xl:text-2xl font-medium">Available Balance as of <?php echo $dateNow; ?></div>
@@ -670,7 +675,9 @@ Copy Referral Link
                         
                     </div>   
                 </div>
-                <div class="block sm:hidden col-span-2 ">asd</div>
+                <div data-bs-toggle="modal" data-bs-target="#exampleModalCenter" class="block sm:hidden col-span-2 p-2.5"><button type="button" class=" block sm:hidden w-full inline-block mb-3 px-6 py-2 px-6 py-2.5 bg-blue-600 text-white font-medium text-sm lg:text-sm uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                Redeem Code
+                </button></div>
                 <div class="hidden sm:block col-span-2 sm:col-span-1">
                      <div class="grid grid-cols-2 gab-2 w-full h-full pl-3 py-2 text-white">
                      <div class="col-span-2 font-medium text-md sm:text-lg xl:text-xl">Points Earned</div>
