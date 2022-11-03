@@ -21,157 +21,175 @@ while($userRow = mysqli_fetch_assoc($resultInfo)){
     $sponsorrr = $userRow['sponsorName'];
 
 }
-$SelectPresentBalance ="SELECT * FROM `totalbalance` WHERE `userID` = '$member_id';";
-$resultPresentBalance = mysqli_query($conn, $SelectPresentBalance);
-
-while($userRow = mysqli_fetch_assoc($resultPresentBalance)){
-    $totalBalance = $userRow['totalBalance'];
-
-}
 
 $email = $_SESSION["email_address"];
-if(isset($_POST['enterCode'])){
-    $EnteredCode = $_POST['EnteredCode'];
-    $sqlSelectCode= "SELECT * FROM `generated_code` WHERE `code` = '$EnteredCode' AND `type` = 'RA' || `type`='RB'";
-    $resultSelectCode = mysqli_query($conn, $sqlSelectCode);
-    $num_of_select_code = mysqli_num_rows($resultSelectCode);
-    while($userRow = mysqli_fetch_assoc($resultSelectCode))
-        {
-        $userNameOfCodeOwner = $userRow['userNameOfCodeOwner'];
-        $type = $userRow['type'];
-
-            if($num_of_select_code !=0)
-            {
-                if($userNameOfCodeOwner !=""){
-                    // echo "This is code is already used. Please enter another code";
-                    echo "<script>alert('This is code is already used. Please enter another code')</script>";
-                }
-                else{
-                    $sqlUpdateCodeOwner= "UPDATE `generated_code` SET `userNameOfCodeOwner`='$email',`userIdOfCodeOwner`='$id' WHERE `code` = '$EnteredCode'";
-                    mysqli_query($conn, $sqlUpdateCodeOwner);
-                    // echo "You have successfully enter the code!";
-                    $sqlSelectRebatesPoints= "SELECT * FROM `rebates_points` WHERE `user_id` = '$id'";
-                    $resultSelectRPoints = mysqli_query($conn, $sqlSelectRebatesPoints);
-                    $num_of_select_points = mysqli_num_rows($resultSelectRPoints);
-                    if($num_of_select_points==0){
-                        $sqlinsertPoints= "INSERT INTO `rebates_points`(`user_id`, `email_address`, `pointsEarned`) VALUES ('$id','$email','1')";
-                        mysqli_query($conn, $sqlinsertPoints);
-                          $sqlinsertTransacPoints= "INSERT INTO `transaction`(`type`, `userName`, `userId`, `packageType`, `addedPoints`, `totalPoints`)VALUES ('Points','$email','$id','$type','1','1')";
-                                mysqli_query($conn, $sqlinsertTransacPoints);
-                    }
-                    else{
-                        $sqlSelectRebatesPoints2= "SELECT * FROM `rebates_points` WHERE `user_id` = '$id'";
-                        $resultSelectRPoints2 = mysqli_query($conn, $sqlSelectRebatesPoints2);
-
-                        while($userRow = mysqli_fetch_assoc($resultSelectRPoints2))
-                        {
-                        $pointsEarned = $userRow['pointsEarned'];
-                        $pointsEarned++;
-                        $sqlUpdatePointsEarned= "UPDATE `rebates_points` SET `pointsEarned`='$pointsEarned' WHERE `user_id` = '$id'";
-                        mysqli_query($conn, $sqlUpdatePointsEarned);
-                        $sqlinsertTransacPoints= "INSERT INTO `transaction`(`type`, `userName`, `userId`, `packageType`, `addedPoints`, `totalPoints`)VALUES ('Points','$email','$id','$type','1','$pointsEarned')";
-                        mysqli_query($conn, $sqlinsertTransacPoints);
-                        }                
-                    }
-
-                    $sponsor=$id;
-                    for ($i = 1; $i<=10; $i++)
-                    {                  
-                    //Update sponsor total balance
-                    $sqlUserSponsor= "SELECT * FROM `invites` WHERE `idOfInvite` = '$sponsor';";
-                    $resultUserSponsor = mysqli_query($conn, $sqlUserSponsor);
-                    while($userRow = mysqli_fetch_assoc($resultUserSponsor))
-                        {
-                            $inviteeID = $userRow['inviteeID'];
-                                
-                            $sqlGetTotalBalance= "SELECT * FROM `totalbalance` WHERE `userID` = '$inviteeID'";
-                            $resultTotalBalance = mysqli_query($conn, $sqlGetTotalBalance);
-                            
-                            $totalBalance = 0;
-                            while($userRow = mysqli_fetch_assoc($resultTotalBalance)){
-                                $totalBalance = $userRow['totalBalance'];
-                                $emailOfSponsor = $userRow['userName'];
-                            }
-                            if($i==1)
-                            {
-                                $updatedBalance = $totalBalance + 80;
-                                $sqlinsertTransact= "INSERT INTO `transaction`(`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`)VALUES ('Rebates','$emailOfSponsor','$inviteeID','$type','$email','$id','80','$updatedBalance')";
-                                mysqli_query($conn, $sqlinsertTransact);
-
-                            }
-                            else if($i==2 || $i==3 || $i==4 || $i==5){
-                            $updatedBalance = $totalBalance + 30;
-                            $sqlinsertTransact= "INSERT INTO `transaction`(`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`)VALUES ('Rebates','$emailOfSponsor','$inviteeID','$type','$email','$id','30','$updatedBalance')";
-                            mysqli_query($conn, $sqlinsertTransact);
-                            }
-                            else{
-                            $updatedBalance = $totalBalance + 20;
-                            $sqlinsertTransact= "INSERT INTO `transaction`(`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`)VALUES ('Rebates','$emailOfSponsor','$inviteeID','$type','$email','$id','20','$updatedBalance')";
-                            mysqli_query($conn, $sqlinsertTransact);
-                            }
-                            $sqlAddBalance= "UPDATE `totalbalance` SET `totalBalance`='$updatedBalance' WHERE `userID` = '$inviteeID'";
-                            mysqli_query($conn, $sqlAddBalance);
-
-                         
 
 
-                            $sponsor = $inviteeID;
-                      }
-                    }
-                    echo "<script>alert('You have successfully enter the code!')</script>";
+// array of dowlines
 
-                }
-            }
-         }
+$level1 = array();
+$level1Name = array();
+
+$level2 = array();
+$level2Name = array();
+
+$level3 = array();
+$level3Name = array();
+
+$level4 = array();
+$level4Name = array();
+
+$level5 = array();
+$level5Name = array();
+
+$level6 = array();
+$level6Name = array();
+
+$level7 = array();
+$level7Name = array();
+
+$level8 = array();
+$level8Name = array();
+
+$level9 = array();
+$level9Name = array();
+
+$level10 = array();
+$level10Name = array();
+
+
+
+//codes for getting the downlines
+//level 1
+
+$selectLevel1= "SELECT * FROM `accounts` WHERE `sponsor` = '$member_id '";
+$resultselectLevel1= mysqli_query($conn, $selectLevel1);
+while($userRow = mysqli_fetch_assoc($resultselectLevel1)){
+    $name = $userRow['first_name'].' '.$userRow['last_name'];
+    // echo " <div>$name</div>";
+    array_push($level1Name, $name);
+    $idinvite = $userRow['member_id'];
+    array_push($level1,$idinvite);
+    // print ($level1[0]);
 }
+//level 2
+$count = count($level1);
+for($i=0; $i<=$count-1; $i++){
+    $selectLevel2= "SELECT * FROM `accounts` WHERE `sponsor` = '$level1[$i]'";
+    $resultselectLevel2= mysqli_query($conn, $selectLevel2);
+    while($userRow = mysqli_fetch_assoc($resultselectLevel2)){
+        $name2 = $userRow['first_name'].' '.$userRow['last_name'];
+        array_push($level2Name, $name2);
+        $idinvite = $userRow['member_id'];
+        array_push($level2,$idinvite);
+    }
+    }
+//level 3
+$count = count($level2);
+    for($i=0; $i<=$count-1; $i++){
+        $selectLevel3= "SELECT * FROM `accounts` WHERE `sponsor` = '$level2[$i]'";
+        $resultselectLevel3= mysqli_query($conn, $selectLevel3);
+        while($userRow = mysqli_fetch_assoc($resultselectLevel3)){
+            $name3 = $userRow['first_name'].' '.$userRow['last_name'];
+            array_push($level3Name, $name3);
+            $idinvite = $userRow['member_id'];
+            array_push($level3,$idinvite);
+        }
+        }
 
-// getiing the points\
-$totalPoints=0;
-$sqlSelectRebatesPoints3= "SELECT * FROM `rebates_points` WHERE `user_id` = '$id'";
-$resultSelectRPoints3 = mysqli_query($conn, $sqlSelectRebatesPoints3);
-while($userRow = mysqli_fetch_assoc($resultSelectRPoints3)){
-    $totalPoints = $userRow['pointsEarned'];
- 
-}
+//level 4
+$count = count($level3);
+    for($i=0; $i<=$count-1; $i++){
+        $selectLevel4= "SELECT * FROM `accounts` WHERE `sponsor` = '$level3[$i]'";
+        $resultselectLevel4= mysqli_query($conn, $selectLevel4);
+        while($userRow = mysqli_fetch_assoc($resultselectLevel4)){
+            $name4 = $userRow['first_name'].' '.$userRow['last_name'];
+            array_push($level4Name, $name4);
+            $idinvite = $userRow['member_id'];
+            array_push($level4,$idinvite);
+        }
+        }
 
-// code for getting the accounts//
-$tableNameTransaction="transaction";
-$columnsTransaction= ['transactionId', 'type','userName','userId','inviteName','inviteeName' ,'addedAmount', 'TotalBalance'];
-$fetchDataTransaction= fetch_transaction($db, $tableNameTransaction, $columnsTransaction);
+        
+//level 5
+$count = count($level4);
+for($i=0; $i<=$count-1; $i++){
+    $selectLevel5= "SELECT * FROM `accounts` WHERE `sponsor` = '$level4[$i]'";
+    $resultselectLevel5= mysqli_query($conn, $selectLevel5);
+    while($userRow = mysqli_fetch_assoc($resultselectLevel5)){
+        $name5 = $userRow['first_name'].' '.$userRow['last_name'];
+        array_push($level5Name, $name5);
+        $idinvite = $userRow['member_id'];
+        array_push($level5,$idinvite);
+    }
+    }
 
+    //level 6
+$count = count($level5);
+for($i=0; $i<=$count-1; $i++){
+    $selectLevel6= "SELECT * FROM `accounts` WHERE `sponsor` = '$level5[$i]'";
+    $resultselectLevel6= mysqli_query($conn, $selectLevel6);
+    while($userRow = mysqli_fetch_assoc($resultselectLevel6)){
+        $name6 = $userRow['first_name'].' '.$userRow['last_name'];
+        array_push($level6Name, $name6);
+        $idinvite = $userRow['member_id'];
+        array_push($level6,$idinvite);
+    }
+    }
+    
+    //level 7
+$count = count($level6);
+for($i=0; $i<=$count-1; $i++){
+    $selectLevel7= "SELECT * FROM `accounts` WHERE `sponsor` = '$level6[$i]'";
+    $resultselectLevel7= mysqli_query($conn, $selectLevel7);
+    while($userRow = mysqli_fetch_assoc($resultselectLevel7)){
+        $name7 = $userRow['first_name'].' '.$userRow['last_name'];
+        array_push($level7Name, $name7);
+        $idinvite = $userRow['member_id'];
+        array_push($level7,$idinvite);
+    }
+    }
+        
+    //level 8
+$count = count($level7);
+for($i=0; $i<=$count-1; $i++){
+    $selectLevel8= "SELECT * FROM `accounts` WHERE `sponsor` = '$level7[$i]'";
+    $resultselectLevel8= mysqli_query($conn, $selectLevel8);
+    while($userRow = mysqli_fetch_assoc($resultselectLevel8)){
+        $name8 = $userRow['first_name'].' '.$userRow['last_name'];
+        array_push($level8Name, $name8);
+        $idinvite = $userRow['member_id'];
+        array_push($level8,$idinvite);
+    }
+    }
+            
+    //level 9
+$count = count($level8);
+for($i=0; $i<=$count-1; $i++){
+    $selectLevel9= "SELECT * FROM `accounts` WHERE `sponsor` = '$level8[$i]'";
+    $resultselectLevel9= mysqli_query($conn, $selectLevel9);
+    while($userRow = mysqli_fetch_assoc($resultselectLevel9)){
+        $name9 = $userRow['first_name'].' '.$userRow['last_name'];
+        array_push($level9Name, $name9);
+        $idinvite = $userRow['member_id'];
+        array_push($level9,$idinvite);
+    }
+    }
 
-function fetch_transaction($db, $tableNameTransaction, $columnsTransaction){
+        //level 10
+$count = count($level9);
+for($i=0; $i<=$count-1; $i++){
+    $selectLevel10= "SELECT * FROM `accounts` WHERE `sponsor` = '$level9[$i]'";
+    $resultselectLevel10= mysqli_query($conn, $selectLevel10);
+    while($userRow = mysqli_fetch_assoc($resultselectLevel10)){
+        $name10 = $userRow['first_name'].' '.$userRow['last_name'];
+        array_push($level10Name, $name10);
+        $idinvite = $userRow['member_id'];
+        array_push($level10,$idinvite);
+    }
+    }
 
-
- if(empty($db)){
-  $msg= "Database connection error";
- }elseif (empty($columnsTransaction) || !is_array($columnsTransaction)) {
-  $msg="columns Name must be defined in an indexed array";
- }elseif(empty($tableNameTransaction)){
-   $msg= "Table Name is empty";
-}else{
-$columnName = implode(", ", $columnsTransaction);
-$member_id = $_SESSION["member_id"];
-$query = "SELECT * FROM `transaction` WHERE `userId` = '$member_id'";
-
-//  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';
-$result = $db->query($query);
-if($result== true){ 
- if ($result->num_rows > 0) {
-    $row= mysqli_fetch_all($result, MYSQLI_ASSOC);
-    $msg= $row;
- } else {
-    $msg= "No Data Found"; 
- }
-}else{
-  $msg= mysqli_error($db);
-}
-}
-return $msg;
-}
-// end of code for getting the accounts//
-
-
+$totalMembers = count($level1)+count($level2)+count($level3)+count($level4)+count($level5)+count($level6)+count($level7)+count($level8)+count($level9)+count($level10);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -278,9 +296,9 @@ return $msg;
         <div class=" user-members-content-container pt-24 px-6 pb-6 bg-emerald-100 w-screen">
             <h2 class="text-center font-black text-4xl mb-10">Members</h2>
             <div class="container px-6 mx-auto">
-            <h2 class="bg-white rounded-lg p-3 mb-3 font-bold text-xl shadow-lg">Spnsor: <?php echo $sponsorrr; ?></h2>
+            <h2 class="bg-white rounded-lg p-3 mb-3 font-bold text-xl shadow-lg">Sponsor: <?php echo $sponsorrr; ?></h2>
 
-                <h2 class="bg-white rounded-lg p-3 mb-3 font-bold text-xl shadow-lg">Total: 9,999</h2>
+                <h2 class="bg-white rounded-lg p-3 mb-3 font-bold text-xl shadow-lg">Total: <?php echo $totalMembers ;?></h2>
                 <section class="mb-32 text-gray-800  shadow-lg">
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item border-t-0 border-l-0 border-r-0 rounded-none bg-white border border-gray-200">
@@ -290,18 +308,21 @@ return $msg;
                                 type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
                                 aria-controls="flush-collapseOne">
                                 LEVEL 1
-                                <span class="absolute right-12">624</span>
+                                <span class="absolute right-12"><?php echo count($level1);?></span>
                             </button>
                             </h2>
                             <div id="flush-collapseOne" class="accordion-collapse border-0 collapse show"
                             aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body py-4 px-5 text-gray-500 text-center grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
                                     <!-- NAMES -->
-                                    <div>John Arian Malondras</div>
-                                    <div>John Arian Malondras</div>
-                                    <div>John Arian Malondras</div>
-                                    <div>John Arian Malondras</div>
-                                    <div>John Arian Malondras</div>
+                             
+                                    <?php
+                                    $count = count($level1);
+                                        for($i=0; $i<=$count-1; $i++){
+                                            echo "<div> $level1Name[$i] </div>";
+                                        }
+                              
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -312,14 +333,23 @@ return $msg;
                                 type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
                                 aria-controls="flush-collapseTwo">
                                 LEVEL 2
-                                <span class="absolute right-12">0</span>
+                                <span class="absolute right-12"><?php echo count($level2);?></span>
                             </button>
                             </h2>
                             <div id="flush-collapseTwo" class="accordion-collapse border-0 collapse" aria-labelledby="flush-headingTwo"
                             data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body py-4 px-5 text-gray-500 text-center grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
                                     <!-- NAMES -->
-                                    <div class="col-span-3">No data</div>
+                                    <!-- <div class="col-span-3">No data</div> -->
+                                     
+                                    <?php
+                                    $count = count($level2);
+                                    // echo $count;
+                                        for($i=0; $i<=$count-1; $i++){
+                                            echo "<div> $level2Name[$i] </div>";
+                                        }
+                              
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -330,14 +360,21 @@ return $msg;
                                 type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false"
                                 aria-controls="flush-collapseThree">
                                 LEVEL 3
-                                <span class="absolute right-12">0</span>
+                                <span class="absolute right-12"><?php echo count($level3);?></span>
                             </button>
                             </h2>
                             <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
                             data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body py-4 px-5 text-gray-500 text-center grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
                                     <!-- NAMES -->
-                                    <div class="col-span-3">No data</div>
+                                    <?php
+                                    $count = count($level3);
+                                    // echo $count;
+                                        for($i=0; $i<=$count-1; $i++){
+                                            echo "<div> $level3Name[$i] </div>";
+                                        }
+                              
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -348,14 +385,21 @@ return $msg;
                                 type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false"
                                 aria-controls="flush-collapseFour">
                                 LEVEL 4
-                                <span class="absolute right-12">0</span>
+                                <span class="absolute right-12"><?php echo count($level4);?></span>
                             </button>
                             </h2>
                             <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
                             data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body py-4 px-5 text-gray-500 text-center grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
                                     <!-- NAMES -->
-                                    <div class="col-span-3">No data</div>
+                                    <?php
+                                    $count = count($level4);
+                                    // echo $count;
+                                        for($i=0; $i<=$count-1; $i++){
+                                            echo "<div> $level4Name[$i] </div>";
+                                        }
+                              
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -366,14 +410,21 @@ return $msg;
                                 type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false"
                                 aria-controls="flush-collapseFive">
                                 LEVEL 5
-                                <span class="absolute right-12">0</span>
+                                <span class="absolute right-12"><?php echo count($level5);?>
                             </button>
                             </h2>
                             <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive"
                             data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body py-4 px-5 text-gray-500 text-center grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
                                     <!-- NAMES -->
-                                    <div class="col-span-3">No data</div>
+                                    <?php
+                                    $count = count($level5);
+                                    // echo $count;
+                                        for($i=0; $i<=$count-1; $i++){
+                                            echo "<div> $level5Name[$i] </div>";
+                                        }
+                              
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -384,14 +435,21 @@ return $msg;
                                 type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false"
                                 aria-controls="flush-collapseSix">
                                 LEVEL 6
-                                <span class="absolute right-12">0</span>
+                                <span class="absolute right-12"><?php echo count($level6);?>
                             </button>
                             </h2>
                             <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix"
                             data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body py-4 px-5 text-gray-500 text-center grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
                                     <!-- NAMES -->
-                                    <div class="col-span-3">No data</div>
+                                    <?php
+                                    $count = count($level6);
+                                    // echo $count;
+                                        for($i=0; $i<=$count-1; $i++){
+                                            echo "<div> $level6Name[$i] </div>";
+                                        }
+                              
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -402,14 +460,21 @@ return $msg;
                                 type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false"
                                 aria-controls="flush-collapseSeven">
                                 LEVEL 7
-                                <span class="absolute right-12">0</span>
+                                <span class="absolute right-12"><?php echo count($level7);?>
                             </button>
                             </h2>
                             <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven"
                             data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body py-4 px-5 text-gray-500 text-center grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
                                     <!-- NAMES -->
-                                    <div class="col-span-3">No data</div>
+                                    <?php
+                                    $count = count($level7);
+                                    // echo $count;
+                                        for($i=0; $i<=$count-1; $i++){
+                                            echo "<div> $level7Name[$i] </div>";
+                                        }
+                              
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -420,14 +485,21 @@ return $msg;
                                 type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false"
                                 aria-controls="flush-collapseEight">
                                 LEVEL 8
-                                <span class="absolute right-12">0</span>
+                                <span class="absolute right-12"><?php echo count($level8);?>
                             </button>
                             </h2>
                             <div id="flush-collapseEight" class="accordion-collapse collapse" aria-labelledby="flush-headingEight"
                             data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body py-4 px-5 text-gray-500 text-center grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
                                     <!-- NAMES -->
-                                    <div class="col-span-3">No data</div>
+                                    <?php
+                                    $count = count($level8);
+                                    // echo $count;
+                                        for($i=0; $i<=$count-1; $i++){
+                                            echo "<div> $level8Name[$i] </div>";
+                                        }
+                              
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -438,14 +510,22 @@ return $msg;
                                 type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false"
                                 aria-controls="flush-collapseNine">
                                 LEVEL 9
-                                <span class="absolute right-12">0</span>
+                                <span class="absolute right-12"><?php echo count($level9);?>
+
                             </button>
                             </h2>
                             <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine"
                             data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body py-4 px-5 text-gray-500 text-center grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
                                     <!-- NAMES -->
-                                    <div class="col-span-3">No data</div>
+                                    <?php
+                                    $count = count($level9);
+                                    // echo $count;
+                                        for($i=0; $i<=$count-1; $i++){
+                                            echo "<div> $level9Name[$i] </div>";
+                                        }
+                              
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -456,14 +536,22 @@ return $msg;
                                 type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false"
                                 aria-controls="flush-collapseTen">
                                 LEVEL 10
-                                <span class="absolute right-12">0</span>
+                                <span class="absolute right-12"><?php echo count($level10);?>
+
                             </button>
                             </h2>
                             <div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingTen"
                             data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body py-4 px-5 text-gray-500 text-center grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
                                     <!-- NAMES -->
-                                    <div class="col-span-3">No data</div>
+                                    <?php
+                                    $count = count($level10);
+                                    // echo $count;
+                                        for($i=0; $i<=$count-1; $i++){
+                                            echo "<div> $level10Name[$i] </div>";
+                                        }
+                              
+                                    ?>
                                 </div>
                             </div>
                         </div>
