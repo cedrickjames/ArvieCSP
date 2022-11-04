@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2022 at 03:41 PM
+-- Generation Time: Nov 04, 2022 at 01:18 AM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 8.0.19
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -66,10 +66,7 @@ INSERT INTO `accounts` (`id`, `member_id`, `first_name`, `last_name`, `sponsor`,
 (63, 'ADS2022-10-16', 'Ten', 'Dyis', 'ADS2022-10-15', 'Nine  Nuebe', 'ten@gmail.com', '$2y$10$Pk8lh4FKU0LJ/P4oVgdswe.0ccQ/YGlvaOir8VXM.Jd2hz.wGrNlC', 977157288, '2022-10-31 13:37:34', 'approved', 'userist', 'DI10-wPtK-PlNk', 'Gentri', '8765', '98765', 16, ''),
 (67, 'ADS2022-10-17', 'Aaa', 'Aaa', 'ADS2022-10-7', 'One  Uno', 'aaa@gmail.com', '$2y$10$rvqXMElO/TCfbXGmq7gKvuXxxdGvJoiyUZBnnmRVBKpd/BgItOhtG', 2147483647, '2022-10-31 15:18:55', 'approved', 'userist', 'DI10-oqra-7Kib', 'Palangue A', '765', '9765', 17, ''),
 (68, 'ADS2022-10-18', 'Bbb', 'Bbb', 'ADS2022-10-8', 'Two  Dos', 'bbb@gmail.com', '$2y$10$vh.tt3ILjlWUGCuj2LAEDeek/4ILnpOXk2N0V79YlTPIpQSUI44R.', 2147483647, '2022-10-31 18:16:19', 'approved', 'userist', 'DI10-Tw47-01vQ', 'Tanza', '807978776', '986', 18, ''),
-(69, 'ADS2022-10-19', 'Ccc', 'Ccc', 'ADS2022-10-9', 'Three  Tres', 'ccc@gmail.com', '$2y$10$sZZPWkCysryA02ogqeqyQOPn6GOIlpKCuoCadoAI2jx3P5jr2AO6u', 2147483647, '2022-10-31 19:16:58', 'approved', 'userist', 'DI10-tpJX-x5ch', 'Palangue 2', '987', '987', 19, ''),
-(70, 'ADS2022-11-20', 'Eleven', 'Onse', 'ADS2022-10-16', 'Ten  Dyis', 'eleven@gmail.com', '$2y$10$PmU5CC3IBPPGBCgJ/1j15Oo1inMLbZZ/E2Zyw13Q2RII2TnCSRTBi', 2147483647, '2022-11-02 20:16:08', 'approved', 'userist', 'DI11-pqNk-Wp6M', 'Palangue Naic', '384276938', '98237469', 20, ''),
-(71, 'ADS2022-11-21', 'Twelve', 'Dose', 'ADS2022-11-20', 'Eleven  Onse', 'twelve@gmail.com', '$2y$10$HUN7rBaVo6MTx2fIZnd5kO40QvAR.tk0rrEdi/G4aDKWtHc1JvDrm', 2147483647, '2022-11-02 20:20:43', 'approved', 'userist', 'DI11-68Hd-1MYn', 'Naic', '9879', '98798', 21, ''),
-(72, 'ADS2022-11-22', 'Maria', 'Clara', 'ADS2022-11-20', 'Eleven  Onse', 'mariaclara@gmail.com', '$2y$10$jofKzpdsN/y2gUzTAB9BvOzH8HST5BPIhuisdNn9Pr7jqpDeTrBim', 2147483647, '2022-11-02 20:27:05', 'approved', 'userist', 'DI11-Kov0-cuEp', 'Tanza', '69869', '986', 22, '');
+(69, 'ADS2022-10-19', 'Ccc', 'Ccc', 'ADS2022-10-9', 'Three  Tres', 'ccc@gmail.com', '$2y$10$sZZPWkCysryA02ogqeqyQOPn6GOIlpKCuoCadoAI2jx3P5jr2AO6u', 2147483647, '2022-10-31 19:16:58', 'approved', 'userist', 'DI10-tpJX-x5ch', 'Palangue 2', '987', '987', 19, '');
 
 -- --------------------------------------------------------
 
@@ -144,8 +141,30 @@ CREATE TABLE `payout_request` (
 INSERT INTO `payout_request` (`payout_request_id`, `date`, `transaction_id`, `member_id`, `member_name`, `amount`, `mode_of_payment`, `account_number`, `account_name`, `bank_branch`, `status`, `receipt`, `date_released`, `time_released`, `transactionIdBasis`) VALUES
 (6, '2022-10-31', 'PR-202231101', 'ADS2022-10-7', 'One Uno', '1000', 'Gcash', '', '', '', 'released', '../images/81474d6c951d85d569edd1bea61e83cb.jpeg', '2022-10-31', '03:20 pm', 1),
 (7, '2022-10-31', 'PR-202231102', 'ADS2022-10-8', 'Two Dos', '1000', 'Gcash', '', '', '', 'released', '../images/9cb210f1aca77cafec32fca1a4be0403.jpeg', '2022-10-31', '06:17 pm', 2),
-(9, '2022-10-31', 'PR-202231104', 'ADS2022-10-9', 'Three Tres', '1000', 'BPI', '7342382739871', 'Cedrick James Orozo', 'BPI Naic', 'released', '../images/e6b67c0731e6953809c445004a35cdec.jpeg', '2022-10-31', '07:41 pm', 4),
-(10, '2022-11-02', 'PR-202202115', 'ADS2022-11-20', 'Eleven Onse', '1000', 'Gcash', '09555445345', 'Eleven Onse', '', 'released', '../images/d40e679ae62c15b35a8b0ad6eaffb7ac.jpeg', '2022-11-02', '08:31 pm', 5);
+(9, '2022-10-31', 'PR-202231104', 'ADS2022-10-9', 'Three Tres', '1000', 'BPI', '7342382739871', 'Cedrick James Orozo', 'BPI Naic', 'released', '../images/e6b67c0731e6953809c445004a35cdec.jpeg', '2022-10-31', '07:41 pm', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `points_report`
+--
+
+CREATE TABLE `points_report` (
+  `points_report_id` int(100) NOT NULL,
+  `member_id` varchar(100) NOT NULL,
+  `date` varchar(50) NOT NULL,
+  `time` varchar(20) NOT NULL,
+  `month` varchar(50) NOT NULL,
+  `year` varchar(10) NOT NULL,
+  `points_earned` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `points_report`
+--
+
+INSERT INTO `points_report` (`points_report_id`, `member_id`, `date`, `time`, `month`, `year`, `points_earned`) VALUES
+(1, '1234', '11-04-2022', '08:18 am', 'Nov', '2022', '10');
 
 -- --------------------------------------------------------
 
@@ -164,8 +183,8 @@ CREATE TABLE `rebatesamount` (
 --
 
 INSERT INTO `rebatesamount` (`id`, `rebatesA`, `rebatesB`) VALUES
-(1, 80, 80),
-(2, 30, 30),
+(1, 70, 70),
+(2, 30, 20),
 (3, 30, 30),
 (4, 30, 30),
 (5, 30, 20),
@@ -193,7 +212,7 @@ CREATE TABLE `rebates_points` (
 --
 
 INSERT INTO `rebates_points` (`rebates_points_id`, `user_id`, `email_address`, `pointsEarned`) VALUES
-(4, 'ADS2022-10-7', 'one@gmail.com', 1),
+(4, 'ADS2022-10-7', 'one@gmail.com', 0),
 (10, 'ADS2022-10-8', 'two@gmail.com', 1),
 (11, 'ADS2022-10-9', 'three@gmail.com', 0),
 (12, 'ADS2022-10-10', 'four@gmail.com', 0),
@@ -205,10 +224,7 @@ INSERT INTO `rebates_points` (`rebates_points_id`, `user_id`, `email_address`, `
 (18, 'ADS2022-10-16', 'ten@gmail.com', 0),
 (22, 'ADS2022-10-17', 'aaa@gmail.com', 0),
 (23, 'ADS2022-10-18', 'bbb@gmail.com', 0),
-(24, 'ADS2022-10-19', 'ccc@gmail.com', 0),
-(25, 'ADS2022-11-20', 'eleven@gmail.com', 1),
-(26, 'ADS2022-11-21', 'twelve@gmail.com', 0),
-(27, 'ADS2022-11-22', 'mariaclara@gmail.com', 0);
+(24, 'ADS2022-10-19', 'ccc@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -251,18 +267,13 @@ INSERT INTO `referral_codes` (`gen_date`, `referrer`, `transfer_date`, `referee`
 ('2022-10-31 14:52:21', 'waiting', '2022-10-31 14:52:21', 'ADS2022-10-17', 'eleven@gmail.com', '2022-10-31 14:52:21', 'used', 'RA10-F1gX-8OBQ', 'AT10-8OT3e7K6du1Qv0Mz', 124, 'RA', '5'),
 ('2022-10-31 14:52:21', 'waiting', '2022-10-31 14:52:21', 'ADS2022-10-18', 'twelve@gmail.com', '2022-10-31 14:52:21', 'used', 'RA10-A6jy-c5zm', 'AT10-8OT3e7K6du1Qv0Mz', 125, 'RA', '5'),
 ('2022-10-31 14:52:21', 'waiting', '2022-10-31 14:52:21', 'ADS2022-10-8', 'two@gmail.com', '2022-10-31 14:52:21', 'used', 'RA10-bzqy-azpJ', 'AT10-8OT3e7K6du1Qv0Mz', 126, 'RA', '5'),
-('2022-10-31 14:52:22', 'waiting', '2022-10-31 14:52:22', 'ADS2022-10-7', 'one@gmail.com', '2022-10-31 14:52:22', 'to_redeem', 'RA10-Tz8I-Ilk0', 'AT10-8OT3e7K6du1Qv0Mz', 127, 'RA', '5'),
-('2022-10-31 14:52:22', 'waiting', '2022-10-31 14:52:22', 'ADS2022-11-20', 'eleven@gmail.com', '2022-10-31 14:52:22', 'to_redeem', 'RA10-ekHP-Cazq', 'AT10-8OT3e7K6du1Qv0Mz', 128, 'RA', '5'),
+('2022-10-31 14:52:22', 'waiting', '2022-10-31 14:52:22', NULL, '', '2022-10-31 14:52:22', 'to_redeem', 'RA10-Tz8I-Ilk0', 'AT10-8OT3e7K6du1Qv0Mz', 127, 'RA', '5'),
+('2022-10-31 14:52:22', 'waiting', '2022-10-31 14:52:22', NULL, '', '2022-10-31 14:52:22', 'to_redeem', 'RA10-ekHP-Cazq', 'AT10-8OT3e7K6du1Qv0Mz', 128, 'RA', '5'),
 ('2022-10-31 15:11:10', 'waiting', '2022-10-31 15:11:10', 'ADS2022-10-17', '', '2022-10-31 15:11:10', 'used', 'DI10-oqra-7Kib', 'AT10-EMBfopuTgKWOd2Yc', 129, 'DI', '5'),
 ('2022-10-31 15:11:10', 'waiting', '2022-10-31 15:11:10', 'ADS2022-10-18', '', '2022-10-31 15:11:10', 'used', 'DI10-Tw47-01vQ', 'AT10-EMBfopuTgKWOd2Yc', 130, 'DI', '5'),
 ('2022-10-31 15:11:11', 'waiting', '2022-10-31 15:11:11', 'ADS2022-10-19', '', '2022-10-31 15:11:11', 'used', 'DI10-tpJX-x5ch', 'AT10-EMBfopuTgKWOd2Yc', 131, 'DI', '5'),
 ('2022-10-31 15:11:11', 'waiting', '2022-10-31 15:11:11', NULL, '', '2022-10-31 15:11:11', 'to_redeem', 'DI10-UGFR-6sYP', 'AT10-EMBfopuTgKWOd2Yc', 132, 'DI', '5'),
-('2022-10-31 15:11:11', 'waiting', '2022-10-31 15:11:11', NULL, '', '2022-10-31 15:11:11', 'to_redeem', 'DI10-v9Hj-AyUP', 'AT10-EMBfopuTgKWOd2Yc', 133, 'DI', '5'),
-('2022-11-02 20:12:55', 'waiting', '2022-11-02 20:12:55', 'ADS2022-11-20', '', '2022-11-02 20:12:55', 'used', 'DI11-pqNk-Wp6M', 'AT11-hHowLBAt0SKsT2gr', 134, 'DI', '5'),
-('2022-11-02 20:12:55', 'waiting', '2022-11-02 20:12:55', 'ADS2022-11-21', '', '2022-11-02 20:12:55', 'used', 'DI11-68Hd-1MYn', 'AT11-hHowLBAt0SKsT2gr', 135, 'DI', '5'),
-('2022-11-02 20:12:55', 'waiting', '2022-11-02 20:12:55', 'ADS2022-11-22', '', '2022-11-02 20:12:55', 'used', 'DI11-Kov0-cuEp', 'AT11-hHowLBAt0SKsT2gr', 136, 'DI', '5'),
-('2022-11-02 20:12:55', 'waiting', '2022-11-02 20:12:55', NULL, '', '2022-11-02 20:12:55', 'to_redeem', 'DI11-09EB-CAO0', 'AT11-hHowLBAt0SKsT2gr', 137, 'DI', '5'),
-('2022-11-02 20:12:56', 'waiting', '2022-11-02 20:12:56', NULL, '', '2022-11-02 20:12:56', 'to_redeem', 'DI11-A04h-FS1Y', 'AT11-hHowLBAt0SKsT2gr', 138, 'DI', '5');
+('2022-10-31 15:11:11', 'waiting', '2022-10-31 15:11:11', NULL, '', '2022-10-31 15:11:11', 'to_redeem', 'DI10-v9Hj-AyUP', 'AT10-EMBfopuTgKWOd2Yc', 133, 'DI', '5');
 
 -- --------------------------------------------------------
 
@@ -284,22 +295,19 @@ CREATE TABLE `totalbalance` (
 --
 
 INSERT INTO `totalbalance` (`totalBalanceId`, `userID`, `userName`, `totalBalance`, `unclaimable`, `totalIncome`) VALUES
-(77, 'ADS2022-10-7', 'one@gmail.com', 230, 0, 1000),
-(86, 'ADS2022-10-8', 'two@gmail.com', 190, 0, 1000),
-(87, 'ADS2022-10-9', 'three@gmail.com', 120, 60, 1000),
-(88, 'ADS2022-10-10', 'four@gmail.com', 610, 60, 0),
-(89, 'ADS2022-10-11', 'five@gmail.com', 600, 80, 0),
-(90, 'ADS2022-10-12', 'six@gmail.com', 590, 90, 0),
-(91, 'ADS2022-10-13', 'seven@gmail.com', 580, 90, 0),
-(92, 'ADS2022-10-14', 'eight@gmail.com', 570, 90, 0),
-(93, 'ADS2022-10-15', 'nine@gmail.com', 560, 90, 0),
-(94, 'ADS2022-10-16', 'ten@gmail.com', 1040, 170, 0),
+(77, 'ADS2022-10-7', 'one@gmail.com', 110, 90, 1000),
+(86, 'ADS2022-10-8', 'two@gmail.com', 140, 0, 1000),
+(87, 'ADS2022-10-9', 'three@gmail.com', 90, 40, 1000),
+(88, 'ADS2022-10-10', 'four@gmail.com', 580, 40, 0),
+(89, 'ADS2022-10-11', 'five@gmail.com', 570, 50, 0),
+(90, 'ADS2022-10-12', 'six@gmail.com', 560, 60, 0),
+(91, 'ADS2022-10-13', 'seven@gmail.com', 550, 60, 0),
+(92, 'ADS2022-10-14', 'eight@gmail.com', 540, 60, 0),
+(93, 'ADS2022-10-15', 'nine@gmail.com', 530, 60, 0),
+(94, 'ADS2022-10-16', 'ten@gmail.com', 520, 100, 0),
 (98, 'ADS2022-10-17', 'aaa@gmail.com', 0, 0, 0),
 (99, 'ADS2022-10-18', 'bbb@gmail.com', 0, 0, 0),
-(100, 'ADS2022-10-19', 'ccc@gmail.com', 0, 0, 0),
-(101, 'ADS2022-11-20', 'eleven@gmail.com', 0, 0, 1000),
-(102, 'ADS2022-11-21', 'twelve@gmail.com', 0, 0, 0),
-(103, 'ADS2022-11-22', 'mariaclara@gmail.com', 0, 0, 0);
+(100, 'ADS2022-10-19', 'ccc@gmail.com', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -399,53 +407,7 @@ INSERT INTO `transaction` (`transactionId`, `Date`, `time`, `type`, `userName`, 
 (339, '', '', 'Indirect Referral', 'Two  Dos', 'ADS2022-10-8', 'Ccc Ccc', 'Three Tres', '', '', '', 10, 140, 0, 0),
 (340, '', '', 'Indirect Referral', 'One  Uno', 'ADS2022-10-7', 'Ccc Ccc', 'Three Tres', '', '', '', 10, 110, 0, 0),
 (341, '', '', 'Indirect Referral', '', 'n/a', 'Ccc Ccc', 'Three Tres', '', '', '', 10, 10, 0, 0),
-(342, '2022-10-31', '07:41 pm', 'Withdrawal', '', 'ADS2022-10-9', '', '', '', '', '', 1000, 90, 0, 0),
-(343, '', '', 'Direct Referral', 'ten@gmail.com', 'ADS2022-10-16', 'Eleven Onse', 'Ten Dyis', '', '', '', 500, 1020, 0, 0),
-(344, '', '', 'Indirect Referral', 'Nine  Nuebe', 'ADS2022-10-15', 'Eleven Onse', 'Ten Dyis', '', '', '', 10, 540, 0, 0),
-(345, '', '', 'Indirect Referral', 'Eight  Otso', 'ADS2022-10-14', 'Eleven Onse', 'Ten Dyis', '', '', '', 10, 550, 0, 0),
-(346, '', '', 'Indirect Referral', 'Seven  Syete', 'ADS2022-10-13', 'Eleven Onse', 'Ten Dyis', '', '', '', 10, 560, 0, 0),
-(347, '', '', 'Indirect Referral', 'Six  Sais', 'ADS2022-10-12', 'Eleven Onse', 'Ten Dyis', '', '', '', 10, 570, 0, 0),
-(348, '', '', 'Indirect Referral', 'Five  Sinko', 'ADS2022-10-11', 'Eleven Onse', 'Ten Dyis', '', '', '', 10, 580, 0, 0),
-(349, '', '', 'Indirect Referral', 'Four  Kwatro', 'ADS2022-10-10', 'Eleven Onse', 'Ten Dyis', '', '', '', 10, 590, 0, 0),
-(350, '', '', 'Indirect Referral', 'Three  Tres', 'ADS2022-10-9', 'Eleven Onse', 'Ten Dyis', '', '', '', 10, 100, 0, 0),
-(351, '', '', 'Indirect Referral', 'Two  Dos', 'ADS2022-10-8', 'Eleven Onse', 'Ten Dyis', '', '', '', 10, 150, 0, 0),
-(352, '', '', 'Indirect Referral', 'One  Uno', 'ADS2022-10-7', 'Eleven Onse', 'Ten Dyis', '', '', '', 10, 120, 0, 0),
-(353, '', '', 'Direct Referral', 'eleven@gmail.com', 'ADS2022-11-20', 'Twelve Dose', 'Eleven Onse', '', '', '', 500, 500, 0, 0),
-(354, '', '', 'Indirect Referral', 'Ten  Dyis', 'ADS2022-10-16', 'Twelve Dose', 'Eleven Onse', '', '', '', 10, 1030, 0, 0),
-(355, '', '', 'Indirect Referral', 'Nine  Nuebe', 'ADS2022-10-15', 'Twelve Dose', 'Eleven Onse', '', '', '', 10, 550, 0, 0),
-(356, '', '', 'Indirect Referral', 'Eight  Otso', 'ADS2022-10-14', 'Twelve Dose', 'Eleven Onse', '', '', '', 10, 560, 0, 0),
-(357, '', '', 'Indirect Referral', 'Seven  Syete', 'ADS2022-10-13', 'Twelve Dose', 'Eleven Onse', '', '', '', 10, 570, 0, 0),
-(358, '', '', 'Indirect Referral', 'Six  Sais', 'ADS2022-10-12', 'Twelve Dose', 'Eleven Onse', '', '', '', 10, 580, 0, 0),
-(359, '', '', 'Indirect Referral', 'Five  Sinko', 'ADS2022-10-11', 'Twelve Dose', 'Eleven Onse', '', '', '', 10, 590, 0, 0),
-(360, '', '', 'Indirect Referral', 'Four  Kwatro', 'ADS2022-10-10', 'Twelve Dose', 'Eleven Onse', '', '', '', 10, 600, 0, 0),
-(361, '', '', 'Indirect Referral', 'Three  Tres', 'ADS2022-10-9', 'Twelve Dose', 'Eleven Onse', '', '', '', 10, 110, 0, 0),
-(362, '', '', 'Indirect Referral', 'Two  Dos', 'ADS2022-10-8', 'Twelve Dose', 'Eleven Onse', '', '', '', 10, 160, 0, 0),
-(363, '', '', 'Claimed Rebates', 'one@gmail.com', 'ADS2022-10-7', '', '', '', '', '', 90, 210, 0, 0),
-(364, '', '', 'Points', 'one@gmail.com', 'ADS2022-10-7', '', '', 'RA', '', '', 0, 0, 1, 1),
-(365, '', '', 'Unclaimable Rebates', '', 'n/a', '', '', 'RA', 'one@gmail.com', 'ADS2022-10-7', 70, 70, 0, 0),
-(366, '', '', 'Direct Referral', 'eleven@gmail.com', 'ADS2022-11-20', 'Maria Clara', 'Eleven Onse', '', '', '', 500, 1000, 0, 0),
-(367, '', '', 'Indirect Referral', 'Ten  Dyis', 'ADS2022-10-16', 'Maria Clara', 'Eleven Onse', '', '', '', 10, 1040, 0, 0),
-(368, '', '', 'Indirect Referral', 'Nine  Nuebe', 'ADS2022-10-15', 'Maria Clara', 'Eleven Onse', '', '', '', 10, 560, 0, 0),
-(369, '', '', 'Indirect Referral', 'Eight  Otso', 'ADS2022-10-14', 'Maria Clara', 'Eleven Onse', '', '', '', 10, 570, 0, 0),
-(370, '', '', 'Indirect Referral', 'Seven  Syete', 'ADS2022-10-13', 'Maria Clara', 'Eleven Onse', '', '', '', 10, 580, 0, 0),
-(371, '', '', 'Indirect Referral', 'Six  Sais', 'ADS2022-10-12', 'Maria Clara', 'Eleven Onse', '', '', '', 10, 590, 0, 0),
-(372, '', '', 'Indirect Referral', 'Five  Sinko', 'ADS2022-10-11', 'Maria Clara', 'Eleven Onse', '', '', '', 10, 600, 0, 0),
-(373, '', '', 'Indirect Referral', 'Four  Kwatro', 'ADS2022-10-10', 'Maria Clara', 'Eleven Onse', '', '', '', 10, 610, 0, 0),
-(374, '', '', 'Indirect Referral', 'Three  Tres', 'ADS2022-10-9', 'Maria Clara', 'Eleven Onse', '', '', '', 10, 120, 0, 0),
-(375, '', '', 'Indirect Referral', 'Two  Dos', 'ADS2022-10-8', 'Maria Clara', 'Eleven Onse', '', '', '', 10, 170, 0, 0),
-(376, '2022-11-02', '08:31 pm', 'Withdrawal', '', 'ADS2022-11-20', '', '', '', '', '', 1000, 0, 0, 0),
-(377, '', '', 'Claimed Rebates', 'eleven@gmail.com', 'ADS2022-11-20', '', '', '', '', '', 0, 0, 0, 0),
-(378, '', '', 'Points', 'eleven@gmail.com', 'ADS2022-11-20', '', '', 'RA', '', '', 0, 0, 1, 1),
-(379, '', '', 'Unclaimable Rebates', 'ten@gmail.com', 'ADS2022-10-16', '', '', 'RA', 'eleven@gmail.com', 'ADS2022-11-20', 70, 170, 0, 0),
-(380, '', '', 'Unclaimable Rebates', 'nine@gmail.com', 'ADS2022-10-15', '', '', 'RA', 'eleven@gmail.com', 'ADS2022-11-20', 30, 90, 0, 0),
-(381, '', '', 'Unclaimable Rebates', 'eight@gmail.com', 'ADS2022-10-14', '', '', 'RA', 'eleven@gmail.com', 'ADS2022-11-20', 30, 90, 0, 0),
-(382, '', '', 'Unclaimable Rebates', 'seven@gmail.com', 'ADS2022-10-13', '', '', 'RA', 'eleven@gmail.com', 'ADS2022-11-20', 30, 90, 0, 0),
-(383, '', '', 'Unclaimable Rebates', 'six@gmail.com', 'ADS2022-10-12', '', '', 'RA', 'eleven@gmail.com', 'ADS2022-11-20', 30, 90, 0, 0),
-(384, '', '', 'Unclaimable Rebates', 'five@gmail.com', 'ADS2022-10-11', '', '', 'RA', 'eleven@gmail.com', 'ADS2022-11-20', 30, 80, 0, 0),
-(385, '', '', 'Unclaimable Rebates', 'four@gmail.com', 'ADS2022-10-10', '', '', 'RA', 'eleven@gmail.com', 'ADS2022-11-20', 20, 60, 0, 0),
-(386, '', '', 'Unclaimable Rebates', 'three@gmail.com', 'ADS2022-10-9', '', '', 'RA', 'eleven@gmail.com', 'ADS2022-11-20', 20, 60, 0, 0),
-(387, '', '', 'Rebates', 'two@gmail.com', 'ADS2022-10-8', '', '', 'RA', 'eleven@gmail.com', 'ADS2022-11-20', 20, 190, 0, 0),
-(388, '', '', 'Rebates', 'one@gmail.com', 'ADS2022-10-7', '', '', 'RA', 'eleven@gmail.com', 'ADS2022-11-20', 20, 230, 0, 0);
+(342, '2022-10-31', '07:41 pm', 'Withdrawal', '', 'ADS2022-10-9', '', '', '', '', '', 1000, 90, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -475,6 +437,12 @@ ALTER TABLE `invites`
 --
 ALTER TABLE `payout_request`
   ADD PRIMARY KEY (`payout_request_id`);
+
+--
+-- Indexes for table `points_report`
+--
+ALTER TABLE `points_report`
+  ADD PRIMARY KEY (`points_report_id`);
 
 --
 -- Indexes for table `rebatesamount`
@@ -514,7 +482,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(60) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(60) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `generated_code`
@@ -532,7 +500,13 @@ ALTER TABLE `invites`
 -- AUTO_INCREMENT for table `payout_request`
 --
 ALTER TABLE `payout_request`
-  MODIFY `payout_request_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `payout_request_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `points_report`
+--
+ALTER TABLE `points_report`
+  MODIFY `points_report_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `rebatesamount`
@@ -544,25 +518,25 @@ ALTER TABLE `rebatesamount`
 -- AUTO_INCREMENT for table `rebates_points`
 --
 ALTER TABLE `rebates_points`
-  MODIFY `rebates_points_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `rebates_points_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `referral_codes`
 --
 ALTER TABLE `referral_codes`
-  MODIFY `transaction_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `transaction_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 
 --
 -- AUTO_INCREMENT for table `totalbalance`
 --
 ALTER TABLE `totalbalance`
-  MODIFY `totalBalanceId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `totalBalanceId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transactionId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=389;
+  MODIFY `transactionId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=343;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

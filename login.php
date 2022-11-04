@@ -1,7 +1,15 @@
 <?php
 
 $loginPage = true; ?>
-<?php include "./includes/auth/login.php"; ?>
+<?php include "./includes/auth/login.php"; 
+
+date_default_timezone_set("Asia/Singapore");
+$date = new DateTime(); 
+$completeDateNow  = $date->format('M d, Y');  
+$day  = $date->format('D'); 
+$timenow = date("h:i a"); 
+echo $timenow;
+?>
 
 
 <!DOCTYPE html>
