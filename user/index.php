@@ -86,14 +86,37 @@ if(isset($_POST['enterCode'])){
                             $updatedBalance4 = $unclaimable+$totalBalance4;
                             $sqlAddBalance3= "UPDATE `totalbalance` SET `totalBalance`='$updatedBalance4' WHERE `userID` = '$member_id'";
                             mysqli_query($conn, $sqlAddBalance3);
-                            $sqlinsertTransact= "INSERT INTO `transaction`(`type`, `userName`, `userId`, `addedAmount`, `TotalBalance`)VALUES ('Claimed Rebates','$email','$member_id','$unclaimable','$updatedBalance4')";
+
+                            $code = "TR";
+                            $get_month = date('m', strtotime("now"));
+                        
+                            $sqlLastID = "SELECT MAX(transactionIdBasis) as 'idnumber' FROM `transaction` WHERE 1";//select the highest number_basis
+                            $getLastId = mysqli_query($conn, $sqlLastID);
+                            while($userRow = mysqli_fetch_assoc($getLastId)){
+                                $lastId = $userRow['idnumber'];
+                                $lastId++; //increment the number_basis
+                            }
+    
+                            
+                            $getDateNow = new DateTime();
+                            $getYearNow  = $getDateNow->format('Y'); 
+                            $getMonthNow  = $getDateNow->format('m'); 
+                            $getDateNow  = $getDateNow->format('d'); 
+                            $getDateNowReal = new DateTime();
+                            $FullDateOfthisDay = $getDateNowReal->format('Y-m-d'); 
+                            $timenow = date("h:i a"); 
+    
+                            $transactionId = $code."-".$getYearNow."".$getDateNow."".$getMonthNow."".$lastId;
+
+
+                            $sqlinsertTransact= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`, `userName`, `userId`, `addedAmount`, `TotalBalance`,`transactionIdBasis`)VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Claimed Rebates','$email','$member_id','$unclaimable','$updatedBalance4','$lastId')";
                             mysqli_query($conn, $sqlinsertTransact);
                             $sqlReset= "UPDATE `totalbalance` SET `unclaimable`='0' WHERE `userID` = '$member_id'";
                             mysqli_query($conn, $sqlReset);
 
                         }
                     }
-                    $sqlUpdateCodeOwner= "UPDATE `referral_codes` SET `userNameOfCodeOwner`='$email',`referee`='$member_id' WHERE `ref_code` = '$EnteredCode'";
+                    $sqlUpdateCodeOwner= "UPDATE `referral_codes` SET `userNameOfCodeOwner`='$email',`referee`='$member_id', `status`='used'  WHERE `ref_code` = '$EnteredCode'";
 
                     mysqli_query($conn, $sqlUpdateCodeOwner);
                     // echo "You have successfully enter the code!";
@@ -103,7 +126,31 @@ if(isset($_POST['enterCode'])){
                     if($num_of_select_points==0){
                         $sqlinsertPoints= "INSERT INTO `rebates_points`(`user_id`, `email_address`, `pointsEarned`) VALUES ('$member_id','$email','1')";
                         mysqli_query($conn, $sqlinsertPoints);
-                          $sqlinsertTransacPoints= "INSERT INTO `transaction`(`type`, `userName`, `userId`, `packageType`, `addedPoints`, `totalPoints`)VALUES ('Points','$email','$member_id','$type','1','1')";
+
+                        
+                        $code = "TR";
+                        $get_month = date('m', strtotime("now"));
+                    
+                        $sqlLastID = "SELECT MAX(transactionIdBasis) as 'idnumber' FROM `transaction` WHERE 1";//select the highest number_basis
+                        $getLastId = mysqli_query($conn, $sqlLastID);
+                        while($userRow = mysqli_fetch_assoc($getLastId)){
+                            $lastId = $userRow['idnumber'];
+                            $lastId++; //increment the number_basis
+                        }
+
+                        
+                        $getDateNow = new DateTime();
+                        $getYearNow  = $getDateNow->format('Y'); 
+                        $getMonthNow  = $getDateNow->format('m'); 
+                        $getDateNow  = $getDateNow->format('d'); 
+                        $getDateNowReal = new DateTime();
+                        $FullDateOfthisDay = $getDateNowReal->format('Y-m-d'); 
+                        $timenow = date("h:i a"); 
+
+                        $transactionId = $code."-".$getYearNow."".$getDateNow."".$getMonthNow."".$lastId;
+
+
+                          $sqlinsertTransacPoints= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`, `userName`, `userId`, `packageType`, `addedPoints`, `totalPoints`,`transactionIdBasis`)VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Points','$email','$member_id','$type','1','1','$lastId')";
                                 mysqli_query($conn, $sqlinsertTransacPoints);
                     }
                     else{
@@ -116,7 +163,31 @@ if(isset($_POST['enterCode'])){
                         $pointsEarned++;
                         $sqlUpdatePointsEarned= "UPDATE `rebates_points` SET `pointsEarned`='$pointsEarned' WHERE `user_id` = '$member_id'";
                         mysqli_query($conn, $sqlUpdatePointsEarned);
-                        $sqlinsertTransacPoints= "INSERT INTO `transaction`(`type`, `userName`, `userId`, `packageType`, `addedPoints`, `totalPoints`)VALUES ('Points','$email','$member_id','$type','1','$pointsEarned')";
+
+                        
+                        
+                        $code = "TR";
+                        $get_month = date('m', strtotime("now"));
+                    
+                        $sqlLastID = "SELECT MAX(transactionIdBasis) as 'idnumber' FROM `transaction` WHERE 1";//select the highest number_basis
+                        $getLastId = mysqli_query($conn, $sqlLastID);
+                        while($userRow = mysqli_fetch_assoc($getLastId)){
+                            $lastId = $userRow['idnumber'];
+                            $lastId++; //increment the number_basis
+                        }
+
+                        
+                        $getDateNow = new DateTime();
+                        $getYearNow  = $getDateNow->format('Y'); 
+                        $getMonthNow  = $getDateNow->format('m'); 
+                        $getDateNow  = $getDateNow->format('d'); 
+                        $getDateNowReal = new DateTime();
+                        $FullDateOfthisDay = $getDateNowReal->format('Y-m-d'); 
+                        $timenow = date("h:i a"); 
+
+                        $transactionId = $code."-".$getYearNow."".$getDateNow."".$getMonthNow."".$lastId;
+                        
+                        $sqlinsertTransacPoints= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`, `userName`, `userId`, `packageType`, `addedPoints`, `totalPoints`,`transactionIdBasis`)VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Points','$email','$member_id','$type','1','$pointsEarned','$lastId')";
                         mysqli_query($conn, $sqlinsertTransacPoints);
                         }                
                     }
@@ -163,7 +234,33 @@ if(isset($_POST['enterCode'])){
                                             $L1 = $userRow['rebatesA'];
                                         }
                                         $updatedBalance = $unclaimableBalance + $L1;
-                                        $sqlinsertTransact= "INSERT INTO `transaction`(`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`)VALUES ('Unclaimable Rebates','$emailOfSponsor','$inviteeID','$type','$email','$member_id','$L1','$updatedBalance')";
+
+                                          
+                        
+                        $code = "TR";
+                        $get_month = date('m', strtotime("now"));
+                    
+                        $sqlLastID = "SELECT MAX(transactionIdBasis) as 'idnumber' FROM `transaction` WHERE 1";//select the highest number_basis
+                        $getLastId = mysqli_query($conn, $sqlLastID);
+                        while($userRow = mysqli_fetch_assoc($getLastId)){
+                            $lastId = $userRow['idnumber'];
+                            $lastId++; //increment the number_basis
+                        }
+
+                        
+                        $getDateNow = new DateTime();
+                        $getYearNow  = $getDateNow->format('Y'); 
+                        $getMonthNow  = $getDateNow->format('m'); 
+                        $getDateNow  = $getDateNow->format('d'); 
+                        $getDateNowReal = new DateTime();
+                        $FullDateOfthisDay = $getDateNowReal->format('Y-m-d'); 
+                        $timenow = date("h:i a"); 
+
+                        $transactionId = $code."-".$getYearNow."".$getDateNow."".$getMonthNow."".$lastId;
+                        
+
+
+                                        $sqlinsertTransact= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`,`transactionIdBasis`)VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Unclaimable Rebates','$emailOfSponsor','$inviteeID','$type','$email','$member_id','$L1','$updatedBalance','$lastId')";
                                         mysqli_query($conn, $sqlinsertTransact);
        
           
@@ -186,10 +283,10 @@ if(isset($_POST['enterCode'])){
                                    $sqlGetTotalBalance= "SELECT * FROM `totalbalance` WHERE `userID` = '$inviteeID'";
                                    $resultTotalBalance = mysqli_query($conn, $sqlGetTotalBalance);
                                    
-                                   $totalBalance = 0;
+                                   $totalBalance1 = 0;
                                    $emailOfSponsor="";
                                    while($userRow = mysqli_fetch_assoc($resultTotalBalance)){
-                                       $totalBalance = $userRow['totalBalance'];
+                                       $totalBalance1 = $userRow['totalBalance'];
                                        $emailOfSponsor = $userRow['userName'];
                                    }
        
@@ -201,8 +298,32 @@ if(isset($_POST['enterCode'])){
                                        while($userRow = mysqli_fetch_assoc($resultL1)){
                                            $L1 = $userRow['rebatesA'];
                                        }
-                                       $updatedBalance = $totalBalance + $L1;
-                                       $sqlinsertTransact= "INSERT INTO `transaction`(`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`)VALUES ('Rebates','$emailOfSponsor','$inviteeID','$type','$email','$member_id','$L1','$updatedBalance')";
+                                       $updatedBalance = $totalBalance1 + $L1;
+
+                                       
+                        $code = "TR";
+                        $get_month = date('m', strtotime("now"));
+                    
+                        $sqlLastID = "SELECT MAX(transactionIdBasis) as 'idnumber' FROM `transaction` WHERE 1";//select the highest number_basis
+                        $getLastId = mysqli_query($conn, $sqlLastID);
+                        while($userRow = mysqli_fetch_assoc($getLastId)){
+                            $lastId = $userRow['idnumber'];
+                            $lastId++; //increment the number_basis
+                        }
+
+                        
+                        $getDateNow = new DateTime();
+                        $getYearNow  = $getDateNow->format('Y'); 
+                        $getMonthNow  = $getDateNow->format('m'); 
+                        $getDateNow  = $getDateNow->format('d'); 
+                        $getDateNowReal = new DateTime();
+                        $FullDateOfthisDay = $getDateNowReal->format('Y-m-d'); 
+                        $timenow = date("h:i a"); 
+
+                        $transactionId = $code."-".$getYearNow."".$getDateNow."".$getMonthNow."".$lastId;
+                        
+
+                                       $sqlinsertTransact= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`,`transactionIdBasis`)VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Rebates','$emailOfSponsor','$inviteeID','$type','$email','$member_id','$L1','$updatedBalance','$lastId')";
                                        mysqli_query($conn, $sqlinsertTransact);
       
          
@@ -268,7 +389,32 @@ if(isset($_POST['enterCode'])){
                                             $L1 = $userRow['rebatesB'];
                                         }
                                         $updatedBalance = $unclaimableBalance + $L1;
-                                        $sqlinsertTransact= "INSERT INTO `transaction`(`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`)VALUES ('Unclaimable Rebates','$emailOfSponsor','$inviteeID','$type','$email','$member_id','$L1','$updatedBalance')";
+
+                                        
+                        $code = "TR";
+                        $get_month = date('m', strtotime("now"));
+                    
+                        $sqlLastID = "SELECT MAX(transactionIdBasis) as 'idnumber' FROM `transaction` WHERE 1";//select the highest number_basis
+                        $getLastId = mysqli_query($conn, $sqlLastID);
+                        while($userRow = mysqli_fetch_assoc($getLastId)){
+                            $lastId = $userRow['idnumber'];
+                            $lastId++; //increment the number_basis
+                        }
+
+                        
+                        $getDateNow = new DateTime();
+                        $getYearNow  = $getDateNow->format('Y'); 
+                        $getMonthNow  = $getDateNow->format('m'); 
+                        $getDateNow  = $getDateNow->format('d'); 
+                        $getDateNowReal = new DateTime();
+                        $FullDateOfthisDay = $getDateNowReal->format('Y-m-d'); 
+                        $timenow = date("h:i a"); 
+
+                        $transactionId = $code."-".$getYearNow."".$getDateNow."".$getMonthNow."".$lastId;
+                        
+
+
+                                        $sqlinsertTransact= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`,`transactionIdBasis`)VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Unclaimable Rebates','$emailOfSponsor','$inviteeID','$type','$email','$member_id','$L1','$updatedBalance','$lastId')";
                                         mysqli_query($conn, $sqlinsertTransact);
        
           
@@ -291,10 +437,10 @@ if(isset($_POST['enterCode'])){
                                    $sqlGetTotalBalance= "SELECT * FROM `totalbalance` WHERE `userID` = '$inviteeID'";
                                    $resultTotalBalance = mysqli_query($conn, $sqlGetTotalBalance);
                                    
-                                   $totalBalance = 0;
+                                   $totalBalance2 = 0;
                                    $emailOfSponsor="";
                                    while($userRow = mysqli_fetch_assoc($resultTotalBalance)){
-                                       $totalBalance = $userRow['totalBalance'];
+                                       $totalBalance2 = $userRow['totalBalance'];
                                        $emailOfSponsor = $userRow['userName'];
                                    }
        
@@ -306,8 +452,35 @@ if(isset($_POST['enterCode'])){
                                        while($userRow = mysqli_fetch_assoc($resultL1)){
                                            $L1 = $userRow['rebatesB'];
                                        }
-                                       $updatedBalance = $totalBalance + $L1;
-                                       $sqlinsertTransact= "INSERT INTO `transaction`(`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`)VALUES ('Rebates','$emailOfSponsor','$inviteeID','$type','$email','$member_id','$L1','$updatedBalance')";
+                                       $updatedBalance = $totalBalance2 + $L1;
+
+
+                                       
+                                        
+                        $code = "TR";
+                        $get_month = date('m', strtotime("now"));
+                    
+                        $sqlLastID = "SELECT MAX(transactionIdBasis) as 'idnumber' FROM `transaction` WHERE 1";//select the highest number_basis
+                        $getLastId = mysqli_query($conn, $sqlLastID);
+                        while($userRow = mysqli_fetch_assoc($getLastId)){
+                            $lastId = $userRow['idnumber'];
+                            $lastId++; //increment the number_basis
+                        }
+
+                        
+                        $getDateNow = new DateTime();
+                        $getYearNow  = $getDateNow->format('Y'); 
+                        $getMonthNow  = $getDateNow->format('m'); 
+                        $getDateNow  = $getDateNow->format('d'); 
+                        $getDateNowReal = new DateTime();
+                        $FullDateOfthisDay = $getDateNowReal->format('Y-m-d'); 
+                        $timenow = date("h:i a"); 
+
+                        $transactionId = $code."-".$getYearNow."".$getDateNow."".$getMonthNow."".$lastId;
+                        
+
+
+                                       $sqlinsertTransact= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`,`transactionIdBasis`)VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Rebates','$emailOfSponsor','$inviteeID','$type','$email','$member_id','$L1','$updatedBalance','$lastId')";
                                        mysqli_query($conn, $sqlinsertTransact);
       
          
@@ -554,7 +727,7 @@ return $msg;
                         }
                         ?>
                     <h5 class="text-xl font-medium leading-normal text-gray-800" id="">
-                        Your Total Balance is : <span> ₱ <?php $totalBalance2 = number_format($totalBalance, 2);echo $totalBalance2; //cedrick code?></span>
+                        Your Total Balance is : <span> ₱ <?php $totalBalance3 = number_format($totalBalance, 2);echo $totalBalance3; //cedrick code?></span>
                         </h5>
                         <br>
                         <br>
@@ -590,7 +763,7 @@ return $msg;
             </div>
         </div>
 
-        <div class=" user-dashboard-content-container pt-20 px-6 pb-6 bg-emerald-100 h-screen">
+        <div class=" user-dashboard-content-container pt-20 px-2 sm:px-6 pb-6 bg-emerald-100 h-screen">
         <!-- <div class="grid grid-rows-2 md:grid-cols-2 gap-4 bg-gradient">
   <div class="...">01</div>
   <div class="...">02</div>
@@ -777,12 +950,12 @@ Copy Referral Link
                                             <!-- Pag from rebate -->
                                             <div class="w-full h-28 lg:h-20 bg-white mt-3 rounded-xl grid grid-cols-5 grid-rows-3">
                                                 <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Category</div>
-                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Type</div>
-                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Downline Name</div>
+                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium"></div>
+                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium"></div>
                                                 <div class="row-span-3 col-span-2 self-center text-end mr-5 text-lg sm:text-xl md:text-2xl xl:text-3xl font-black">+ ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;?></div>
                                                 <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold text-orange-600">Claimed Rebates</div>
-                                                <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold"><?php echo $type;?></div>
-                                                <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl overflow-hidden font-bold"><?php echo $codeOwner;?></div>
+                                                <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold"><?php// echo $type;?></div>
+                                                <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl overflow-hidden font-bold"><?php //echo $codeOwner;?></div>
                                             </div>
                     
                                             <?php 
@@ -792,12 +965,12 @@ Copy Referral Link
                                             <!-- Pag from rebate -->
                                             <div class="w-full h-28 lg:h-20 bg-white mt-3 rounded-xl grid grid-cols-5 grid-rows-3">
                                                 <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Category</div>
-                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Type</div>
-                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Downline Name</div>
+                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium"></div>
+                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium"></div>
                                                 <div class="row-span-3 col-span-2 self-center text-end mr-5 text-lg sm:text-xl md:text-2xl xl:text-3xl font-black">+ ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;?></div>
                                                 <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold text-red-600">Unclaimable Rebates</div>
-                                                <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold"><?php if($package == 'RA'){ echo'Botanical';}else {echo 'Kapenato';} ?></div>
-                                                <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl overflow-hidden font-bold"><?php echo $codeOwner;?></div>
+                                                <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold"><?php// if($package == 'RA'){ echo'Botanical';}else {echo 'Kapenato';} ?></div>
+                                                <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl overflow-hidden font-bold"><?php //echo $codeOwner;?></div>
                                             </div>
                     
                                             <?php 
@@ -805,13 +978,13 @@ Copy Referral Link
                                                             elseif($type=="Points"){
                         ?>
                         <!-- Pag from rebate -->
-                        <div class="w-full h-28 lg:h-20 bg-white mt-3 rounded-xl grid grid-cols-5 grid-rows-2">
-                            <div class="self-end text-center text-xl md:text-sm xl:text-base font-medium">Category</div>
-                            <div class="self-end text-center text-xl md:text-sm xl:text-base font-medium">Type</div>
-                            <div class="self-end text-center text-xl md:text-sm xl:text-base font-medium"></div>
-                            <div class="row-span-2 col-span-2 self-center text-end mr-5 text-4xl md:text-2xl xl:text-3xl font-black">+ 1</div>
-                            <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold text-orange-600">Points</div>
-                            <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold"><?php if($package == 'RA'){ echo'Botanical';}else {echo 'Kapenato';} ?></div>
+                        <div class="w-full h-28 lg:h-20 bg-white mt-3 rounded-xl grid grid-cols-5 grid-rows-3">
+                            <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Category</div>
+                            <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Type</div>
+                            <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium"></div>
+                            <div class="row-span-3 col-span-2 self-center text-end mr-5 text-lg sm:text-xl md:text-2xl xl:text-3xl font-black">+ 1</div>
+                            <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold text-red-600">Points</div>
+                            <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl overflow-hidden font-bold"><?php if($package == 'RA'){ echo'Botanical';}else {echo 'Kapenato';} ?></div>
                             <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold"></div>
                         </div>
 

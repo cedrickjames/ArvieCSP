@@ -109,7 +109,7 @@
  function setClipboard(link) {
     var tempInput = document.createElement("input");
     tempInput.style = "position: absolute; left: -1000px; top: -1000px";
-    tempInput.value = 'http://localhost/ArvieCSP/signup.php?arviecsp='+link;
+    tempInput.value = 'http://45.124.138.104/ArvieCSP/signup.php?arviecsp='+link;
     document.body.appendChild(tempInput);
     tempInput.select();
     document.execCommand("copy");
@@ -118,7 +118,7 @@
     Swal.fire({
   position: 'top-end',
   icon: 'success',
-  title: 'Link Copied http://localhost/ArvieCSP/signup.php?arviecsp='+link,
+  title: 'Link Copied http://45.124.138.104/ArvieCSP/signup.php?arviecsp='+link,
   showConfirmButton: false,
   timer: 1500
 })

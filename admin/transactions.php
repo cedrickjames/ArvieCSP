@@ -1,26 +1,37 @@
 <?php
 session_start();
 include_once ("../includes/config/conn.php");
+
+if(!isset( $_SESSION['loggedin'])){
+    header("location:../login.php");
+  }else{
+    if($_SESSION['permission']=='userist'){
+    header("location:../user/index.php");
+
+    }
+  }
+
 $db= $conn;
 
-// code for getting the accounts//
-$tableNameAccount="accounts";
-$columnsAccounts= ['id', 'first_name','last_name','email_address','access'];
-$fetchDataAccounts= fetch_data_Account($db, $tableNameAccount, $columnsAccounts);
+// code for getting the transaction//
+$tableNameTransaction="transaction";
+$columnsTransaction= ['transactionId','transaction2ndId', 'Date', 'time','type','userName','userId','inviteName','inviteeName' ,'addedAmount', 'TotalBalance'];
+$fetchDataTransaction= fetch_transaction($db, $tableNameTransaction, $columnsTransaction);
 
 
-function fetch_data_Account($db, $tableNameAccount, $columnsAccounts){
+function fetch_transaction($db, $tableNameTransaction, $columnsTransaction){
 
 
  if(empty($db)){
   $msg= "Database connection error";
- }elseif (empty($columnsAccounts) || !is_array($columnsAccounts)) {
+ }elseif (empty($columnsTransaction) || !is_array($columnsTransaction)) {
   $msg="columns Name must be defined in an indexed array";
- }elseif(empty($tableNameAccount)){
+ }elseif(empty($tableNameTransaction)){
    $msg= "Table Name is empty";
 }else{
-$columnName = implode(", ", $columnsAccounts);
-$query = "SELECT * FROM `accounts` WHERE `access` = False";
+$columnName = implode(", ", $columnsTransaction);
+
+$query = "SELECT * FROM `transaction` WHERE 1 ORDER BY `transactionId` DESC";
 
 //  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';
 $result = $db->query($query);
@@ -37,7 +48,7 @@ if($result== true){
 }
 return $msg;
 }
-// end of code for getting the accounts//
+// end of code for getting the transaction//
 
 
 if(isset($_GET['Approve'])){
@@ -282,21 +293,53 @@ $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Oroz
                             <th data-priority="1">Date</th>
                             <th data-priority="2">Tran. No.</th>
                             <th data-priority="3">Member Name</th>
-                            <th data-priority="4">Type</th>
-                            <th data-priority="4">Description</th>
+                            <th data-priority="6">Type</th>
+                            <th data-priority="5">Points</th>
                             <th data-priority="4">Amount</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- i Loop lang yung data dito -->
-                        <tr>
-                            <td class="text-center">10/05/2022</td>
-                            <td class="text-center">PR-10050003</td>
-                            <td class="text-center">John Arian Malondras</td>
-                            <td class="text-center">Rebate</td>
-                            <td class="text-center">5pcs. Botanical Package</td>
-                            <td class="text-center">₱ 5,625.00</td>
-                        </tr>
+                        <?php           
+                            if(is_array($fetchDataTransaction)){      
+                         
+                                foreach($fetchDataTransaction as $data){
+                                    $id = $data['transactionId'];
+
+                                    $Date = $data['Date'];
+                                    $transaction2ndId = $data['transaction2ndId'];
+                                    $userId= $data['userId'];
+                                    $type = $data['type'];
+                                    $addedPoints = $data['addedPoints'];
+                                    $addedAmount = $data['addedAmount'];
+
+
+                                    $SelectInfo ="SELECT * FROM `accounts` WHERE `member_id` = '$userId';";
+                                    $resultInfo= mysqli_query($conn, $SelectInfo);
+                                    $fname5="";
+                                    $lname5="";
+                                    while($userRow = mysqli_fetch_assoc($resultInfo)){
+                                        $fname5 = $userRow['first_name'];
+                                        $lname5 = $userRow['last_name'];
+                     
+                                    
+                                    }
+
+                        ?>
+                                                <tr>
+                            <td class="text-center"><?php echo $id?></td>
+                            <td class="text-center"><?php echo $transaction2ndId?></td>
+                            <td class="text-center"><?php echo $fname5.' '.$lname5?></td>
+                            <td class="text-center"><?php echo $type?></td>
+                            <td class="text-center"><?php echo $addedPoints?></td>
+                            <td class="text-center"><?php echo $addedAmount?></td>
+
+                             <?php
+                                        
+                                    }}else{
+
+                                        }
+                        ?>
                         <!-- end -->
                     </tbody>
                 </table>

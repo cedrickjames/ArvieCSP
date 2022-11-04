@@ -1,6 +1,15 @@
 <?php
 session_start();
 include_once ("../includes/config/conn.php");
+
+if(!isset( $_SESSION['loggedin'])){
+    header("location:../login.php");
+  }else{
+    if($_SESSION['permission']=='userist'){
+    header("location:../user/index.php");
+
+    }
+  }
 $db= $conn;
 
 // code for getting the accounts//

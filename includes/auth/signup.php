@@ -111,7 +111,29 @@ date_default_timezone_set("Asia/Singapore");
                         $sqlAddBalance= "UPDATE `totalbalance` SET `totalBalance`='$updatedBalance' WHERE `userID` = '$referrer'";
                         mysqli_query($conn, $sqlAddBalance);
                     
-                        $sqlinsertTransact= "INSERT INTO `transaction`(`type`,`userName`,`userId`, `inviteName`,`inviteeName`, `addedAmount`, `TotalBalance`) VALUES ('Direct Referral','$emailNaginvite','$referrer','$first_name $last_name','$fnameNaginvite $lnameNaginvite','500','$updatedBalance')";
+
+                        $code = "TR";
+                        $get_month = date('m', strtotime("now"));
+                    
+                        $sqlLastID = "SELECT MAX(transactionIdBasis) as 'idnumber' FROM `transaction` WHERE 1";//select the highest number_basis
+                        $getLastId = mysqli_query($conn, $sqlLastID);
+                        while($userRow = mysqli_fetch_assoc($getLastId)){
+                            $lastId = $userRow['idnumber'];
+                            $lastId++; //increment the number_basis
+                        }
+
+                        
+                        $getDateNow = new DateTime();
+                        $getYearNow  = $getDateNow->format('Y'); 
+                        $getMonthNow  = $getDateNow->format('m'); 
+                        $getDateNow  = $getDateNow->format('d'); 
+                        $getDateNowReal = new DateTime();
+                        $FullDateOfthisDay = $getDateNowReal->format('Y-m-d'); 
+                        $timenow = date("h:i a"); 
+
+                        $transactionId = $code."-".$getYearNow."".$getDateNow."".$getMonthNow."".$lastId;
+
+                        $sqlinsertTransact= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`,`userName`,`userId`, `inviteName`,`inviteeName`, `addedAmount`, `TotalBalance`,`transactionIdBasis`) VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Direct Referral','$emailNaginvite','$referrer','$first_name $last_name','$fnameNaginvite $lnameNaginvite','500','$updatedBalance','$lastId')";
                         mysqli_query($conn, $sqlinsertTransact);
                         
                         //start of loop max of 10th level
@@ -146,7 +168,30 @@ date_default_timezone_set("Asia/Singapore");
                           $sqlAddBalance= "UPDATE `totalbalance` SET `totalBalance`='$updatedBalance' WHERE `userID` = '$inviteeID'";
                           mysqli_query($conn, $sqlAddBalance);
                     
-                          $sqlinsertTransact2= "INSERT INTO `transaction`(`type`,`userName`,`userId`, `inviteName`,`inviteeName`, `addedAmount`, `TotalBalance`) VALUES ('Indirect Referral','$inviteeUpline','$inviteeID','$first_name $last_name','$fnameNaginvite $lnameNaginvite','10','$updatedBalance')";
+                          
+                        $code = "TR";
+                        $get_month = date('m', strtotime("now"));
+                    
+                        $sqlLastID = "SELECT MAX(transactionIdBasis) as 'idnumber' FROM `transaction` WHERE 1";//select the highest number_basis
+                        $getLastId = mysqli_query($conn, $sqlLastID);
+                        while($userRow = mysqli_fetch_assoc($getLastId)){
+                            $lastId = $userRow['idnumber'];
+                            $lastId++; //increment the number_basis
+                        }
+
+                        
+                        $getDateNow = new DateTime();
+                        $getYearNow  = $getDateNow->format('Y'); 
+                        $getMonthNow  = $getDateNow->format('m'); 
+                        $getDateNow  = $getDateNow->format('d'); 
+                        $getDateNowReal = new DateTime();
+                        $FullDateOfthisDay = $getDateNowReal->format('Y-m-d'); 
+                        $timenow = date("h:i a"); 
+
+                        $transactionId = $code."-".$getYearNow."".$getDateNow."".$getMonthNow."".$lastId;
+
+
+                          $sqlinsertTransact2= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`,`userName`,`userId`, `inviteName`,`inviteeName`, `addedAmount`, `TotalBalance`,`transactionIdBasis`) VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Indirect Referral','$inviteeUpline','$inviteeID','$first_name $last_name','$fnameNaginvite $lnameNaginvite','10','$updatedBalance','$lastId')";
                           mysqli_query($conn, $sqlinsertTransact2);
                     
                           

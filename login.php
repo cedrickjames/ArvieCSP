@@ -9,8 +9,8 @@ $completeDateNow  = $date->format('M d, Y');
 $day  = $date->format('D'); 
 $timenow = date("h:i a"); 
 // echo $timenow;
-$sqlinsertTransact2= "INSERT INTO `points_report`( `member_id`, `date`, `time`, `month`, `year`, `points_earned`) VALUES ('1234','11-04-2022','$timenow','Nov','2022','10')";
-mysqli_query($conn, $sqlinsertTransact2);
+// $sqlinsertTransact2= "INSERT INTO `points_report`( `member_id`, `date`, `time`, `month`, `year`, `points_earned`) VALUES ('1234','11-04-2022','$timenow','Nov','2022','10')";
+// mysqli_query($conn, $sqlinsertTransact2);
 ?>
 
 

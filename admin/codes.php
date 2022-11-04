@@ -1,7 +1,14 @@
 <?php
 session_start();
 include "../includes/config/conn.php";
+if(!isset( $_SESSION['loggedin'])){
+    header("location:../login.php");
+  }else{
+    if($_SESSION['permission']=='userist'){
+    header("location:../user/index.php");
 
+    }
+  }
 // //Working
 // $select_member_id ="SELECT * FROM accounts";
 // $query_member_id = mysqli_query($conn, $select_member_id);
@@ -61,18 +68,25 @@ if(isset($_POST['generate'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/styles.css">
     <!-- <link rel="stylesheet" href="./dist/output.css"> -->
-    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css">
-    <!-- <link rel="stylesheet" href="http://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"> -->
-	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-	<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+
+
+
+
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
+    <link rel="stylesheet" href="../node_modules/tw-elements/dist/css/index.min.css" />
+
     <title>Admin</title>
     <script src="../js/tailwind-3.1.8.js"></script>
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
     <script src="../node_modules/tw-elements/dist/js/index.min.js"></script>
-    <!-- <script src="http://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> -->
-	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="../js/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
     <title>Arvie Cosmetic & Skincare ProductsTrading</title>
 
     <style>
@@ -188,7 +202,7 @@ if(isset($_POST['generate'])){
     <div class="display-none lg:display-block lg:w-1/4 xl:w-1/5 2xl:w-1/5">
       <?php include_once "./admin-nav.php"; ?>
     </div>
-    <div class="user-code-content-container pt-5 px-6 pb-5 bg-emerald-100 w-full lg:w-3/4 xl:w-4/5 2xl:w-4/5">
+    <div class="user-code-content-container pt-5 px-2 pb-5 bg-emerald-100  w-full lg:w-3/4 xl:w-4/5 2xl:w-4/5">
         
         <!--Container-->
         <div class="container w-full mx-auto px-2">
@@ -450,6 +464,24 @@ if(isset($_POST['generate'])){
         </div>
     </div>
 
+    <?php include "./editRebates.php"?>;
 
+    <script>
+        $(document).ready(function(){
+            $("#code").addClass("bg-emerald-700");
+            $("#code").addClass("text-white");
+            $("#code").removeClass("text-gray-600");
+
+
+            var table = $('#codeTable').DataTable({
+                responsive: true
+            })
+            .columns.adjust()
+            .responsive.recalc();
+
+        });
+    </script>
 </body>
 </html>
+
+

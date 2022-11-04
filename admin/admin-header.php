@@ -33,7 +33,7 @@
             </div>
             <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
             <li>
-                <a href="<?php if($admin==true){echo 'location: ./admin/index.php';}else{echo 'location: ./user/index.php';} ?>" class="block py-2 px-4 hover:bg-gray-200 bg-gray-300">Dashboard</a>
+                <a href="./index.php" class="block py-2 px-4 hover:bg-gray-200 bg-gray-300">Dashboard</a>
             </li>
             <li>
                 <a href="./members.php" class="block lg:hidden py-2 px-4 hover:bg-gray-200 bg-gray-100">Members</a>
@@ -42,10 +42,13 @@
                 <a href="./codes.php" class="block lg:hidden py-2 px-4 hover:bg-gray-200 bg-gray-100">Codes</a>
             </li>
             <li>
-                <a href="#" class="block lg:hidden py-2 px-4 hover:bg-gray-200 bg-gray-100">Payout Request</a>
+                <a href="./payout-request.php" class="block lg:hidden py-2 px-4 hover:bg-gray-200 bg-gray-100">Payout Request</a>
             </li>
             <li>
-                <a href="#" class="block lg:hidden py-2 px-4 hover:bg-gray-200 bg-gray-100">Transactions</a>
+                <a href="./transactions.php" class="block lg:hidden py-2 px-4 hover:bg-gray-200 bg-gray-100">Transactions</a>
+            </li>
+            <li>
+                <a href="./reports.php" class="block lg:hidden py-2 px-4 hover:bg-gray-200 bg-gray-100">Reports</a>
             </li>
             <li>
                 <a href="#" class="block lg:hidden py-2 px-4 hover:bg-gray-200 bg-gray-100">Edit Home Page</a>

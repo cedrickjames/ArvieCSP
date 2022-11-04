@@ -1,6 +1,15 @@
 <?php
 session_start();
 include_once ("../includes/config/conn.php");
+
+if(!isset( $_SESSION['loggedin'])){
+    header("location:../login.php");
+  }else{
+    if($_SESSION['permission']=='userist'){
+    header("location:../user/index.php");
+
+    }
+  }
 $db= $conn;
 
 
@@ -436,7 +445,7 @@ $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Oroz
 
     </div>
     </div>
-
+    <?php include "./editRebates.php"?>;
     <script>
         $(document).ready(function(){
             $("#payout").addClass("bg-emerald-700");
