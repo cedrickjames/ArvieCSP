@@ -85,7 +85,29 @@ if (isset($_POST['Release']) && $_POST['Release'] == 'Upload')
       $sqlAddBalance= "UPDATE `totalbalance` SET `totalBalance`='$updatedBalance', `totalIncome` = '$updatedTotalIncome' WHERE `userID` = '$member_id'";
       mysqli_query($conn, $sqlAddBalance);
   
-      $sqlinsertTransact= "INSERT INTO `transaction`(`Date`,`time`,`type`,`userId`, `addedAmount`, `TotalBalance`) VALUES ('$DateToday','$timenow','Withdrawal','$member_id','$amount','$updatedBalance')";
+      $code = "TR";
+      $get_month = date('m', strtotime("now"));
+  
+      $sqlLastID = "SELECT MAX(transactionIdBasis) as 'idnumber' FROM `transaction` WHERE 1";//select the highest number_basis
+      $getLastId = mysqli_query($conn, $sqlLastID);
+      while($userRow = mysqli_fetch_assoc($getLastId)){
+          $lastId = $userRow['idnumber'];
+          $lastId++; //increment the number_basis
+      }
+
+      
+      $getDateNow = new DateTime();
+      $getYearNow  = $getDateNow->format('Y'); 
+      $getMonthNow  = $getDateNow->format('m'); 
+      $getDateNow  = $getDateNow->format('d'); 
+      $getDateNowReal = new DateTime();
+      $FullDateOfthisDay = $getDateNowReal->format('Y-m-d'); 
+      $timenow = date("h:i a"); 
+
+      $transactionId = $code."-".$getYearNow."".$getDateNow."".$getMonthNow."".$lastId;
+
+
+      $sqlinsertTransact= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`,`userId`, `addedAmount`, `TotalBalance`,`transactionIdBasis`) VALUES ('$transactionId','$DateToday','$timenow','Withdrawal','$member_id','$amount','$updatedBalance','$lastId')";
       mysqli_query($conn, $sqlinsertTransact);
       
   echo "<script> alert('You have successfully approved the request.')</script>";
