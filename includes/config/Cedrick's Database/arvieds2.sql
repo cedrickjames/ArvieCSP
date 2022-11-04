@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2022 at 01:18 AM
+-- Generation Time: Nov 04, 2022 at 05:21 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -156,15 +156,28 @@ CREATE TABLE `points_report` (
   `time` varchar(20) NOT NULL,
   `month` varchar(50) NOT NULL,
   `year` varchar(10) NOT NULL,
-  `points_earned` varchar(10) NOT NULL
+  `points_earned` varchar(10) NOT NULL,
+  `unclaimable` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `points_report`
 --
 
-INSERT INTO `points_report` (`points_report_id`, `member_id`, `date`, `time`, `month`, `year`, `points_earned`) VALUES
-(1, '1234', '11-04-2022', '08:18 am', 'Nov', '2022', '10');
+INSERT INTO `points_report` (`points_report_id`, `member_id`, `date`, `time`, `month`, `year`, `points_earned`, `unclaimable`) VALUES
+(16, 'ADS2022-10-7', '2022-11-04', '12:18 pm', 'Nov', '2022', '0', '90'),
+(17, 'ADS2022-10-8', '2022-11-04', '12:18 pm', 'Nov', '2022', '1', '0'),
+(18, 'ADS2022-10-9', '2022-11-04', '12:18 pm', 'Nov', '2022', '0', '40'),
+(19, 'ADS2022-10-10', '2022-11-04', '12:18 pm', 'Nov', '2022', '0', '40'),
+(20, 'ADS2022-10-11', '2022-11-04', '12:18 pm', 'Nov', '2022', '0', '50'),
+(21, 'ADS2022-10-12', '2022-11-04', '12:18 pm', 'Nov', '2022', '0', '60'),
+(22, 'ADS2022-10-13', '2022-11-04', '12:18 pm', 'Nov', '2022', '0', '60'),
+(23, 'ADS2022-10-14', '2022-11-04', '12:18 pm', 'Nov', '2022', '0', '60'),
+(24, 'ADS2022-10-15', '2022-11-04', '12:18 pm', 'Nov', '2022', '0', '60'),
+(25, 'ADS2022-10-16', '2022-11-04', '12:18 pm', 'Nov', '2022', '0', '100'),
+(26, 'ADS2022-10-17', '2022-11-04', '12:18 pm', 'Nov', '2022', '0', '0'),
+(27, 'ADS2022-10-18', '2022-11-04', '12:18 pm', 'Nov', '2022', '0', '0'),
+(28, 'ADS2022-10-19', '2022-11-04', '12:18 pm', 'Nov', '2022', '0', '0');
 
 -- --------------------------------------------------------
 
@@ -213,7 +226,7 @@ CREATE TABLE `rebates_points` (
 
 INSERT INTO `rebates_points` (`rebates_points_id`, `user_id`, `email_address`, `pointsEarned`) VALUES
 (4, 'ADS2022-10-7', 'one@gmail.com', 0),
-(10, 'ADS2022-10-8', 'two@gmail.com', 1),
+(10, 'ADS2022-10-8', 'two@gmail.com', 0),
 (11, 'ADS2022-10-9', 'three@gmail.com', 0),
 (12, 'ADS2022-10-10', 'four@gmail.com', 0),
 (13, 'ADS2022-10-11', 'five@gmail.com', 0),
@@ -295,16 +308,16 @@ CREATE TABLE `totalbalance` (
 --
 
 INSERT INTO `totalbalance` (`totalBalanceId`, `userID`, `userName`, `totalBalance`, `unclaimable`, `totalIncome`) VALUES
-(77, 'ADS2022-10-7', 'one@gmail.com', 110, 90, 1000),
+(77, 'ADS2022-10-7', 'one@gmail.com', 110, 0, 1000),
 (86, 'ADS2022-10-8', 'two@gmail.com', 140, 0, 1000),
-(87, 'ADS2022-10-9', 'three@gmail.com', 90, 40, 1000),
-(88, 'ADS2022-10-10', 'four@gmail.com', 580, 40, 0),
-(89, 'ADS2022-10-11', 'five@gmail.com', 570, 50, 0),
-(90, 'ADS2022-10-12', 'six@gmail.com', 560, 60, 0),
-(91, 'ADS2022-10-13', 'seven@gmail.com', 550, 60, 0),
-(92, 'ADS2022-10-14', 'eight@gmail.com', 540, 60, 0),
-(93, 'ADS2022-10-15', 'nine@gmail.com', 530, 60, 0),
-(94, 'ADS2022-10-16', 'ten@gmail.com', 520, 100, 0),
+(87, 'ADS2022-10-9', 'three@gmail.com', 90, 0, 1000),
+(88, 'ADS2022-10-10', 'four@gmail.com', 580, 0, 0),
+(89, 'ADS2022-10-11', 'five@gmail.com', 570, 0, 0),
+(90, 'ADS2022-10-12', 'six@gmail.com', 560, 0, 0),
+(91, 'ADS2022-10-13', 'seven@gmail.com', 550, 0, 0),
+(92, 'ADS2022-10-14', 'eight@gmail.com', 540, 0, 0),
+(93, 'ADS2022-10-15', 'nine@gmail.com', 530, 0, 0),
+(94, 'ADS2022-10-16', 'ten@gmail.com', 520, 0, 0),
 (98, 'ADS2022-10-17', 'aaa@gmail.com', 0, 0, 0),
 (99, 'ADS2022-10-18', 'bbb@gmail.com', 0, 0, 0),
 (100, 'ADS2022-10-19', 'ccc@gmail.com', 0, 0, 0);
@@ -506,7 +519,7 @@ ALTER TABLE `payout_request`
 -- AUTO_INCREMENT for table `points_report`
 --
 ALTER TABLE `points_report`
-  MODIFY `points_report_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `points_report_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `rebatesamount`
