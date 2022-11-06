@@ -26,7 +26,7 @@
     
  ?>
 
-    
+
     <div class="container bg-white relative top-20 mx-auto w-11/12 max-w-sm md:max-w-xl">
         <div class="container shadow-xl p-5 rounded-lg">
             <h1 class="text-emerald-800 text-2xl text-center mb-5">Welcome to<br>Arvie Direct Sales</h1>
@@ -47,13 +47,14 @@
             <!-- Sign up Form -->
             <form class="mt-5" action="signup.php" method="POST">
                 <div class="mb-6">
-                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">Activation Code</label>
-                    <input type="search" id="id-search" name="ref_code" list="idList" autocomplete="false" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                    <label for="ref_code" class="block mb-2 text-sm font-medium text-gray-900">Activation Code</label>
+                    <input type="search" id="ref_code" name="ref_code" list="idList" autocomplete="false" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
 
 
                 </div>
+
                 <div class="relative mb-6 hidden">
-                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">Sponsor</label>
+                    <label for="sponsorId-input" class="block mb-2 text-sm font-medium text-gray-900">Sponsor</label>
                     <input type="text" id="sponsorId-input" name="sponsor" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     <button type="button" class="checkID text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Check Referral Code</button>
                 </div>
@@ -68,12 +69,12 @@
                     </div>
                 </div>
                 <div class="mb-6">
-                    <label for="address" class="block mb-2 text-sm font-medium text-gray-900 ">Address</label>
+                    <label for="homeAddress" class="block mb-2 text-sm font-medium text-gray-900 ">Address</label>
                     <input type="text" name="homeAddress" id="homeAddress" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
                 </div>
                 <div class="mb-6">
                     <label for="birthday" class="block mb-2 text-sm font-medium text-gray-900 ">Birthday</label>
-                    <input type="date" name="birthday" id="birthday" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" maxlength="11" required="">
+                    <input type="date" name="birthday"  id="birthday" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" maxlength="11" required="">
                 </div>
                 <div class="mb-6">
                     <label for="contact_number" class="block mb-2 text-sm font-medium text-gray-900 ">Contact Number</label>
@@ -86,11 +87,11 @@
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
                         <label for="sss_num" class="block mb-2 text-sm font-medium text-gray-900">SSS Number</label>
-                        <input type="text" id="sss_num" name="sss_num" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                        <input type="text" id="sss_num" name="sss_num" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" >
                     </div>
                     <div>
                         <label for="tin_acct" class="block mb-2 text-sm font-medium text-gray-900 ">TIN</label>
-                        <input type="text" id="tin_acct" name="tin_acct" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                        <input type="text" id="tin_acct" name="tin_acct" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" >
                     </div> 
                 </div>
                 <div class="mb-6">
@@ -118,8 +119,43 @@
 
 if(isset($_GET['arviecsp'])){
     $sponsorID = $_GET['arviecsp'];
-
     echo "<script> document.getElementById('sponsorId-input').value='$sponsorID'</script>";
+}
+if(isset($_GET['fname'])){
+    $fname = $_GET['fname'];
+    echo "<script> document.getElementById('first_name').value='$fname'</script>";
+}
+if(isset($_GET['lname'])){
+    $lname = $_GET['lname'];
+    echo "<script> document.getElementById('last_name').value='$lname'</script>";
+}
+if(isset($_GET['email'])){
+    $email = $_GET['email'];
+    echo "<script> document.getElementById('email_address').value='$email'</script>";
+}
+if(isset($_GET['contact'])){
+    $contact = $_GET['contact'];
+    echo "<script> document.getElementById('contact_number').value='$contact'</script>";
+}
+if(isset($_GET['bday'])){
+    $bday = $_GET['bday'];
+    echo "<script> document.getElementById('birthday').value='$bday'</script>";
+}
+if(isset($_GET['sss'])){
+    $sss = $_GET['sss'];
+    echo "<script> document.getElementById('sss_num').value='$sss'</script>";
+}
+if(isset($_GET['tin'])){
+    $tin = $_GET['tin'];
+    echo "<script> document.getElementById('tin_acct').value='$tin'</script>";
+}
+if(isset($_GET['address'])){
+    $address = $_GET['address'];
+    echo "<script> document.getElementById('homeAddress').value='$address'</script>";
+}
+if(isset($_GET['code'])){
+    $code = $_GET['code'];
+    echo "<script> document.getElementById('ref_code').value='$code'</script>";
 }
 ?>
     <script>

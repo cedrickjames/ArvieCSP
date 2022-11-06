@@ -34,11 +34,11 @@ $SelectInfo ="SELECT * FROM `accounts` WHERE `member_id` = '$member_id';";
 $resultInfo= mysqli_query($conn, $SelectInfo);
 $fname="";
 $lname="";
-$referralLink="";
+
 while($userRow = mysqli_fetch_assoc($resultInfo)){
     $fname = $userRow['first_name'];
     $lname = $userRow['last_name'];
-    $referralLink = $userRow['referralLink'];
+
 
 }
 $SelectPresentBalance ="SELECT * FROM `totalbalance` WHERE `userID` = '$member_id';";
@@ -51,7 +51,7 @@ while($userRow = mysqli_fetch_assoc($resultPresentBalance)){
 
 
 }
-
+$fullname = $fname.' '.$lname;
 $email = $_SESSION["email_address"];
 if(isset($_POST['enterCode'])){
 
@@ -259,8 +259,8 @@ if(isset($_POST['enterCode'])){
                         $transactionId = $code."-".$getYearNow."".$getDateNow."".$getMonthNow."".$lastId;
                         
 
-
-                                        $sqlinsertTransact= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`,`transactionIdBasis`)VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Unclaimable Rebates','$emailOfSponsor','$inviteeID','$type','$email','$member_id','$L1','$updatedBalance','$lastId')";
+                                        
+                                        $sqlinsertTransact= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`,`transactionIdBasis`)VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Unclaimable Rebates','$emailOfSponsor','$inviteeID','$type','$fullname','$member_id','$L1','$updatedBalance','$lastId')";
                                         mysqli_query($conn, $sqlinsertTransact);
        
           
@@ -323,7 +323,7 @@ if(isset($_POST['enterCode'])){
                         $transactionId = $code."-".$getYearNow."".$getDateNow."".$getMonthNow."".$lastId;
                         
 
-                                       $sqlinsertTransact= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`,`transactionIdBasis`)VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Rebates','$emailOfSponsor','$inviteeID','$type','$email','$member_id','$L1','$updatedBalance','$lastId')";
+                                       $sqlinsertTransact= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`,`transactionIdBasis`)VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Rebates','$emailOfSponsor','$inviteeID','$type','$fullname','$member_id','$L1','$updatedBalance','$lastId')";
                                        mysqli_query($conn, $sqlinsertTransact);
       
          
@@ -414,7 +414,7 @@ if(isset($_POST['enterCode'])){
                         
 
 
-                                        $sqlinsertTransact= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`,`transactionIdBasis`)VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Unclaimable Rebates','$emailOfSponsor','$inviteeID','$type','$email','$member_id','$L1','$updatedBalance','$lastId')";
+                                        $sqlinsertTransact= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`,`transactionIdBasis`)VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Unclaimable Rebates','$emailOfSponsor','$inviteeID','$type','$fullname','$member_id','$L1','$updatedBalance','$lastId')";
                                         mysqli_query($conn, $sqlinsertTransact);
        
           
@@ -480,7 +480,7 @@ if(isset($_POST['enterCode'])){
                         
 
 
-                                       $sqlinsertTransact= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`,`transactionIdBasis`)VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Rebates','$emailOfSponsor','$inviteeID','$type','$email','$member_id','$L1','$updatedBalance','$lastId')";
+                                       $sqlinsertTransact= "INSERT INTO `transaction`(`transaction2ndId`,`Date`,`time`,`type`, `userName`, `userId`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`,`transactionIdBasis`)VALUES ('$transactionId','$FullDateOfthisDay','$timenow','Rebates','$emailOfSponsor','$inviteeID','$type','$fullname','$member_id','$L1','$updatedBalance','$lastId')";
                                        mysqli_query($conn, $sqlinsertTransact);
       
          
@@ -906,13 +906,18 @@ Copy Referral Link
                                         if($type=="Direct Referral"){
                         ?>
                         <!-- Pag from Direct Referral -->
-                        <div class="w-full h-28 lg:h-20 bg-white mt-3 rounded-xl grid grid-cols-4 sm:grid-cols-5 grid-rows-4 sm:grid-rows-3">
-                            <div class="row-span-2 sm:row-span-1 self-center sm:self-end text-center pl-2 text-xs sm:text-sm md:text-sm xl:text-base font-medium">Category</div>
-                            <div class="row-span-2 sm:row-span-1 self-center sm:self-end text-center text-xs sm:text-sm md:text-sm xl:text-base font-medium">Invite's Name</div>
-                            <div class="hidden sm:block"></div>
-                            <div class="row-span-4 sm:row-span-3 col-span-2 self-center text-end mr-5 text-lg sm:text-xl md:text-2xl xl:text-3xl font-black">+  ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;//cedrick code ?></div> 
+                        <div class="w-full h-28 lg:h-20 bg-white mt-3 rounded-xl grid grid-cols-5 grid-rows-3">
+                            <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Category</div>
+                            <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Invite's Name</div>
+                            <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium"></div>
+
+                            <div class="col-end-6 col-span-2 self-end text-center text-xs sm:text-sm xl:text-base font-medium"><?php echo $date.' '.$time; ?></div>
+
                             <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base xl:text-xl font-bold text-green-600"> <?php echo $type; ?></div>
-                            <div class="row-span-2 pl-1 mr-1 self-center text-center whitespace-normal lg:whitespace-normal md:text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold"><?php echo $inviteName; ?></div>
+                            <div class="row-span-2 pl-1 mr-1 self-center text-center whitespace-normal overflow-hidden lg:whitespace-nowrap text-xs sm:text-base xl:text-xl font-bold"><?php echo $inviteName; ?></div>
+                            <div class="row-span-2 pl-1 mr-1 self-center text-center whitespace-normal overflow-hidden lg:whitespace-nowrap text-xs sm:text-base xl:text-xl font-bold"></div>
+                            <div class="col-span-2 row-span-2 self-center text-center mr-5 text-lg sm:text-xl md:text-2xl xl:text-3xl font-black">+  ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;//cedrick code ?></div> 
+
                         </div>
 
                         <?php 
@@ -923,10 +928,13 @@ Copy Referral Link
                             <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Category</div>
                             <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Downline Name</div>
                             <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Invite's Name</div>
-                            <div class="row-span-3 col-span-2 self-center text-end mr-5 text-lg sm:text-xl md:text-2xl xl:text-3xl font-black">+ ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;?></div>
+                            <div class="col-end-6 col-span-2 self-end text-center text-xs sm:text-sm xl:text-base font-medium"><?php echo $date.' '.$time; ?></div>
+
                             <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base xl:text-xl font-bold text-green-600"><?php echo $type; ?></div>
                             <div class="row-span-2 pl-1 mr-1 self-center text-center whitespace-normal overflow-hidden lg:whitespace-nowrap text-xs sm:text-base xl:text-xl font-bold"><?php echo $inviteeName; ?></div>
                             <div class="row-span-2 pl-1 mr-1 self-center text-center whitespace-normal overflow-hidden lg:whitespace-nowrap text-xs sm:text-base xl:text-xl font-bold"><?php echo $inviteName; ?></div>
+                            <div class="col-span-2 row-span-2 self-center text-center mr-5 text-lg sm:text-xl md:text-2xl xl:text-3xl font-black">+ ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;?></div>
+
                         </div>
 
                         <?php 
@@ -937,10 +945,13 @@ Copy Referral Link
                             <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Category</div>
                             <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Type</div>
                             <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Downline Name</div>
-                            <div class="row-span-3 col-span-2 self-center text-end mr-5 text-lg sm:text-xl md:text-2xl xl:text-3xl font-black">+ ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;?></div>
+                            <div class="col-end-6 col-span-2 self-end text-center text-xs sm:text-sm xl:text-base font-medium"><?php echo $date.' '.$time; ?></div>
+
                             <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold text-orange-600">Rebate</div>
                             <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold"><?php if($package == 'RA'){ echo'Botanical';}else {echo 'Kapenato';} ?></div>
                             <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl overflow-hidden font-bold"><?php echo $codeOwner;?></div>
+                            <div class="col-span-2 row-span-2 self-center text-center mr-5 text-lg sm:text-xl md:text-2xl xl:text-3xl font-black">+ ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;?></div>
+
                         </div>
 
                         <?php 
@@ -950,12 +961,12 @@ Copy Referral Link
                                             <!-- Pag from rebate -->
                                             <div class="w-full h-28 lg:h-20 bg-white mt-3 rounded-xl grid grid-cols-5 grid-rows-3">
                                                 <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Category</div>
-                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium"></div>
-                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium"></div>
+                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Date </div>
+                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Time</div>
                                                 <div class="row-span-3 col-span-2 self-center text-end mr-5 text-lg sm:text-xl md:text-2xl xl:text-3xl font-black">+ ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;?></div>
                                                 <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold text-orange-600">Claimed Rebates</div>
-                                                <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold"><?php// echo $type;?></div>
-                                                <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl overflow-hidden font-bold"><?php //echo $codeOwner;?></div>
+                                                <div class="row-span-2 pl-1 mr-1 self-center text-center whitespace-normal overflow-hidden lg:whitespace-nowrap text-xs sm:text-base xl:text-xl font-bold"><?php echo $date;?> </div>
+                                                <div class="row-span-2 pl-1 mr-1 self-center text-center whitespace-normal overflow-hidden lg:whitespace-nowrap text-xs sm:text-base xl:text-xl font-bold"><?php echo $time;?> </div>
                                             </div>
                     
                                             <?php 
@@ -965,12 +976,15 @@ Copy Referral Link
                                             <!-- Pag from rebate -->
                                             <div class="w-full h-28 lg:h-20 bg-white mt-3 rounded-xl grid grid-cols-5 grid-rows-3">
                                                 <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Category</div>
-                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium"></div>
-                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium"></div>
-                                                <div class="row-span-3 col-span-2 self-center text-end mr-5 text-lg sm:text-xl md:text-2xl xl:text-3xl font-black">+ ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;?></div>
+                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Type</div>
+                                                <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Downline Name</div>
+                                                <div class="col-end-6 col-span-2 self-end text-center text-xs sm:text-sm xl:text-base font-medium"><?php echo $date.' '.$time; ?></div>
+
                                                 <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold text-red-600">Unclaimable Rebates</div>
-                                                <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold"><?php// if($package == 'RA'){ echo'Botanical';}else {echo 'Kapenato';} ?></div>
-                                                <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl overflow-hidden font-bold"><?php //echo $codeOwner;?></div>
+                                                <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold"><?php if($package == 'RA'){ echo'Botanical';}else {echo 'Kapenato';} ?></div>
+                                                <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl overflow-hidden font-bold"><?php echo $codeOwner;?></div>
+                                                <div class="col-span-2 row-span-2 self-center text-center mr-5 text-lg sm:text-xl md:text-2xl xl:text-3xl font-black">+ ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;?></div>
+                                           
                                             </div>
                     
                                             <?php 
@@ -982,9 +996,14 @@ Copy Referral Link
                             <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Category</div>
                             <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium">Type</div>
                             <div class="self-end text-center text-xs sm:text-sm xl:text-base font-medium"></div>
-                            <div class="row-span-3 col-span-2 self-center text-end mr-5 text-lg sm:text-xl md:text-2xl xl:text-3xl font-black">+ 1</div>
+                            <div class="col-end-6 col-span-2 self-end text-center text-xs sm:text-sm xl:text-base font-medium"><?php echo $date.' '.$time; ?></div>
+
                             <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl font-bold text-red-600">Points</div>
                             <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base md:text-lg xl:text-xl overflow-hidden font-bold"><?php if($package == 'RA'){ echo'Botanical';}else {echo 'Kapenato';} ?></div>
+                            <div class="row-span-2 pl-1 mr-1 self-center text-center whitespace-normal overflow-hidden lg:whitespace-nowrap text-xs sm:text-base xl:text-xl font-bold"></div>
+
+                            <div class="col-span-2 row-span-2 self-center text-center mr-5 text-lg sm:text-xl md:text-2xl xl:text-3xl font-black">+ 1</div>
+
                             <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold"></div>
                         </div>
 
@@ -993,9 +1012,9 @@ Copy Referral Link
                         ?>
                         <!-- Pag out or withdraw -->
                         <div class="w-full h-28 lg:h-20 bg-white mt-3 rounded-xl grid grid-cols-5 grid-rows-2">
-                            <div class="row-span-2 sm:row-span-1 self-center sm:self-end text-center pl-2 text-xs sm:text-sm md:text-sm xl:text-base font-medium">Category</div>
-                            <div class="row-span-2 sm:row-span-1 self-center sm:self-end text-center text-xs sm:text-sm md:text-sm xl:text-base font-medium">Date </div>
-                            <div class="row-span-2 sm:row-span-1 self-center sm:self-end text-center text-xs sm:text-sm md:text-sm xl:text-base font-medium">Time</div>
+                            <div class="self-center text-center text-xs sm:text-sm xl:text-base font-medium">Category</div>
+                            <div class="self-center text-center text-xs sm:text-sm xl:text-base font-medium">Date </div>
+                            <div class="self-center text-center text-xs sm:text-sm xl:text-base font-medium">Time</div>
                             <div class="row-span-3 col-span-2 self-center text-end mr-5 text-sm sm:text-xl md:text-2xl xl:text-3xl font-black">- ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;?></div>
                             <div class="row-span-2 pl-1 mr-1 self-center text-center text-xs sm:text-base xl:text-xl font-bold text-red-600">Withdrawal</div>
                             <div class="row-span-2 pl-1 mr-1 self-center text-center whitespace-normal overflow-hidden lg:whitespace-nowrap text-xs sm:text-base xl:text-xl font-bold"><?php echo $date;?> </div>

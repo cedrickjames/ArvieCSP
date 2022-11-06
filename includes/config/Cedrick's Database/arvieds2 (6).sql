@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2022 at 03:28 PM
+-- Generation Time: Nov 06, 2022 at 09:07 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -42,34 +42,33 @@ CREATE TABLE `accounts` (
   `permission` varchar(8) NOT NULL,
   `referralId` varchar(16) NOT NULL,
   `homeaddress` varchar(255) NOT NULL,
-  `tin_acct` varchar(255) NOT NULL,
-  `sss_num` varchar(255) NOT NULL,
-  `number_basis` int(11) NOT NULL COMMENT 'for idnumber purposes only',
-  `referralLink` varchar(100) NOT NULL
+  `tin_acct` varchar(255) DEFAULT NULL,
+  `sss_num` varchar(255) DEFAULT NULL,
+  `number_basis` int(11) NOT NULL COMMENT 'for idnumber purposes only'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`id`, `member_id`, `first_name`, `last_name`, `sponsor`, `sponsorName`, `email_address`, `pass`, `contact_number`, `date`, `access`, `permission`, `referralId`, `homeaddress`, `tin_acct`, `sss_num`, `number_basis`, `referralLink`) VALUES
-(6, 'ADS22-10-6', 'Arvie', 'Admin', 'n/a', '', 'arvieadmin@gmail.com', '$2y$10$jTe3GMdGIMRgT1XLcBgjVe/2hw1FrmEwPhmkeHys9hw.vSqdR0wt2', 2147483647, '2022-10-17 21:36:49', 'approved', 'administ', 'asd12-12345', '3 Verder, Tanza, Cavite', 'n/a', 'n/a', 6, ''),
-(41, 'ADS2022-10-7', 'One', 'Uno', 'n/a', '', 'one@gmail.com', '$2y$10$jTe3GMdGIMRgT1XLcBgjVe/2hw1FrmEwPhmkeHys9hw.vSqdR0wt2', 955535367, '2022-10-17 21:36:49', 'approved', 'userist', '', '3 Verder, Tanza, Cavite', 'n/a', 'n/a', 7, ''),
-(55, 'ADS2022-10-8', 'Two', 'Dos', 'ADS2022-10-7', 'One  Uno', 'two@gmail.com', '$2y$10$bEFkhXL7GdUNgAijCNMKj.gFZ0PRQ9qcPA6LeOA42Fv3h32Ee/PsK', 2147483647, '2022-10-31 13:15:10', 'approved', 'userist', 'DI10-A4in-vZ8N', 'Palangue 2, Naic, Cavite ', '34563456', '34563456', 8, ''),
-(56, 'ADS2022-10-9', 'Three', 'Tres', 'ADS2022-10-8', 'Two  Dos', 'three@gmail.com', '$2y$10$MZkaTLZsvTRYECVZIDeTyOUuWliyWrhXtkb9Z/VL5z2ifIJg6k7g2', 2147483647, '2022-10-31 13:19:51', 'approved', 'userist', 'DI10-MPux-tmbU', 'Palangue 3', '9283972', '092387287', 9, ''),
-(57, 'ADS2022-10-10', 'Four', 'Kwatro', 'ADS2022-10-9', 'Three  Tres', 'four@gmail.com', '$2y$10$extJtjR0WS.OWRqnzrxqYepHXG/eeBKYkeMWneVQOhDNbBYvfY7PS', 2147483647, '2022-10-31 13:22:05', 'approved', 'userist', 'DI10-4D2v-pEDG', 'Naic', '6789', '09876', 10, ''),
-(58, 'ADS2022-10-11', 'Five', 'Sinko', 'ADS2022-10-10', 'Four  Kwatro', 'five@gmail.com', '$2y$10$oeFzdi1DpVvm6hxgdWA/ouDiC3f2pVOE9Y2F5g8B7d4vq2O2tb.nC', 2147483647, '2022-10-31 13:24:20', 'approved', 'userist', 'DI10-fgH4-zMA6', 'Naic', '69', '098', 11, ''),
-(59, 'ADS2022-10-12', 'Six', 'Sais', 'ADS2022-10-11', 'Five  Sinko', 'six@gmail.com', '$2y$10$GEEsHsCNk5YKqagRYNotWOs5BFGGyGXdAh1xZ2zXFAoieXLpj6HaC', 2147483647, '2022-10-31 13:26:06', 'approved', 'userist', 'DI10-brFW-Dulq', 'Tanza', '67890', '09876543', 12, ''),
-(60, 'ADS2022-10-13', 'Seven', 'Syete', 'ADS2022-10-12', 'Six  Sais', 'seven@gmail.com', '$2y$10$BUbrVrsNRooQ..fuuJQwEuTxjaqQ/b7gxhOOgdUc6uDSeZTf7RV3K', 2147483647, '2022-10-31 13:28:06', 'approved', 'userist', 'DI10-Alsu-zTk9', 'Tanza', '6767', '0987', 13, ''),
-(61, 'ADS2022-10-14', 'Eight', 'Otso', 'ADS2022-10-13', 'Seven  Syete', 'eight@gmail.com', '$2y$10$Ohu.RWoHLhQv/Ud4DCF31eunF8S.16VDu7ZMwVmS8gb2mvSn/9.Sa', 987654765, '2022-10-31 13:32:27', 'approved', 'userist', 'DI10-7PID-VzBt', 'Indang', '0987654', '0987654', 14, ''),
-(62, 'ADS2022-10-15', 'Nine', 'Nuebe', 'ADS2022-10-14', 'Eight  Otso', 'nine@gmail.com', '$2y$10$kSU2eMHdndfGZ8msPrY7au4KgD7TOn3/.1RFnb5asbLgT8FL9D676', 2147483647, '2022-10-31 13:34:00', 'approved', 'userist', 'DI10-crOT-zpEU', 'Kawit', '776555678', '0966788', 15, ''),
-(63, 'ADS2022-10-16', 'Ten', 'Dyis', 'ADS2022-10-15', 'Nine  Nuebe', 'ten@gmail.com', '$2y$10$Pk8lh4FKU0LJ/P4oVgdswe.0ccQ/YGlvaOir8VXM.Jd2hz.wGrNlC', 977157288, '2022-10-31 13:37:34', 'approved', 'userist', 'DI10-wPtK-PlNk', 'Gentri', '8765', '98765', 16, ''),
-(67, 'ADS2022-10-17', 'Aaa', 'Aaa', 'ADS2022-10-7', 'One  Uno', 'aaa@gmail.com', '$2y$10$rvqXMElO/TCfbXGmq7gKvuXxxdGvJoiyUZBnnmRVBKpd/BgItOhtG', 2147483647, '2022-10-31 15:18:55', 'approved', 'userist', 'DI10-oqra-7Kib', 'Palangue A', '765', '9765', 17, ''),
-(68, 'ADS2022-10-18', 'Bbb', 'Bbb', 'ADS2022-10-8', 'Two  Dos', 'bbb@gmail.com', '$2y$10$vh.tt3ILjlWUGCuj2LAEDeek/4ILnpOXk2N0V79YlTPIpQSUI44R.', 2147483647, '2022-10-31 18:16:19', 'approved', 'userist', 'DI10-Tw47-01vQ', 'Tanza', '807978776', '986', 18, ''),
-(69, 'ADS2022-10-19', 'Ccc', 'Ccc', 'ADS2022-10-9', 'Three  Tres', 'ccc@gmail.com', '$2y$10$sZZPWkCysryA02ogqeqyQOPn6GOIlpKCuoCadoAI2jx3P5jr2AO6u', 2147483647, '2022-10-31 19:16:58', 'approved', 'userist', 'DI10-tpJX-x5ch', 'Palangue 2', '987', '987', 19, ''),
-(70, 'ADS2022-11-20', 'Cedrick James', 'Orozo', 'ADS2022-10-7', 'One  Uno', 'cedrickorozo@gmail.com', '$2y$10$VW.EiheBENh1M0oH9jQTE.ZEzyybIHoZpA9K3gZzRBKC4kwQVXt4e', 2147483647, '2022-11-04 21:16:01', 'approved', 'userist', 'DI10-UGFR-6sYP', '0233 Palangue 2 Naic Cavite', '1234123', '234341234', 20, ''),
-(71, 'ADS2022-11-21', 'Crisostomo', 'Ibarra', 'ADS2022-10-7', 'One  Uno', 'crisostomo@gmail.com', '$2y$10$dxnXGARCOz2F2xn.wHrCIemFWG3Q213ytNXFqVL2NUgHndd/5mCLK', 912881928, '2022-11-04 21:19:42', 'approved', 'userist', 'DI10-v9Hj-AyUP', 'Las Filipinas', '0293840', '2394571', 21, ''),
-(72, 'ADS2022-11-22', 'Maria', 'Clara', 'ADS2022-10-7', 'One  Uno', 'mariaclara@gmail.com', '$2y$10$mbgfu53Z2RkXVvLMWG35W.WcnEC9foi3Vce1vnYAtgBYUf02ti64S', 912881928, '2022-11-04 21:32:01', 'approved', 'userist', 'DI11-9XtG-ahd2', 'Las Filipinas', '234234', '234234', 22, '');
+INSERT INTO `accounts` (`id`, `member_id`, `first_name`, `last_name`, `sponsor`, `sponsorName`, `email_address`, `pass`, `contact_number`, `date`, `access`, `permission`, `referralId`, `homeaddress`, `tin_acct`, `sss_num`, `number_basis`) VALUES
+(6, 'ADS22-10-6', 'Arvie', 'Admin', 'n/a', '', 'arvieadmin@gmail.com', '$2y$10$jTe3GMdGIMRgT1XLcBgjVe/2hw1FrmEwPhmkeHys9hw.vSqdR0wt2', 2147483647, '2022-10-17 21:36:49', 'approved', 'administ', 'asd12-12345', '3 Verder, Tanza, Cavite', 'n/a', 'n/a', 6),
+(41, 'ADS2022-10-7', 'One', 'Uno', 'n/a', '', 'one@gmail.com', '$2y$10$jTe3GMdGIMRgT1XLcBgjVe/2hw1FrmEwPhmkeHys9hw.vSqdR0wt2', 955535367, '2022-10-17 21:36:49', 'approved', 'userist', '', '3 Verder, Tanza, Cavite', 'n/a', 'n/a', 7),
+(55, 'ADS2022-10-8', 'Two', 'Dos', 'ADS2022-10-7', 'One  Uno', 'two@gmail.com', '$2y$10$bEFkhXL7GdUNgAijCNMKj.gFZ0PRQ9qcPA6LeOA42Fv3h32Ee/PsK', 2147483647, '2022-10-31 13:15:10', 'approved', 'userist', 'DI10-A4in-vZ8N', 'Palangue 2, Naic, Cavite ', '34563456', '34563456', 8),
+(56, 'ADS2022-10-9', 'Three', 'Tres', 'ADS2022-10-8', 'Two  Dos', 'three@gmail.com', '$2y$10$MZkaTLZsvTRYECVZIDeTyOUuWliyWrhXtkb9Z/VL5z2ifIJg6k7g2', 2147483647, '2022-10-31 13:19:51', 'approved', 'userist', 'DI10-MPux-tmbU', 'Palangue 3', '9283972', '092387287', 9),
+(57, 'ADS2022-10-10', 'Four', 'Kwatro', 'ADS2022-10-9', 'Three  Tres', 'four@gmail.com', '$2y$10$extJtjR0WS.OWRqnzrxqYepHXG/eeBKYkeMWneVQOhDNbBYvfY7PS', 2147483647, '2022-10-31 13:22:05', 'approved', 'userist', 'DI10-4D2v-pEDG', 'Naic', '6789', '09876', 10),
+(58, 'ADS2022-10-11', 'Five', 'Sinko', 'ADS2022-10-10', 'Four  Kwatro', 'five@gmail.com', '$2y$10$oeFzdi1DpVvm6hxgdWA/ouDiC3f2pVOE9Y2F5g8B7d4vq2O2tb.nC', 2147483647, '2022-10-31 13:24:20', 'approved', 'userist', 'DI10-fgH4-zMA6', 'Naic', '69', '098', 11),
+(59, 'ADS2022-10-12', 'Six', 'Sais', 'ADS2022-10-11', 'Five  Sinko', 'six@gmail.com', '$2y$10$GEEsHsCNk5YKqagRYNotWOs5BFGGyGXdAh1xZ2zXFAoieXLpj6HaC', 2147483647, '2022-10-31 13:26:06', 'approved', 'userist', 'DI10-brFW-Dulq', 'Tanza', '67890', '09876543', 12),
+(60, 'ADS2022-10-13', 'Seven', 'Syete', 'ADS2022-10-12', 'Six  Sais', 'seven@gmail.com', '$2y$10$BUbrVrsNRooQ..fuuJQwEuTxjaqQ/b7gxhOOgdUc6uDSeZTf7RV3K', 2147483647, '2022-10-31 13:28:06', 'approved', 'userist', 'DI10-Alsu-zTk9', 'Tanza', '6767', '0987', 13),
+(61, 'ADS2022-10-14', 'Eight', 'Otso', 'ADS2022-10-13', 'Seven  Syete', 'eight@gmail.com', '$2y$10$Ohu.RWoHLhQv/Ud4DCF31eunF8S.16VDu7ZMwVmS8gb2mvSn/9.Sa', 987654765, '2022-10-31 13:32:27', 'approved', 'userist', 'DI10-7PID-VzBt', 'Indang', '0987654', '0987654', 14),
+(62, 'ADS2022-10-15', 'Nine', 'Nuebe', 'ADS2022-10-14', 'Eight  Otso', 'nine@gmail.com', '$2y$10$kSU2eMHdndfGZ8msPrY7au4KgD7TOn3/.1RFnb5asbLgT8FL9D676', 2147483647, '2022-10-31 13:34:00', 'approved', 'userist', 'DI10-crOT-zpEU', 'Kawit', '776555678', '0966788', 15),
+(63, 'ADS2022-10-16', 'Ten', 'Dyis', 'ADS2022-10-15', 'Nine  Nuebe', 'ten@gmail.com', '$2y$10$Pk8lh4FKU0LJ/P4oVgdswe.0ccQ/YGlvaOir8VXM.Jd2hz.wGrNlC', 977157288, '2022-10-31 13:37:34', 'approved', 'userist', 'DI10-wPtK-PlNk', 'Gentri', '8765', '98765', 16),
+(67, 'ADS2022-10-17', 'Aaa', 'Aaa', 'ADS2022-10-7', 'One  Uno', 'aaa@gmail.com', '$2y$10$rvqXMElO/TCfbXGmq7gKvuXxxdGvJoiyUZBnnmRVBKpd/BgItOhtG', 2147483647, '2022-10-31 15:18:55', 'approved', 'userist', 'DI10-oqra-7Kib', 'Palangue A', '765', '9765', 17),
+(68, 'ADS2022-10-18', 'Bbb', 'Bbb', 'ADS2022-10-8', 'Two  Dos', 'bbb@gmail.com', '$2y$10$vh.tt3ILjlWUGCuj2LAEDeek/4ILnpOXk2N0V79YlTPIpQSUI44R.', 2147483647, '2022-10-31 18:16:19', 'approved', 'userist', 'DI10-Tw47-01vQ', 'Tanza', '807978776', '986', 18),
+(69, 'ADS2022-10-19', 'Ccc', 'Ccc', 'ADS2022-10-9', 'Three  Tres', 'ccc@gmail.com', '$2y$10$sZZPWkCysryA02ogqeqyQOPn6GOIlpKCuoCadoAI2jx3P5jr2AO6u', 2147483647, '2022-10-31 19:16:58', 'approved', 'userist', 'DI10-tpJX-x5ch', 'Palangue 2', '987', '987', 19),
+(70, 'ADS2022-11-20', 'Cedrick James', 'Orozo', 'ADS2022-10-7', 'One  Uno', 'cedrickorozo@gmail.com', '$2y$10$VW.EiheBENh1M0oH9jQTE.ZEzyybIHoZpA9K3gZzRBKC4kwQVXt4e', 2147483647, '2022-11-04 21:16:01', 'approved', 'userist', 'DI10-UGFR-6sYP', '0233 Palangue 2 Naic Cavite', '1234123', '234341234', 20),
+(71, 'ADS2022-11-21', 'Crisostomo', 'Ibarra', 'ADS2022-10-7', 'One  Uno', 'crisostomo@gmail.com', '$2y$10$dxnXGARCOz2F2xn.wHrCIemFWG3Q213ytNXFqVL2NUgHndd/5mCLK', 912881928, '2022-11-04 21:19:42', 'approved', 'userist', 'DI10-v9Hj-AyUP', 'Las Filipinas', '0293840', '2394571', 21),
+(72, 'ADS2022-11-22', 'Maria', 'Clara', 'ADS2022-10-7', 'One  Uno', 'mariaclara@gmail.com', '$2y$10$mbgfu53Z2RkXVvLMWG35W.WcnEC9foi3Vce1vnYAtgBYUf02ti64S', 912881928, '2022-11-04 21:32:01', 'approved', 'userist', 'DI11-9XtG-ahd2', 'Las Filipinas', '234234', '234234', 22);
 
 -- --------------------------------------------------------
 
@@ -144,7 +143,8 @@ CREATE TABLE `payout_request` (
 INSERT INTO `payout_request` (`payout_request_id`, `date`, `transaction_id`, `member_id`, `member_name`, `amount`, `mode_of_payment`, `account_number`, `account_name`, `bank_branch`, `status`, `receipt`, `date_released`, `time_released`, `transactionIdBasis`) VALUES
 (6, '2022-10-31', 'PR-202231101', 'ADS2022-10-7', 'One Uno', '1000', 'Gcash', '', '', '', 'released', '../images/81474d6c951d85d569edd1bea61e83cb.jpeg', '2022-10-31', '03:20 pm', 1),
 (7, '2022-10-31', 'PR-202231102', 'ADS2022-10-8', 'Two Dos', '1000', 'Gcash', '', '', '', 'released', '../images/9cb210f1aca77cafec32fca1a4be0403.jpeg', '2022-10-31', '06:17 pm', 2),
-(9, '2022-10-31', 'PR-202231104', 'ADS2022-10-9', 'Three Tres', '1000', 'BPI', '7342382739871', 'Cedrick James Orozo', 'BPI Naic', 'released', '../images/e6b67c0731e6953809c445004a35cdec.jpeg', '2022-10-31', '07:41 pm', 4);
+(9, '2022-10-31', 'PR-202231104', 'ADS2022-10-9', 'Three Tres', '1000', 'BPI', '7342382739871', 'Cedrick James Orozo', 'BPI Naic', 'released', '../images/e6b67c0731e6953809c445004a35cdec.jpeg', '2022-10-31', '07:41 pm', 4),
+(10, '2022-11-04', 'PR-202204115', 'ADS2022-10-7', 'One Uno', '1000', 'Gcash', '09555445345', 'Cedrick James Orozo', '', 'released', '../images/4fbcddc50c8588684afdb05c280a7dff.jpeg', '2022-11-04', '10:46 pm', 5);
 
 -- --------------------------------------------------------
 
@@ -231,7 +231,7 @@ INSERT INTO `rebates_points` (`rebates_points_id`, `user_id`, `email_address`, `
 (4, 'ADS2022-10-7', 'one@gmail.com', 1),
 (10, 'ADS2022-10-8', 'two@gmail.com', 0),
 (11, 'ADS2022-10-9', 'three@gmail.com', 0),
-(12, 'ADS2022-10-10', 'four@gmail.com', 0),
+(12, 'ADS2022-10-10', 'four@gmail.com', 1),
 (13, 'ADS2022-10-11', 'five@gmail.com', 0),
 (14, 'ADS2022-10-12', 'six@gmail.com', 0),
 (15, 'ADS2022-10-13', 'seven@gmail.com', 1),
@@ -304,7 +304,7 @@ INSERT INTO `referral_codes` (`gen_date`, `referrer`, `transfer_date`, `referee`
 ('2022-11-04 21:50:04', 'waiting', '2022-11-04 21:50:04', 'ADS2022-10-13', 'seven@gmail.com', '2022-11-04 21:50:04', 'used', 'RA11-bKSw-tebL', 'AT11-GxMcnOaT6DCtUlWk', 142, 'RA', '10'),
 ('2022-11-04 21:50:04', 'waiting', '2022-11-04 21:50:04', NULL, '', '2022-11-04 21:50:04', 'to_redeem', 'RA11-lqw6-fSY0', 'AT11-GxMcnOaT6DCtUlWk', 143, 'RA', '10'),
 ('2022-11-04 21:50:04', 'waiting', '2022-11-04 21:50:04', NULL, '', '2022-11-04 21:50:04', 'to_redeem', 'RA11-2bDI-xJCl', 'AT11-GxMcnOaT6DCtUlWk', 144, 'RA', '10'),
-('2022-11-04 21:50:04', 'waiting', '2022-11-04 21:50:04', NULL, '', '2022-11-04 21:50:04', 'to_redeem', 'RA11-X3Uj-QTMc', 'AT11-GxMcnOaT6DCtUlWk', 145, 'RA', '10'),
+('2022-11-04 21:50:04', 'waiting', '2022-11-04 21:50:04', 'ADS2022-10-10', 'four@gmail.com', '2022-11-04 21:50:04', 'used', 'RA11-X3Uj-QTMc', 'AT11-GxMcnOaT6DCtUlWk', 145, 'RA', '10'),
 ('2022-11-04 21:50:04', 'waiting', '2022-11-04 21:50:04', NULL, '', '2022-11-04 21:50:04', 'to_redeem', 'RA11-BXu7-iGfN', 'AT11-GxMcnOaT6DCtUlWk', 146, 'RA', '10'),
 ('2022-11-04 21:50:04', 'waiting', '2022-11-04 21:50:04', NULL, '', '2022-11-04 21:50:04', 'to_redeem', 'RA11-Kn5k-kPfn', 'AT11-GxMcnOaT6DCtUlWk', 147, 'RA', '10'),
 ('2022-11-04 21:50:05', 'waiting', '2022-11-04 21:50:05', NULL, '', '2022-11-04 21:50:05', 'to_redeem', 'RA11-yJeP-x1KB', 'AT11-GxMcnOaT6DCtUlWk', 148, 'RA', '10');
@@ -329,10 +329,10 @@ CREATE TABLE `totalbalance` (
 --
 
 INSERT INTO `totalbalance` (`totalBalanceId`, `userID`, `userName`, `totalBalance`, `unclaimable`, `totalIncome`) VALUES
-(77, 'ADS2022-10-7', 'one@gmail.com', 1770, 0, 1000),
-(86, 'ADS2022-10-8', 'two@gmail.com', 140, 100, 1000),
-(87, 'ADS2022-10-9', 'three@gmail.com', 90, 110, 1000),
-(88, 'ADS2022-10-10', 'four@gmail.com', 580, 120, 0),
+(77, 'ADS2022-10-7', 'one@gmail.com', 800, 0, 2000),
+(86, 'ADS2022-10-8', 'two@gmail.com', 140, 130, 1000),
+(87, 'ADS2022-10-9', 'three@gmail.com', 90, 180, 1000),
+(88, 'ADS2022-10-10', 'four@gmail.com', 700, 0, 0),
 (89, 'ADS2022-10-11', 'five@gmail.com', 570, 120, 0),
 (90, 'ADS2022-10-12', 'six@gmail.com', 560, 160, 0),
 (91, 'ADS2022-10-13', 'seven@gmail.com', 680, 0, 0),
@@ -501,7 +501,14 @@ INSERT INTO `transaction` (`transactionId`, `transaction2ndId`, `Date`, `time`, 
 (394, 'TR-20220411118', '2022-11-04', '09:56 pm', 'Unclaimable Rebates', 'three@gmail.com', 'ADS2022-10-9', '', '', 'RA', 'seven@gmail.com', 'ADS2022-10-13', 30, 110, 0, 0, 118),
 (395, 'TR-20220411119', '2022-11-04', '09:56 pm', 'Unclaimable Rebates', 'two@gmail.com', 'ADS2022-10-8', '', '', 'RA', 'seven@gmail.com', 'ADS2022-10-13', 30, 100, 0, 0, 119),
 (396, 'TR-20220411120', '2022-11-04', '09:56 pm', 'Rebates', 'one@gmail.com', 'ADS2022-10-7', '', '', 'RA', 'seven@gmail.com', 'ADS2022-10-13', 30, 1770, 0, 0, 120),
-(397, 'TR-20220411121', '2022-11-04', '09:56 pm', 'Unclaimable Rebates', '', 'n/a', '', '', 'RA', 'seven@gmail.com', 'ADS2022-10-13', 20, 20, 0, 0, 121);
+(397, 'TR-20220411121', '2022-11-04', '09:56 pm', 'Unclaimable Rebates', '', 'n/a', '', '', 'RA', 'seven@gmail.com', 'ADS2022-10-13', 20, 20, 0, 0, 121),
+(398, 'TR-20220411122', '2022-11-04', '10:46 pm', 'Withdrawal', '', 'ADS2022-10-7', '', '', '', '', '', 1000, 770, 0, 0, 122),
+(399, 'TR-20220611123', '2022-11-06', '03:17 pm', 'Claimed Rebates', 'four@gmail.com', 'ADS2022-10-10', '', '', '', '', '', 120, 700, 0, 0, 123),
+(400, 'TR-20220611124', '2022-11-06', '03:17 pm', 'Points', 'four@gmail.com', 'ADS2022-10-10', '', '', 'RA', '', '', 0, 0, 1, 1, 124),
+(401, 'TR-20220611125', '2022-11-06', '03:17 pm', 'Unclaimable Rebates', 'three@gmail.com', 'ADS2022-10-9', '', '', 'RA', 'Four Kwatro', 'ADS2022-10-10', 70, 180, 0, 0, 125),
+(402, 'TR-20220611126', '2022-11-06', '03:17 pm', 'Unclaimable Rebates', 'two@gmail.com', 'ADS2022-10-8', '', '', 'RA', 'Four Kwatro', 'ADS2022-10-10', 30, 130, 0, 0, 126),
+(403, 'TR-20220611127', '2022-11-06', '03:17 pm', 'Rebates', 'one@gmail.com', 'ADS2022-10-7', '', '', 'RA', 'Four Kwatro', 'ADS2022-10-10', 30, 800, 0, 0, 127),
+(404, 'TR-20220611128', '2022-11-06', '03:17 pm', 'Unclaimable Rebates', '', 'n/a', '', '', 'RA', 'Four Kwatro', 'ADS2022-10-10', 30, 30, 0, 0, 128);
 
 --
 -- Indexes for dumped tables
@@ -594,7 +601,7 @@ ALTER TABLE `invites`
 -- AUTO_INCREMENT for table `payout_request`
 --
 ALTER TABLE `payout_request`
-  MODIFY `payout_request_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `payout_request_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `points_report`
@@ -630,7 +637,7 @@ ALTER TABLE `totalbalance`
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transactionId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=398;
+  MODIFY `transactionId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=405;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

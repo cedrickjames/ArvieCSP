@@ -3,14 +3,31 @@
 include_once ("./includes/config/conn.php");
 date_default_timezone_set("Asia/Singapore");
 
+
     if(isset($_POST['register'])){
 
-    $referrer_check = $_POST['sponsor'];
+    // $referrer_check = $sponsorID;
     $ref_code_check = $_POST['ref_code'];
     $referralcheck = "SELECT * FROM `referral_codes` WHERE `ref_code` = '$ref_code_check' AND `status` = 'to_redeem' AND `codetype` ='DI'";
     $resultReferral = mysqli_query($conn, $referralcheck);
     $referral_count = mysqli_num_rows($resultReferral);
+                
     $referrer = $_POST["sponsor"];
+    $ref_code = $_POST["ref_code"];
+    $first_name = $_POST["first_name"];
+    $last_name = $_POST["last_name"];
+    $email_address = $_POST["email_address"];
+    $pass = $_POST["pass"];
+    $contact_number = $_POST["contact_number"];
+    $birthday = date('M d Y', strtotime($_POST["birthday"]));
+    $confirm_pass = $_POST["confirm_pass"];
+    $sss_num = $_POST["sss_num"];
+    $tin_acct = $_POST["tin_acct"];
+    $homeaddress = $_POST["homeAddress"];
+
+    $getDateNow = new DateTime($birthday);
+    $getBday = $getDateNow->format('Y-m-d');
+
     if ($referral_count == 1) {
 
         while($referral_info = mysqli_fetch_assoc($resultReferral)) {
@@ -33,19 +50,9 @@ date_default_timezone_set("Asia/Singapore");
 
 
             $member_id = $code.$getYearNow."-".$getMonthNow."-".$lastId;
-            
-            $referrer = $_POST["sponsor"];
-            $ref_code = $_POST["ref_code"];
-            $first_name = $_POST["first_name"];
-            $last_name = $_POST["last_name"];
-            $email_address = $_POST["email_address"];
-            $pass = $_POST["pass"];
-            $contact_number = $_POST["contact_number"];
-            $birthday = date('M d Y', strtotime($_POST["birthday"]));
-            $confirm_pass = $_POST["confirm_pass"];
-            $sss_num = $_POST["sss_num"];
-            $tin_acct = $_POST["tin_acct"];
-            $homeaddress = $_POST["homeAddress"];
+
+
+
         
             $create_user_select = "SELECT * FROM accounts WHERE email_address = '$email_address'";
             $create_user_query = mysqli_query($conn, $create_user_select);
@@ -223,7 +230,8 @@ date_default_timezone_set("Asia/Singapore");
                       text: 'There is an error in adding the account.',
                     //   footer: '<a href="">Why do I have this issue?</a>'
                     }).then(function() {
-              window.location = "signup.php?arviecsp=<?php echo $referrer;?>";
+                        window.location = "signup.php?arviecsp=<?php echo $referrer;?>&code=<?php echo $ref_code?>&fname=<?php echo $first_name?>&lname=<?php echo $last_name;?>&email=<?php echo $email_address;?>&contact=<?php echo $contact_number;?>&bday=<?php echo $getBday?>&sss=<?php echo $sss_num;?>&tin=<?php echo $tin_acct;?>&address=<?php echo $homeaddress; ?>";
+
           });
                      </script><?php 
 
@@ -245,7 +253,8 @@ date_default_timezone_set("Asia/Singapore");
               text: 'Password not match.',
             //   footer: '<a href="">Why do I have this issue?</a>'
             }).then(function() {
-      window.location = "signup.php?arviecsp=<?php echo $referrer;?>";
+                window.location = "signup.php?arviecsp=<?php echo $referrer;?>&code=<?php echo $ref_code?>&fname=<?php echo $first_name?>&lname=<?php echo $last_name;?>&email=<?php echo $email_address;?>&contact=<?php echo $contact_number;?>&bday=<?php echo $getBday?>&sss=<?php echo $sss_num;?>&tin=<?php echo $tin_acct;?>&address=<?php echo $homeaddress; ?>";
+
   });
              </script><?php 
 
@@ -262,7 +271,8 @@ date_default_timezone_set("Asia/Singapore");
               text: 'Email address is already taken.',
             //   footer: '<a href="">Why do I have this issue?</a>'
             }).then(function() {
-      window.location = "signup.php?arviecsp=<?php echo $referrer;?>";
+                window.location = "signup.php?arviecsp=<?php echo $referrer;?>&code=<?php echo $ref_code?>&fname=<?php echo $first_name?>&lname=<?php echo $last_name;?>&contact=<?php echo $contact_number;?>&bday=<?php echo $getBday?>&sss=<?php echo $sss_num;?>&tin=<?php echo $tin_acct;?>&address=<?php echo $homeaddress; ?>";
+
   });
              </script><?php 
             } 
@@ -274,14 +284,16 @@ date_default_timezone_set("Asia/Singapore");
         // echo "<script> alert('This code does not exist or already been used.')</script>";
         // header("location: signup.php?arviecsp=$referrer");
         ?><script>
+        // document.getElementById("ref_code").value="<?php $ref_code; ?>";
+
         Swal.fire({
       icon: 'error',
       title: 'Unsuccessful',
       text: 'This code does not exist or already been used.',
     //   footer: '<a href="">Why do I have this issue?</a>'
     }).then(function() {
-window.location = "signup.php?arviecsp=<?php echo $referrer;?>";
-});
+      window.location = "signup.php?arviecsp=<?php echo $referrer;?>&fname=<?php echo $first_name?>&lname=<?php echo $last_name;?>&email=<?php echo $email_address;?>&contact=<?php echo $contact_number;?>&bday=<?php echo $getBday?>&sss=<?php echo $sss_num;?>&tin=<?php echo $tin_acct;?>&address=<?php echo $homeaddress; ?>";
+  });
      </script><?php 
 
     }

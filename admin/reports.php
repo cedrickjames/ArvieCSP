@@ -273,11 +273,11 @@ $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Oroz
                                     $resultInfo= mysqli_query($conn, $SelectInfo);
                                     $fname="";
                                     $lname="";
-                                    $referralLink="";
+                             
                                     while($userRow = mysqli_fetch_assoc($resultInfo)){
                                         $fname = $userRow['first_name'];
                                         $lname = $userRow['last_name'];
-                                        $referralLink = $userRow['referralLink'];
+                                
                                     
                                     }
                                     
