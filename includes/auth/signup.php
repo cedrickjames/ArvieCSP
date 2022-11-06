@@ -31,7 +31,7 @@ date_default_timezone_set("Asia/Singapore");
     if ($referral_count == 1) {
 
         while($referral_info = mysqli_fetch_assoc($resultReferral)) {
-            $referrer =$referral_info['referrer'];
+            // $referrer =$referral_info['referrer'];
             $ref_code = $referral_info['ref_code'];
 
             $code = "ADS";
