@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2022 at 09:07 AM
+-- Generation Time: Nov 06, 2022 at 02:59 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -68,7 +68,9 @@ INSERT INTO `accounts` (`id`, `member_id`, `first_name`, `last_name`, `sponsor`,
 (69, 'ADS2022-10-19', 'Ccc', 'Ccc', 'ADS2022-10-9', 'Three  Tres', 'ccc@gmail.com', '$2y$10$sZZPWkCysryA02ogqeqyQOPn6GOIlpKCuoCadoAI2jx3P5jr2AO6u', 2147483647, '2022-10-31 19:16:58', 'approved', 'userist', 'DI10-tpJX-x5ch', 'Palangue 2', '987', '987', 19),
 (70, 'ADS2022-11-20', 'Cedrick James', 'Orozo', 'ADS2022-10-7', 'One  Uno', 'cedrickorozo@gmail.com', '$2y$10$VW.EiheBENh1M0oH9jQTE.ZEzyybIHoZpA9K3gZzRBKC4kwQVXt4e', 2147483647, '2022-11-04 21:16:01', 'approved', 'userist', 'DI10-UGFR-6sYP', '0233 Palangue 2 Naic Cavite', '1234123', '234341234', 20),
 (71, 'ADS2022-11-21', 'Crisostomo', 'Ibarra', 'ADS2022-10-7', 'One  Uno', 'crisostomo@gmail.com', '$2y$10$dxnXGARCOz2F2xn.wHrCIemFWG3Q213ytNXFqVL2NUgHndd/5mCLK', 912881928, '2022-11-04 21:19:42', 'approved', 'userist', 'DI10-v9Hj-AyUP', 'Las Filipinas', '0293840', '2394571', 21),
-(72, 'ADS2022-11-22', 'Maria', 'Clara', 'ADS2022-10-7', 'One  Uno', 'mariaclara@gmail.com', '$2y$10$mbgfu53Z2RkXVvLMWG35W.WcnEC9foi3Vce1vnYAtgBYUf02ti64S', 912881928, '2022-11-04 21:32:01', 'approved', 'userist', 'DI11-9XtG-ahd2', 'Las Filipinas', '234234', '234234', 22);
+(72, 'ADS2022-11-22', 'Maria', 'Clara', 'ADS2022-10-7', 'One  Uno', 'mariaclara@gmail.com', '$2y$10$mbgfu53Z2RkXVvLMWG35W.WcnEC9foi3Vce1vnYAtgBYUf02ti64S', 912881928, '2022-11-04 21:32:01', 'approved', 'userist', 'DI11-9XtG-ahd2', 'Las Filipinas', '234234', '234234', 22),
+(73, 'ADS2022-11-23', 'asdas asda', 'asas', 'ADS2022-10-7', '  ', 'asd@gmail.com', '$2y$10$6iE/mb/nVp2sfpWwM99X4.USlv3j0p1VHoENgTdw1p6YDMTgG7qV.', 0, '2022-11-06 16:13:44', 'approved', 'userist', 'DI11-xDng-CgOk', 'asdasd', 'asdas', 'asd', 23),
+(74, 'ADS2022-11-24', 'samp samp', 'samp', 'ADS2022-10-7', 'One  Uno', 'samp@gmail.com', '$2y$10$gFFg4HAqSA71lwYTmH7CjOt5V3Vw/.1wjETyl5BRWHrelh1SUIagq', 998765477, '2022-11-06 16:25:15', 'approved', 'userist', 'DI11-rCVc-rfhQ', 'samp', 'asd', 'asd', 24);
 
 -- --------------------------------------------------------
 
@@ -243,7 +245,9 @@ INSERT INTO `rebates_points` (`rebates_points_id`, `user_id`, `email_address`, `
 (24, 'ADS2022-10-19', 'ccc@gmail.com', 0),
 (25, 'ADS2022-11-20', 'cedrickorozo@gmail.com', 0),
 (26, 'ADS2022-11-21', 'crisostomo@gmail.com', 1),
-(27, 'ADS2022-11-22', 'mariaclara@gmail.com', 0);
+(27, 'ADS2022-11-22', 'mariaclara@gmail.com', 0),
+(28, 'ADS2022-11-23', 'asd@gmail.com', 0),
+(29, 'ADS2022-11-24', 'samp@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -256,7 +260,7 @@ CREATE TABLE `referral_codes` (
   `referrer` varchar(255) NOT NULL,
   `transfer_date` datetime NOT NULL,
   `referee` varchar(255) DEFAULT NULL,
-  `userNameOfCodeOwner` varchar(50) NOT NULL,
+  `userNameOfCodeOwner` varchar(50) DEFAULT NULL,
   `transact_date` datetime NOT NULL,
   `status` varchar(255) DEFAULT NULL,
   `ref_code` varchar(14) NOT NULL,
@@ -296,8 +300,8 @@ INSERT INTO `referral_codes` (`gen_date`, `referrer`, `transfer_date`, `referee`
 ('2022-11-04 21:30:46', 'waiting', '2022-11-04 21:30:46', 'ADS2022-11-22', '', '2022-11-04 21:30:46', 'used', 'DI11-9XtG-ahd2', 'AT11-tGyKvIhUuDdWwXT0', 134, 'DI', '5'),
 ('2022-11-04 21:30:46', 'waiting', '2022-11-04 21:30:46', NULL, '', '2022-11-04 21:30:46', 'to_redeem', 'DI11-QS9P-GdKD', 'AT11-tGyKvIhUuDdWwXT0', 135, 'DI', '5'),
 ('2022-11-04 21:30:46', 'waiting', '2022-11-04 21:30:46', NULL, '', '2022-11-04 21:30:46', 'to_redeem', 'DI11-uXNs-qaAO', 'AT11-tGyKvIhUuDdWwXT0', 136, 'DI', '5'),
-('2022-11-04 21:30:47', 'waiting', '2022-11-04 21:30:47', NULL, '', '2022-11-04 21:30:47', 'to_redeem', 'DI11-rCVc-rfhQ', 'AT11-tGyKvIhUuDdWwXT0', 137, 'DI', '5'),
-('2022-11-04 21:30:47', 'waiting', '2022-11-04 21:30:47', NULL, '', '2022-11-04 21:30:47', 'to_redeem', 'DI11-xDng-CgOk', 'AT11-tGyKvIhUuDdWwXT0', 138, 'DI', '5'),
+('2022-11-04 21:30:47', 'waiting', '2022-11-04 21:30:47', 'ADS2022-11-24', '', '2022-11-04 21:30:47', 'used', 'DI11-rCVc-rfhQ', 'AT11-tGyKvIhUuDdWwXT0', 137, 'DI', '5'),
+('2022-11-04 21:30:47', 'waiting', '2022-11-04 21:30:47', 'ADS2022-11-23', '', '2022-11-04 21:30:47', 'used', 'DI11-xDng-CgOk', 'AT11-tGyKvIhUuDdWwXT0', 138, 'DI', '5'),
 ('2022-11-04 21:50:03', 'waiting', '2022-11-04 21:50:03', 'ADS2022-10-16', 'ten@gmail.com', '2022-11-04 21:50:03', 'used', 'RA11-ti6G-38lf', 'AT11-GxMcnOaT6DCtUlWk', 139, 'RA', '10'),
 ('2022-11-04 21:50:03', 'waiting', '2022-11-04 21:50:03', 'ADS2022-10-15', 'nine@gmail.com', '2022-11-04 21:50:03', 'used', 'RA11-kYt6-vzFB', 'AT11-GxMcnOaT6DCtUlWk', 140, 'RA', '10'),
 ('2022-11-04 21:50:03', 'waiting', '2022-11-04 21:50:03', 'ADS2022-10-14', 'eight@gmail.com', '2022-11-04 21:50:03', 'used', 'RA11-9Of1-A6JT', 'AT11-GxMcnOaT6DCtUlWk', 141, 'RA', '10'),
@@ -329,7 +333,7 @@ CREATE TABLE `totalbalance` (
 --
 
 INSERT INTO `totalbalance` (`totalBalanceId`, `userID`, `userName`, `totalBalance`, `unclaimable`, `totalIncome`) VALUES
-(77, 'ADS2022-10-7', 'one@gmail.com', 800, 0, 2000),
+(77, 'ADS2022-10-7', 'one@gmail.com', 1300, 0, 2000),
 (86, 'ADS2022-10-8', 'two@gmail.com', 140, 130, 1000),
 (87, 'ADS2022-10-9', 'three@gmail.com', 90, 180, 1000),
 (88, 'ADS2022-10-10', 'four@gmail.com', 700, 0, 0),
@@ -344,7 +348,9 @@ INSERT INTO `totalbalance` (`totalBalanceId`, `userID`, `userName`, `totalBalanc
 (100, 'ADS2022-10-19', 'ccc@gmail.com', 0, 0, 0),
 (101, 'ADS2022-11-20', 'cedrickorozo@gmail.com', 0, 0, 0),
 (102, 'ADS2022-11-21', 'crisostomo@gmail.com', 0, 0, 0),
-(103, 'ADS2022-11-22', 'mariaclara@gmail.com', 0, 0, 0);
+(103, 'ADS2022-11-22', 'mariaclara@gmail.com', 0, 0, 0),
+(104, 'ADS2022-11-23', 'asd@gmail.com', 0, 0, 0),
+(105, 'ADS2022-11-24', 'samp@gmail.com', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -358,17 +364,17 @@ CREATE TABLE `transaction` (
   `Date` varchar(100) NOT NULL,
   `time` varchar(15) NOT NULL,
   `type` varchar(50) NOT NULL,
-  `userName` varchar(50) NOT NULL,
+  `userName` varchar(50) DEFAULT NULL,
   `userId` varchar(50) NOT NULL,
-  `inviteName` varchar(50) NOT NULL,
-  `inviteeName` varchar(50) NOT NULL,
-  `packageType` varchar(200) NOT NULL,
-  `codeOwner` varchar(200) NOT NULL COMMENT 'indicates the user of the code',
-  `codeOwnerId` varchar(200) NOT NULL COMMENT 'this indicates the id of the code user',
-  `addedAmount` int(50) NOT NULL,
-  `TotalBalance` int(50) NOT NULL,
-  `addedPoints` int(50) NOT NULL,
-  `totalPoints` int(50) NOT NULL,
+  `inviteName` varchar(50) DEFAULT NULL,
+  `inviteeName` varchar(50) DEFAULT NULL,
+  `packageType` varchar(200) DEFAULT NULL,
+  `codeOwner` varchar(200) DEFAULT NULL COMMENT 'indicates the user of the code',
+  `codeOwnerId` varchar(200) DEFAULT NULL COMMENT 'this indicates the id of the code user',
+  `addedAmount` int(50) DEFAULT 0,
+  `TotalBalance` int(50) DEFAULT 0,
+  `addedPoints` int(50) DEFAULT 0,
+  `totalPoints` int(50) DEFAULT 0,
   `transactionIdBasis` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -508,7 +514,10 @@ INSERT INTO `transaction` (`transactionId`, `transaction2ndId`, `Date`, `time`, 
 (401, 'TR-20220611125', '2022-11-06', '03:17 pm', 'Unclaimable Rebates', 'three@gmail.com', 'ADS2022-10-9', '', '', 'RA', 'Four Kwatro', 'ADS2022-10-10', 70, 180, 0, 0, 125),
 (402, 'TR-20220611126', '2022-11-06', '03:17 pm', 'Unclaimable Rebates', 'two@gmail.com', 'ADS2022-10-8', '', '', 'RA', 'Four Kwatro', 'ADS2022-10-10', 30, 130, 0, 0, 126),
 (403, 'TR-20220611127', '2022-11-06', '03:17 pm', 'Rebates', 'one@gmail.com', 'ADS2022-10-7', '', '', 'RA', 'Four Kwatro', 'ADS2022-10-10', 30, 800, 0, 0, 127),
-(404, 'TR-20220611128', '2022-11-06', '03:17 pm', 'Unclaimable Rebates', '', 'n/a', '', '', 'RA', 'Four Kwatro', 'ADS2022-10-10', 30, 30, 0, 0, 128);
+(404, 'TR-20220611128', '2022-11-06', '03:17 pm', 'Unclaimable Rebates', '', 'n/a', '', '', 'RA', 'Four Kwatro', 'ADS2022-10-10', 30, 30, 0, 0, 128),
+(405, 'TR-20220611129', '2022-11-06', '04:13 pm', 'Direct Referral', '', 'waiting', 'asdas asda asas', ' ', '', '', '', 500, 500, 0, 0, 129),
+(406, 'TR-20220611130', '2022-11-06', '04:25 pm', 'Direct Referral', 'one@gmail.com', 'ADS2022-10-7', 'samp samp samp', 'One Uno', '', '', '', 500, 1300, 0, 0, 130),
+(407, 'TR-20220611131', '2022-11-06', '04:25 pm', 'Indirect Referral', '', 'n/a', 'samp samp samp', 'One Uno', '', '', '', 10, 10, 0, 0, 131);
 
 --
 -- Indexes for dumped tables
@@ -583,7 +592,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(60) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(60) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `generated_code`
@@ -619,7 +628,7 @@ ALTER TABLE `rebatesamount`
 -- AUTO_INCREMENT for table `rebates_points`
 --
 ALTER TABLE `rebates_points`
-  MODIFY `rebates_points_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `rebates_points_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `referral_codes`
@@ -631,13 +640,13 @@ ALTER TABLE `referral_codes`
 -- AUTO_INCREMENT for table `totalbalance`
 --
 ALTER TABLE `totalbalance`
-  MODIFY `totalBalanceId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `totalBalanceId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transactionId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=405;
+  MODIFY `transactionId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=408;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
