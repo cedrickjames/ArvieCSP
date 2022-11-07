@@ -14,9 +14,8 @@ $db= $conn;
 
 // code for getting the accounts//
 $tableNameAccount="accounts";
-$columnsAccounts= ['id', 'first_name','last_name','email_address','access'];
+$columnsAccounts= ['id', 'first_name','last_name','sponsorName','permission','totalIncome','pointsEarned'];
 $fetchDataAccounts= fetch_data_Account($db, $tableNameAccount, $columnsAccounts);
-
 
 function fetch_data_Account($db, $tableNameAccount, $columnsAccounts){
 
@@ -29,7 +28,7 @@ function fetch_data_Account($db, $tableNameAccount, $columnsAccounts){
    $msg= "Table Name is empty";
 }else{
 $columnName = implode(", ", $columnsAccounts);
-$query = "SELECT * FROM `accounts` WHERE `access` = False";
+$query = "SELECT accounts.*, totalbalance.*, rebates_points.pointsEarned FROM accounts INNER JOIN totalbalance ON accounts.member_id=totalbalance.userID INNER JOIN rebates_points ON accounts.member_id=rebates_points.user_id";
 
 //  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';
 $result = $db->query($query);
@@ -208,16 +207,37 @@ return $msg;
                         </tr>
                     </thead>
                     <tbody>
+                    <?php           
+                            if(is_array($fetchDataAccounts)){      
+                         
+                                foreach($fetchDataAccounts as $data){
+                                    $first_name = $data['first_name'];
+                                    $last_name = $data['last_name'];
+                                    $totalIncome= $data['totalIncome'];
+                                    $pointsEarned = $data['pointsEarned'];
+                                    $sponsorName = $data['sponsorName'];
+                                    $permission = $data['permission'];
+
+
+
+                        ?>
                         <!-- i Loop lang yung data dito -->
                         <tr>
-                            <td class="text-center">Cedrick Orozo</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">3</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Kevin Marero</td>
+                            <td class="text-center"><?php echo $first_name.' '.$last_name; ?></td>
+                            <td class="text-center"><?php if($permission == "userist"){echo "Member"; } else if($permission != "userist" || $permission != "administ"){ echo "Stockist";} else{echo "administ";} ?></td>
+                            <td class="text-center"><?php echo $pointsEarned; ?></td>
+                            <td class="text-center"><?php echo $totalIncome; ?></td>
+                            <td class="text-center"><?php echo $sponsorName; ?></td>
                             <td class="text-center"><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
                         </tr>
                         <!-- end -->
+
+                        <?php
+                                        
+                                    }}else{
+
+                                        }
+                        ?>
                     </tbody>
 
                 </table>
