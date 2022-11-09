@@ -159,6 +159,7 @@ if(isset($_GET['code'])){
 }
 ?>
     <script>
+        
         $(document).ready(function(){
             $('#phone').keyup(function () { 
                 this.value = this.value.replace(/[^0-9\.]/g,'');

@@ -116,7 +116,7 @@ if(isset($_POST['enterCode'])){
 
                         }
                     }
-                    $sqlUpdateCodeOwner= "UPDATE `referral_codes` SET `userNameOfCodeOwner`='$email',`referee`='$member_id', `status`='used'  WHERE `ref_code` = '$EnteredCode'";
+                    $sqlUpdateCodeOwner= "UPDATE `referral_codes` SET `userNameOfCodeOwner`='$email', `transfer_date`=current_timestamp(), `referee`='$member_id', `status`='used'  WHERE `ref_code` = '$EnteredCode'";
 
                     mysqli_query($conn, $sqlUpdateCodeOwner);
                     // echo "You have successfully enter the code!";

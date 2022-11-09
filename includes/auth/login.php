@@ -65,14 +65,45 @@ if(isset($_POST["login"])){
                                 header("location: ./signup.php");
                             }
                         }else{
-                            $login_err = "Invalid username or password.";
+                            ?><script>
+                            Swal.fire({
+                          icon: 'error',
+                          title: 'Oops!',
+                          text: 'Invalid username or password.',
+                        //   footer: '<a href="">Why do I have this issue?</a>'
+                        }).then(function() {
+                  window.location = "./login.php";
+              });
+                         </script><?php 
+                            // $login_err = "Invalid username or password.";
                         }
                     }
                 } else{
-                    $login_err = "Invalid username or password.";
+
+                    ?><script>
+                    Swal.fire({
+                  icon: 'error',
+                  title: 'Oops!',
+                  text: 'Invalid username or password.',
+                //   footer: '<a href="">Why do I have this issue?</a>'
+                }).then(function() {
+          window.location = "./login.php";
+      });
+                 </script><?php 
+                    // $login_err = "Invalid username or password.";
                 }
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                ?><script>
+                Swal.fire({
+              icon: 'error',
+              title: 'Oops!',
+              text: 'Something went wrong. Please try again later.',
+            //   footer: '<a href="">Why do I have this issue?</a>'
+            }).then(function() {
+      window.location = "./login.php";
+  });
+             </script><?php 
+           
             }
             mysqli_stmt_close($stmt);
         }

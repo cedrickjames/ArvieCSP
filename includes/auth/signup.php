@@ -104,7 +104,7 @@ date_default_timezone_set("Asia/Singapore");
                             $emailNaginvite=$userRow['email_address'];
 
                         }
-                        $sqlupdatecodestatus ="UPDATE `referral_codes` SET `status`='used', `referee` = '$member_id' WHERE `ref_code` = '$ref_code'";
+                        $sqlupdatecodestatus ="UPDATE `referral_codes` SET `status`='used', `transfer_date`=current_timestamp(), `referee` = '$member_id' WHERE `ref_code` = '$ref_code'";
                         mysqli_query($conn, $sqlupdatecodestatus);
 
                         //start of passive

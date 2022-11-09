@@ -1,7 +1,7 @@
 <?php
 
 $loginPage = true; ?>
-<?php include "./includes/auth/login.php"; 
+<?php 
 
 date_default_timezone_set("Asia/Singapore");
 $date = new DateTime(); 
@@ -27,9 +27,16 @@ $timenow = date("h:i a");
     <script src="./js/tailwind-3.1.8.js"></script>
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
     <script src="./js/jquery-3.6.1.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
 </head>
 <body class="h-screen w-screen">
-    <?php include_once "./header.php"; ?>
+    <?php
+    include "./includes/auth/login.php"; 
+    include_once "./header.php"; ?>
     
     <div class="container bg-white relative top-24 md:top-28 mx-auto w-11/12 max-w-sm">
         <div class="container shadow-xl p-5 rounded-lg">

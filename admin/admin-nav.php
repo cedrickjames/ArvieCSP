@@ -8,7 +8,7 @@
                 <b class="table-cell align-bottom whitespace-nowrap"><?php echo $_SESSION["first_name"]." ". $_SESSION["last_name"];?></b>
             </div>
             <div class="col-span-3 pl-2 xl:pl-4 lg:text-base">
-                <span class=""><?php echo $_SESSION["id"]; ?></span>
+                <span class=""><?php echo $_SESSION["member_id"]; ?></span>
             </div>
         </div>
     </div>
@@ -219,7 +219,7 @@
             </a>
          </li>
          <li>
-            <a href="#" class="flex items-center p-2 text-base font-normal text-gray-600 rounded-lg hover:bg-emerald-600 hover:text-white">
+            <a href="../includes/auth/signout.php" class="flex items-center p-2 text-base font-normal text-gray-600 rounded-lg hover:bg-emerald-600 hover:text-white">
             <svg aria-hidden="true" class="flex-shrink-0 w-7 h-7" fill="currentColor" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
                 <path d="M224.48633,136.48438l-41.98926,42a12.0001,12.0001,0,0,1-16.97266-16.96876L187.03467,140H104a12,12,0,0,1,0-24h83.03467L165.52441,94.48438a12.0001,12.0001,0,0,1,16.97266-16.96876l41.98926,42A12.00094,12.00094,0,0,1,224.48633,136.48438ZM104,204H52V52h52a12,12,0,0,0,0-24H48A20.02229,20.02229,0,0,0,28,48V208a20.02229,20.02229,0,0,0,20,20h56a12,12,0,0,0,0-24Z"/>
             </svg>
