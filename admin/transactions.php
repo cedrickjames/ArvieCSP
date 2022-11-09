@@ -327,7 +327,7 @@ $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Oroz
 
                         ?>
                                                 <tr>
-                            <td class="text-center"><?php echo $id?></td>
+                            <td class="text-center"><?php echo $Date?></td>
                             <td class="text-center"><?php echo $transaction2ndId?></td>
                             <td class="text-center"><?php echo $fname5.' '.$lname5?></td>
                             <td class="text-center"><?php echo $type?></td>
