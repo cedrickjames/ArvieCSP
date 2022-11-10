@@ -149,7 +149,7 @@ while($userRow = mysqli_fetch_assoc($resultselectTotalAmountReleasedThisMonth)){
 
 
 
-// code for getting the transaction//
+// code for getting the points//
 $tableNamePoints="rebates_points";
 $columnsPoints= ['rebates_points_id','user_id', 'email_address', 'pointsEarned','first_name', 'last_name'];
 $fetchDataPoints= fetch_data_Points($db, $tableNamePoints, $columnsPoints);
@@ -184,9 +184,13 @@ if($result== true){
 }
 return $msg;
 }
-// end of code for getting the transaction//
+// end of code for getting the points//
+
+
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -205,6 +209,11 @@ return $msg;
 
     <script src="../js/jquery-3.6.1.min.js"></script>
     <script src="../node_modules/tw-elements/dist/js/index.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
     <title>Arvie Cosmetic & Skincare  ProductsTrading</title>
 
     <style>
@@ -272,6 +281,8 @@ return $msg;
   <div class="content-container lg:flex lg:flex-row w-full">
     <div class="display-none lg:display-block lg:w-1/4 xl:w-1/5 2xl:w-1/5">
       <?php include_once "./admin-nav.php"; ?>
+      
+
     </div>
     <div class="user-dashboard-content-container pt-5 px-6 pb-5 bg-emerald-100 w-full lg:w-3/4 xl:w-4/5 2xl:w-4/5">
         <!-- SALES -->
@@ -354,10 +365,77 @@ return $msg;
 
         </div>
     </div>
+<?php
 
+
+$member_id = $_SESSION["member_id"];
+
+
+ if(isset($_POST['changePassword'])){
+// echo "<script> console.log('asdasd')</script>";
+    $selectpass = "SELECT `pass` FROM `accounts` WHERE `member_id` ='$member_id'";
+$resultselectpass = mysqli_query($conn, $selectpass);
+while($userRow = mysqli_fetch_assoc($resultselectpass)){
+    $pass = $userRow['pass'];
+}
+$oldPassword = $_POST['oldPassword'];
+$newPassword = $_POST['newPassword'];
+$confirmPassword = $_POST['confirmPassword'];
+
+$hash = password_hash($newPassword, PASSWORD_DEFAULT);
+if(password_verify($oldPassword, $pass)){
+    if($newPassword == $confirmPassword){
+
+        $sqlUpdatePass=  "UPDATE `accounts` SET `pass`='$hash' WHERE `member_id` = '$member_id';";
+        $updatepass = mysqli_query($conn, $sqlUpdatePass);
+        if($updatepass){
+            ?><script>
+            Swal.fire({
+          icon: 'success',
+          title: 'Successful',
+          text: 'Password Changed',
+        //   footer: '<a href="">Why do I have this issue?</a>'
+        }).then(function() {
+            window.location = "index.php";
+    });
+         </script><?php 
+        }
+       
+    }
+    else{
+        ?><script>
+        Swal.fire({
+      icon: 'error',
+      title: 'Unsuccessful',
+      text: 'Password not match.',
+    //   footer: '<a href="">Why do I have this issue?</a>'
+    }).then(function() {
+        $('#changePassword').modal('show');
+});
+     </script><?php 
+
+    }
+    }
+    else{
+        ?><script>
+        Swal.fire({
+      icon: 'error',
+      title: 'Unsuccessful',
+      text: 'Wrong Old Password',
+    //   footer: '<a href="">Why do I have this issue?</a>'
+    }).then(function() {
+        $('#changePassword').modal('show');
+});
+     </script><?php 
+
+    }
+    
+  }
+?>
 
 <?php include "./editRebates.php"?>;
 
+<?php include_once "./changePassword.php"; ?>
 
 
 

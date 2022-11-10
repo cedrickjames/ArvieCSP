@@ -1039,6 +1039,75 @@ Copy Referral Link
         </div>
     </div>
 
+    <?php
+
+
+$member_id = $_SESSION["member_id"];
+
+
+ if(isset($_POST['changePassword'])){
+// echo "<script> console.log('asdasd')</script>";
+    $selectpass = "SELECT `pass` FROM `accounts` WHERE `member_id` ='$member_id'";
+$resultselectpass = mysqli_query($conn, $selectpass);
+while($userRow = mysqli_fetch_assoc($resultselectpass)){
+    $pass = $userRow['pass'];
+}
+$oldPassword = $_POST['oldPassword'];
+$newPassword = $_POST['newPassword'];
+$confirmPassword = $_POST['confirmPassword'];
+
+$hash = password_hash($newPassword, PASSWORD_DEFAULT);
+if(password_verify($oldPassword, $pass)){
+    if($newPassword == $confirmPassword){
+
+        $sqlUpdatePass=  "UPDATE `accounts` SET `pass`='$hash' WHERE `member_id` = '$member_id';";
+        $updatepass = mysqli_query($conn, $sqlUpdatePass);
+        if($updatepass){
+            ?><script>
+            Swal.fire({
+          icon: 'success',
+          title: 'Successful',
+          text: 'Password Changed',
+        //   footer: '<a href="">Why do I have this issue?</a>'
+        }).then(function() {
+            window.location = "index.php";
+    });
+         </script><?php 
+        }
+       
+    }
+    else{
+        ?><script>
+        Swal.fire({
+      icon: 'error',
+      title: 'Unsuccessful',
+      text: 'Password not match.',
+    //   footer: '<a href="">Why do I have this issue?</a>'
+    }).then(function() {
+        $('#changePassword').modal('show');
+});
+     </script><?php 
+
+    }
+    }
+    else{
+        ?><script>
+        Swal.fire({
+      icon: 'error',
+      title: 'Unsuccessful',
+      text: 'Wrong Old Password',
+    //   footer: '<a href="">Why do I have this issue?</a>'
+    }).then(function() {
+        $('#changePassword').modal('show');
+});
+     </script><?php 
+
+    }
+    
+  }
+?>
+
+<?php include_once "./changePassword.php"; ?>
 
     <script>
         $(document).ready(function(){
