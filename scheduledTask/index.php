@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+session_start(); 
 include_once ("../includes/config/conn.php");
 $db= $conn;
 date_default_timezone_set("Asia/Singapore");
@@ -9,17 +9,10 @@ $completeDateNow  = $date->format('Y-m-d');
 $month  = $date->format('M');  
 $year  = $date->format('Y');
 
-
-
 $day  = $date->format('d'); 
 $timenow = date("h:i a"); 
 
-
-
-
-if($day == '1'){
-
-    
+if($day == '7'){
 $sqlPoints= "SELECT * FROM `rebates_points` WHERE 1";
 $resultPoints = mysqli_query($conn, $sqlPoints);
 

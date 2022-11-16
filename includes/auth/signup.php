@@ -81,11 +81,8 @@ date_default_timezone_set("Asia/Singapore");
                     $create_user_select = "INSERT INTO `accounts`(`member_id`, `first_name`, `last_name`, `sponsor`, `sponsorName`, `email_address`, `pass`, `contact_number`, `date`, `access`, `permission`, `referralId`, `homeaddress`, `tin_acct`, `sss_num`, `number_basis`) VALUES ('$member_id','$first_name','$last_name','$referrer','$fnameNaginvite1  $lnameNaginvite1','$email_address','$hash','$contact_number',current_timestamp(),'approved','userist','$ref_code','$homeaddress','$tin_acct','$sss_num','$lastId')";
                     $success = mysqli_query($conn, $create_user_select);
 
-               
-
-
                     if ($success) { //Just to confirm if may nainsert, and nag success.
-                        $sqlInsertUserInitialBalance= "INSERT INTO `totalbalance`(`userID`, `userName`, `totalBalance`) VALUES ('$member_id','$email_address','0')";
+                        $sqlInsertUserInitialBalance= "INSERT INTO `totalbalance`(`userID`, `userName`, `totalBalance`, `unclaimable`, `totalIncome`) VALUES ('$member_id','$email_address','0','0','0')";
                         mysqli_query($conn, $sqlInsertUserInitialBalance);
 
                         $sqlInsertUserInitialPoints = "INSERT INTO `rebates_points`(`user_id`, `email_address`, `pointsEarned`) VALUES ('$member_id','$email_address','0')";
@@ -104,7 +101,7 @@ date_default_timezone_set("Asia/Singapore");
                             $emailNaginvite=$userRow['email_address'];
 
                         }
-                        $sqlupdatecodestatus ="UPDATE `referral_codes` SET `status`='used', `transfer_date`=current_timestamp(), `referee` = '$member_id' WHERE `ref_code` = '$ref_code'";
+                        $sqlupdatecodestatus ="UPDATE `referral_codes` SET `status`='used', `referee` = '$member_id' WHERE `ref_code` = '$ref_code'";
                         mysqli_query($conn, $sqlupdatecodestatus);
 
                         //start of passive

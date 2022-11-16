@@ -1,7 +1,7 @@
 <?php 
 
 session_start();
-include_once ("../includes/config/conn.php");
+include_once ("/var/www/html/ArvieCSP/includes/config/conn.php");
 if(!isset( $_SESSION['loggedin'])){
   header("location:../login.php");
 }else{
@@ -38,7 +38,7 @@ if (isset($_POST['Release']) && $_POST['Release'] == 'Upload')
     if (in_array($fileExtension, $allowedfileExtensions))
     {
       // directory in which the uploaded file will be moved
-      $uploadFileDir = '../images/';
+      $uploadFileDir = '/var/www/html/ArvieCSP/images/'; //eto yun diba?
       $dest_path = $uploadFileDir . $newFileName;
 
       if(move_uploaded_file($fileTmpPath, $dest_path)) 
@@ -78,13 +78,13 @@ if (isset($_POST['Release']) && $_POST['Release'] == 'Upload')
       while($userRow = mysqli_fetch_assoc($resultTotalBalance)){
           $totalBalance = $userRow['totalBalance'];
           $totalIncome = $userRow['totalIncome'];
-      
+
       }
       $updatedBalance = $totalBalance - $amount;
       $updatedTotalIncome = $totalIncome + $amount;
       $sqlAddBalance= "UPDATE `totalbalance` SET `totalBalance`='$updatedBalance', `totalIncome` = '$updatedTotalIncome' WHERE `userID` = '$member_id'";
       mysqli_query($conn, $sqlAddBalance);
-      
+  
       $code = "TR";
       $get_month = date('m', strtotime("now"));
   

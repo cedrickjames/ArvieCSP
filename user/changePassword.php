@@ -1,7 +1,3 @@
-
-
-
-
 <!-- Modal -->
 <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
   id="changePassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

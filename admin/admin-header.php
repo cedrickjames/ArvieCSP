@@ -56,7 +56,7 @@
             <li>
                 <a  data-bs-toggle="modal" data-bs-target="#exampleModalLg" class="block py-2 px-4 hover:bg-gray-200 bg-gray-100">Edit Rebates</a>
             </li>
-            <li>
+			<li>
                 <a  data-bs-toggle="modal" data-bs-target="#changePassword" class="block py-2 px-4 hover:bg-gray-200 bg-gray-100">Change Password</a>
             </li>
             </ul>

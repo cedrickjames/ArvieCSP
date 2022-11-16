@@ -471,14 +471,6 @@ if(isset($_POST['generate'])){
             $("#code").addClass("bg-emerald-700");
             $("#code").addClass("text-white");
             $("#code").removeClass("text-gray-600");
-
-
-            var table = $('#codeTable').DataTable({
-                responsive: true
-            })
-            .columns.adjust()
-            .responsive.recalc();
-
         });
     </script>
 </body>

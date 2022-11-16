@@ -59,8 +59,8 @@
             </li>
             <li>
                 <a href="#" id="header_edit" class="lg:hidden block py-2 px-4 hover:bg-gray-200">About</a>
-            </li>
-            <li>
+			</li>
+			<li>
                 <a  data-bs-toggle="modal" data-bs-target="#changePassword" class="block py-2 px-4 hover:bg-gray-200 bg-gray-100">Change Password</a>
             </li>
             </ul>

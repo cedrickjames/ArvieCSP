@@ -17,8 +17,6 @@ $getDateNow = new DateTime();
 $DateForToday = $getDateNow->format('Y-m-d');
 $DateForThisMonth = $getDateNow->format('Y-m');
 $Year = $getDateNow->format('Y');
-
-
  //change rebates ammount
 
  if(isset($_POST['changeRebate'])){
@@ -184,13 +182,9 @@ if($result== true){
 }
 return $msg;
 }
-// end of code for getting the points//
-
-
+//end of code for getting the points
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -201,7 +195,10 @@ return $msg;
     <!-- <link rel="stylesheet" href="./dist/output.css"> -->
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
     <link rel="stylesheet" href="../node_modules/tw-elements/dist/css/index.min.css" />
-
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+	<link rel="stylesheet" href="sweetalert2.min.css">
     <title>Admin</title>
     <script src="../js/tailwind-3.1.8.js"></script>
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
@@ -209,11 +206,6 @@ return $msg;
 
     <script src="../js/jquery-3.6.1.min.js"></script>
     <script src="../node_modules/tw-elements/dist/js/index.min.js"></script>
-
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.all.min.js"></script>
-    <script src="sweetalert2.min.js"></script>
-<link rel="stylesheet" href="sweetalert2.min.css">
     <title>Arvie Cosmetic & Skincare  ProductsTrading</title>
 
     <style>
@@ -281,8 +273,6 @@ return $msg;
   <div class="content-container lg:flex lg:flex-row w-full">
     <div class="display-none lg:display-block lg:w-1/4 xl:w-1/5 2xl:w-1/5">
       <?php include_once "./admin-nav.php"; ?>
-      
-
     </div>
     <div class="user-dashboard-content-container pt-5 px-6 pb-5 bg-emerald-100 w-full lg:w-3/4 xl:w-4/5 2xl:w-4/5">
         <!-- SALES -->
@@ -325,29 +315,24 @@ return $msg;
             <div class="order-last lg:order-12 row-span-2 col-span-2 grid mb-6 rounded-lg border border-gray-200 shadow-sm lg:grid-cols-1 shadow-xl w-full h-full">
                 <figure class="overflow-auto flex flex-col pt-2 md:pt-3 2xl:pt-5 text-center  bg-white rounded-lg border-b border-gray-200 lg:rounded-t-none lg:rounded-tl-lg lg:border-r">
                     <h1 class="pb-2 2xl:pb-5 font-black md:text-3xl lg:text-lg xl:text-2xl 2xl:text-5xl sticky top-0 bg-white">Top Points Earner</h1>
-
-                    <?php           
-                            if(is_array($fetchDataPoints)){      
-                         $no = 1;
-                                foreach($fetchDataPoints as $data){
-                                    $fname = $data['first_name'];
-
-                                    $lname = $data['last_name'];
-                                    $points = $data['pointsEarned'];
-                                    ?>
-                        <span class="mt-2">
+					<?php           
+					if(is_array($fetchDataPoints)){   
+						$no = 1;
+						foreach($fetchDataPoints as $data){
+							$fname = $data['first_name'];
+							$lname = $data['last_name'];
+							$points = $data['pointsEarned'];
+					?>
+					<span class="mt-2">
                         <p class="ml-5 inline-block font-medium float-left md:text-xl 2xl:text-3xl"><?php echo $no.". ".$fname." ".$lname?></p>
                         <p class="mr-5 inline-block font-medium float-right md:text-xl 2xl:text-3xl"><?php echo $points?></p>
                     </span>
-                            <?php
-                                        $no++; 
-                                    }
-                                   
-                                }else{
-
-                                        }
+					<?php
+						$no++; 
+						}
+					}else{
+					}
                         ?>
-                   
                 </figure>
             </div>
             <!-- PAYOUT -->
@@ -366,12 +351,8 @@ return $msg;
         </div>
     </div>
 <?php
-
-
 $member_id = $_SESSION["member_id"];
-
-
- if(isset($_POST['changePassword'])){
+	  if(isset($_POST['changePassword'])){
 // echo "<script> console.log('asdasd')</script>";
     $selectpass = "SELECT `pass` FROM `accounts` WHERE `member_id` ='$member_id'";
 $resultselectpass = mysqli_query($conn, $selectpass);
@@ -400,7 +381,7 @@ if(password_verify($oldPassword, $pass)){
     });
          </script><?php 
         }
-       
+
     }
     else{
         ?><script>
@@ -429,12 +410,11 @@ if(password_verify($oldPassword, $pass)){
      </script><?php 
 
     }
-    
+
   }
 ?>
 
 <?php include "./editRebates.php"?>;
-
 <?php include_once "./changePassword.php"; ?>
 
 

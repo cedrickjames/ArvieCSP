@@ -16,9 +16,9 @@
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
     <script src="./js/jquery-3.6.1.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.all.min.js"></script>
-    <script src="sweetalert2.min.js"></script>
-<link rel="stylesheet" href="sweetalert2.min.css">
+    <script src="./node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="./node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="./node_modules/sweetalert2/dist/sweetalert2.min.css">
 </head>
 <body class="h-screen w-screen">
 <?php include "./includes/auth/signup.php"; ?>
@@ -55,7 +55,7 @@
 
                 <div class="relative mb-6 hidden">
                     <label for="sponsorId-input" class="block mb-2 text-sm font-medium text-gray-900">Sponsor</label>
-                    <input type="text" id="sponsorId-input" name="sponsor" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <input type="text" id="sponsorId-input" value="ADS2022-10-7" name="sponsor" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     <button type="button" class="checkID text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Check Referral Code</button>
                 </div>
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -159,7 +159,6 @@ if(isset($_GET['code'])){
 }
 ?>
     <script>
-        
         $(document).ready(function(){
             $('#phone').keyup(function () { 
                 this.value = this.value.replace(/[^0-9\.]/g,'');

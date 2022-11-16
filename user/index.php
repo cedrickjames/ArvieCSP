@@ -520,7 +520,6 @@ $sqlSelectRebatesPoints3= "SELECT * FROM `rebates_points` WHERE `user_id` = '$me
 $resultSelectRPoints3 = mysqli_query($conn, $sqlSelectRebatesPoints3);
 while($userRow = mysqli_fetch_assoc($resultSelectRPoints3)){
     $totalPoints = $userRow['pointsEarned'];
- 
 }
 
 // code for getting the transaction//
@@ -1039,7 +1038,7 @@ Copy Referral Link
         </div>
     </div>
 
-    <?php
+	<?php
 
 
 $member_id = $_SESSION["member_id"];
@@ -1074,7 +1073,7 @@ if(password_verify($oldPassword, $pass)){
     });
          </script><?php 
         }
-       
+
     }
     else{
         ?><script>
@@ -1103,11 +1102,13 @@ if(password_verify($oldPassword, $pass)){
      </script><?php 
 
     }
-    
+
   }
 ?>
 
 <?php include_once "./changePassword.php"; ?>
+
+
 
     <script>
         $(document).ready(function(){
