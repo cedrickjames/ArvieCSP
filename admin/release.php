@@ -78,13 +78,13 @@ if (isset($_POST['Release']) && $_POST['Release'] == 'Upload')
       while($userRow = mysqli_fetch_assoc($resultTotalBalance)){
           $totalBalance = $userRow['totalBalance'];
           $totalIncome = $userRow['totalIncome'];
-
+      
       }
       $updatedBalance = $totalBalance - $amount;
       $updatedTotalIncome = $totalIncome + $amount;
       $sqlAddBalance= "UPDATE `totalbalance` SET `totalBalance`='$updatedBalance', `totalIncome` = '$updatedTotalIncome' WHERE `userID` = '$member_id'";
       mysqli_query($conn, $sqlAddBalance);
-  
+      
       $code = "TR";
       $get_month = date('m', strtotime("now"));
   
