@@ -41,11 +41,10 @@ $transaction_query_code = mysqli_query($conn, $transaction_select_code);
 $no = 1;
 while ($specific_transaction = mysqli_fetch_assoc($transaction_query_code)) {
     $code = $specific_transaction['ref_code'];
-    if($no % 3 == 0){
+    if($no == 3){
 
         if ($specific_transaction['status'] == "used") {
-            $html .='<th style="margin: 50px; padding: 20px ;  background-color: yellow;border: 1px solid black;
-            " >'.$code.'</th></tr>';
+            $html .='<th style="margin: 50px; padding: 20px ;  background-color: yellow;border: 1px solid black;" >'.$code.'</th></tr>';
             $no =   1;
         }
         else{
@@ -57,9 +56,8 @@ while ($specific_transaction = mysqli_fetch_assoc($transaction_query_code)) {
     }
     else if($no ==1){
         if ($specific_transaction['status'] == "used") {
-            $html .='<tr style=" margin: 50px; padding: 20px ;background-color: yellow; border: 1px solid black;
-            "> <th style=" border: 1px solid black;
-            " >'.$code.'</th>';
+            $html .='<tr style=" margin: 50px; padding: 20px ;; border: 1px solid black;
+            "> <th style=" background-color: yellow; border: 1px solid black;" >'.$code.'</th>';
                   $no++;
         }
         else{
