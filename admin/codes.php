@@ -311,7 +311,7 @@ if(isset($_POST['generate'])){
                             <td class="text-center"><?php 
                                 $xxxuser = $referral['referee'];
                                 $staytus = $referral['status'];
-                                echo "<script> console.log('$xxxuser') </script>";
+                                // echo "<script> console.log('$xxxuser') </script>";
                                 $userxxx = "SELECT first_name, last_name FROM accounts WHERE member_id = '$xxxuser'";
                                 $user_query = mysqli_query($conn, $userxxx);
                                 $user_count = mysqli_num_rows($user_query);
@@ -394,13 +394,7 @@ if(isset($_POST['generate'])){
                 $('#name-input').val('');
             });
 
-            var table = $('#codeTable').DataTable({
-                // 'columnDefs': [{ 'orderable': false, 'targets': 0 }],
-                // 'aaSorting': [[1, 'desc']],
-                responsive: true
-            })
-            .columns.adjust()
-            .responsive.recalc();
+
         });
     </script>
     
@@ -471,6 +465,13 @@ if(isset($_POST['generate'])){
             $("#code").addClass("bg-emerald-700");
             $("#code").addClass("text-white");
             $("#code").removeClass("text-gray-600");
+
+            var table = $('#codeTable').DataTable({
+                responsive: true
+            })
+            .columns.adjust()
+            .responsive.recalc();
+
         });
     </script>
 </body>
