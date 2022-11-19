@@ -279,6 +279,8 @@ if(isset($_POST['generate'])){
                             <th data-priority="4">Type</th>
                             <th data-priority="5">Status</th>
                             <th data-priority="6">Used by</th>
+                            <th data-priority="7">Action</th>
+
                             <!-- <th data-priority="7">View</th> -->
                         </tr>
                     </thead>
@@ -321,6 +323,13 @@ if(isset($_POST['generate'])){
                                         }
                                     }
                                 ?></td>
+                                <td class="text-center">
+                                <?php if ($referral['status'] == "to_redeem") {
+                                  
+                                        ?>
+                                        <a href="generated-codes.php?transaction=<?php echo $referral['generation_batch']?>" style="color: blue">View Batch</a></td>
+                                        <?php
+                                    } ?>                                
                             <!-- <td class="text-center">
                                 <button class="text-blue-500" type="submit" name="trannum" data-tran-num="" type="button" data-modal-toggle="viewModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 512 512" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
